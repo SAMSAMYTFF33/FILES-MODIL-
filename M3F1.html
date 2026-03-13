@@ -45,7 +45,13 @@ margin:0;
 padding:0;
 }
 
-body{
+/* اجعل الانتقال بين الألوان ناعماً */
+body, div, h1, h2, h3, p, section, .card, .section-intro {
+    transition: background-color 0.1s, color 0.1s, border-color 0.1s;
+}
+
+/* تأكد أن جميع العناصر تأخذ ألوان المتغيرات فوراً */
+body {
 font-family:'Tajawal',sans-serif;
 background:var(--bg-color);
 color:var(--text-dark);
@@ -53,20 +59,22 @@ line-height:1.8;
 padding-bottom:50px;
 }
 
-/* زر القائمة */
+/* زر القائمة - هامبرغر بدون إطار */
 .menu-btn{
 position:fixed;
 top:15px;
 left:15px;
-font-size:22px;
-background:var(--card-bg);
+font-size:30px;
+background:transparent;
 color:var(--text-dark);
 border:none;
-padding:8px 12px;
-border-radius:8px;
+padding:5px;
 cursor:pointer;
-box-shadow:0 4px 10px rgba(0,0,0,0.3);
 z-index:1000;
+width:auto;
+height:auto;
+line-height:1;
+box-shadow:none;
 }
 
 /* القائمة الجانبية */
@@ -104,16 +112,103 @@ display:flex;
 align-items:center;
 justify-content:center;
 gap:8px;
+margin-bottom:10px;
 }
 
-/* الهيدر */
+/* زر التعديل */
+.edit-btn {
+    font-size:18px;
+    background:var(--secondary-color);
+    color:white;
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:0.3s;
+}
+
+.edit-btn:hover {
+    opacity:0.9;
+    transform:scale(1.02);
+}
+
+.edit-mode-active .edit-btn {
+    background:var(--accent-color);
+    color:var(--text-dark);
+}
+
+/* مؤشر أن وضع التعديل نشط */
+.edit-mode-active [contenteditable="true"] {
+    outline: 2px dashed var(--secondary-color);
+    outline-offset: 2px;
+    background-color: rgba(0,98,51,0.05);
+    cursor: text;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+/* أزرار التعديل الصغيرة فوق النص - مخفية افتراضياً */
+.edit-popup {
+    position:fixed;
+    display:flex;
+    gap:8px;
+    background:var(--card-bg);
+    padding:6px 12px;
+    border-radius:40px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    z-index:2000;
+    border:1px solid var(--secondary-color);
+    transform:translate(-50%, -100%);
+    pointer-events:none;
+    opacity:0;
+    transition:0.15s;
+}
+
+.edit-popup.show {
+    pointer-events:all;
+    opacity:1;
+}
+
+.edit-popup button {
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:none;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:0.15s;
+    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+}
+
+.edit-popup button:hover {
+    transform:scale(1.05);
+}
+
+.confirm-btn {
+    background:#28a745;
+    color:white;
+}
+
+.cancel-btn {
+    background:#dc3545;
+    color:white;
+}
+
+/* الهيدر - بدون ظل */
 header{
 background:linear-gradient(135deg,var(--primary-color),#7a1220);
 color:white;
 padding:60px 20px;
 text-align:center;
 border-bottom:5px solid var(--accent-color);
-box-shadow:0 4px 15px rgba(0,0,0,0.2);
 }
 
 h1{
@@ -143,7 +238,7 @@ padding-bottom:15px;
 z-index:1;
 }
 
-/* السطر المتوهج */
+/* السطر المتوهج - بدون ظل أحمر */
 h2::after{
 content:"";
 position:absolute;
@@ -159,10 +254,6 @@ rgba(255,140,0,0.9) 50%,
 rgba(255,120,0,0.2) 80%,
 transparent 100%
 );
-box-shadow:
-0 0 6px rgba(255,120,0,0.8),
-0 0 20px rgba(255,120,0,0.5),
-0 0 40px rgba(255,120,0,0.3);
 border-radius:50px;
 }
 
@@ -207,6 +298,37 @@ color:var(--text-light);
 text-align:justify;
 }
 
+/* تنسيق الفقرات بخط النظام */
+p {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-light);
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* رسالة تأكيد التعديل */
+.edit-toast {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:var(--secondary-color);
+    color:white;
+    padding:8px 16px;
+    border-radius:8px;
+    font-size:13px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    z-index:2000;
+    opacity:0;
+    transition:0.2s;
+    pointer-events:none;
+}
+
+.edit-toast.show {
+    opacity:1;
+}
+
 @media (max-width:768px){
 h1{font-size:2rem;}
 h2{
@@ -218,14 +340,37 @@ grid-template-columns:1fr;
 .side-menu{
 width:200px;
 }
+.edit-popup button {
+    width:32px;
+    height:32px;
+    font-size:16px;
+}
 }
 </style>
 </head>
 <body>
+<script>
+    // هذا الكود يعمل فوراً قبل ظهور أي عنصر على الشاشة
+    (function() {
+        try {
+            const savedTheme = localStorage.getItem('darkMode');
+            if (savedTheme === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        } catch(e) {
+            // تجاهل الخطأ إذا كان localStorage غير متاح
+        }
+    })();
+</script>
+
+<!-- بداية المحتوى المرئي -->
 <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
 <div class="side-menu" id="menu">
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+<button class="edit-btn" onclick="toggleEditMode()">
+    <span>✎</span> تعديل النصوص
+</button>
 </div>
 
 <header>
@@ -245,7 +390,7 @@ width:200px;
               
             <div class="card">  
                 <h3>المفهوم الضيق</h3>  
-                <p>قصره البعض على القواعد الموضوعية  بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>  
+                <p>قصره البعض على القواعد الموضوعية بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>  
             </div>  
 
             <div class="card">  
@@ -295,21 +440,261 @@ width:200px;
     </section>  
 </div>
 
+<!-- أزرار التعديل الصغيرة فوق النص ❌ ✅ - مخفية افتراضياً -->
+<div class="edit-popup" id="editPopup">
+    <button class="cancel-btn" onclick="cancelEdit()">❌</button>
+    <button class="confirm-btn" onclick="confirmEdit()">✅</button>
+</div>
+
+<!-- رسالة تأكيد -->
+<div class="edit-toast" id="editToast">تم التعديل بنجاح ✓</div>
+
 <script>
+let editMode = false;
+let currentEditElement = null;
+let originalText = '';
+let longPressTimer = null;
+let longPressedElement = null;
+
+// استرجاع حالة الوضع الداكن عند تحميل الصفحة
+function loadThemePreference() {
+    const savedTheme = localStorage.getItem('darkMode');
+    if (savedTheme === 'enabled') {
+        document.body.classList.add('dark-mode');
+        document.querySelector('.theme-btn').innerHTML = '☀️';
+    } else {
+        document.body.classList.remove('dark-mode');
+        document.querySelector('.theme-btn').innerHTML = '🌙';
+    }
+}
+
+// استرجاع حالة وضع التعديل
+function loadEditModePreference() {
+    const savedEditMode = localStorage.getItem('editMode');
+    if (savedEditMode === 'enabled') {
+        editMode = true;
+        document.body.classList.add('edit-mode-active');
+        document.querySelector('.edit-btn').innerHTML = '<span>✓</span> إنهاء التعديل';
+    } else {
+        editMode = false;
+        document.body.classList.remove('edit-mode-active');
+        document.querySelector('.edit-btn').innerHTML = '<span>✎</span> تعديل النصوص';
+    }
+}
+
+// التأكد من إخفاء الأزرار عند تحميل الصفحة
+window.addEventListener('load', function() {
+    loadEditModePreference();
+    hideEditPopup(); // إخفاء الأزرار مباشرة
+    currentEditElement = null; // التأكد من عدم وجود عنصر قيد التعديل
+});
+
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("open");
 }
 
 function toggleTheme(){
 document.body.classList.toggle("dark-mode");
-// تغيير الأيقونة بين 🌙 و ☀️
 let btn = document.querySelector('.theme-btn');
 if(document.body.classList.contains('dark-mode')){
 btn.innerHTML = '☀️';
+localStorage.setItem('darkMode', 'enabled');
 } else {
 btn.innerHTML = '🌙';
+localStorage.setItem('darkMode', 'disabled');
 }
 }
+
+function toggleEditMode() {
+    editMode = !editMode;
+    const editBtn = document.querySelector('.edit-btn');
+    const body = document.body;
+    
+    if (editMode) {
+        body.classList.add('edit-mode-active');
+        editBtn.innerHTML = '<span>✓</span> إنهاء التعديل';
+        localStorage.setItem('editMode', 'enabled');
+        showToast('وضع التعديل نشط');
+    } else {
+        body.classList.remove('edit-mode-active');
+        editBtn.innerHTML = '<span>✎</span> تعديل النصوص';
+        localStorage.setItem('editMode', 'disabled');
+        if (currentEditElement) {
+            currentEditElement.removeAttribute('contenteditable');
+            currentEditElement = null;
+        }
+        hideEditPopup();
+    }
+}
+
+function handleTouchStart(e) {
+    if (!editMode) return;
+    
+    const element = e.target.closest('h1, h2, h3, p, .section-intro, .card p');
+    if (!element || element === currentEditElement) return;
+    
+    e.preventDefault();
+    longPressedElement = element;
+    
+    longPressTimer = setTimeout(() => {
+        if (longPressedElement && editMode) {
+            // إنهاء أي تعديل سابق
+            if (currentEditElement) {
+                currentEditElement.removeAttribute('contenteditable');
+            }
+            
+            // بدء تعديل جديد
+            currentEditElement = longPressedElement;
+            originalText = currentEditElement.innerText;
+            
+            currentEditElement.setAttribute('contenteditable', 'true');
+            currentEditElement.focus();
+            
+            // تحديد النص
+            const range = document.createRange();
+            const sel = window.getSelection();
+            range.selectNodeContents(currentEditElement);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            
+            // إظهار الأزرار فوق النص
+            const popup = document.getElementById('editPopup');
+            const rect = e.touches[0];
+            popup.style.left = rect.clientX + 'px';
+            popup.style.top = (rect.clientY - 50) + 'px';
+            popup.classList.add('show');
+        }
+    }, 600);
+}
+
+function handleTouchEnd(e) {
+    if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+    }
+}
+
+function handleTouchCancel(e) {
+    if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+    }
+}
+
+function cancelEdit() {
+    if (currentEditElement) {
+        currentEditElement.innerText = originalText;
+        currentEditElement.removeAttribute('contenteditable');
+        currentEditElement = null;
+    }
+    hideEditPopup();
+    showToast('❌ تم الإلغاء');
+}
+
+// دالة لحفظ الملف بعد التعديل
+function saveFileToPath(content) {
+    const filePath = '/storage/emulated/0/Android/data/com.S2/files/M3F1.html';
+    
+    // استخدام Android Bridge إذا كان متاحاً
+    if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
+        AndroidBridge.saveFile(filePath, content);
+        return true;
+    }
+    
+    // محاولة استخدام واجهة Android مباشرة
+    if (window.Android && typeof window.Android.saveFile === 'function') {
+        window.Android.saveFile(filePath, content);
+        return true;
+    }
+    
+    return false;
+}
+
+function confirmEdit() {
+    if (currentEditElement) {
+        currentEditElement.removeAttribute('contenteditable');
+        
+        // 1. التنظيف: إخفاء الأزرار وإزالة إحداثيات موقعها "قبل" حفظ الملف
+        const popup = document.getElementById('editPopup');
+        popup.classList.remove('show');
+        popup.removeAttribute('style');
+
+        if (currentEditElement.innerText !== originalText) {
+            // 2. الحصول على محتوى HTML بالكامل (نظيف بدون الأزرار الظاهرة)
+            // إضافة DOCTYPE يدوياً لأنه لا يتم تضمينه في outerHTML
+            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            
+            // 3. حفظ الملف في المسار المطلوب
+            const saved = saveFileToPath(htmlContent);
+            
+            if (saved) {
+                showToast('✅ تم الحفظ');
+            } else {
+                showToast('✅ تم التعديل');
+            }
+        }
+        
+        currentEditElement = null;
+    }
+    hideEditPopup();
+}
+
+
+function hideEditPopup() {
+    document.getElementById('editPopup').classList.remove('show');
+}
+
+function showToast(message) {
+    const toast = document.getElementById('editToast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 1500);
+}
+
+// إضافة مستمعي الأحداث للعناصر
+document.querySelectorAll('h1, h2, h3, p, .section-intro, .card p').forEach(element => {
+    element.addEventListener('touchstart', handleTouchStart, {passive: false});
+    element.addEventListener('touchend', handleTouchEnd);
+    element.addEventListener('touchcancel', handleTouchCancel);
+});
+
+// منع القائمة الافتراضية
+document.addEventListener('contextmenu', (e) => {
+    if (editMode) e.preventDefault();
+});
+
+// منع التمرير أثناء التعديل
+document.addEventListener('touchmove', (e) => {
+    if (currentEditElement) {
+        e.preventDefault();
+    }
+}, {passive: false});
+
+// إنهاء وضع التعديل تلقائياً عند الخروج من الصفحة أو العودة للخلف
+window.addEventListener('beforeunload', function() {
+    if (editMode) {
+        toggleEditMode(); // استدعاء الدالة التي تحول الوضع إلى Off
+    }
+});
+
+// لضمان إغلاق الوضع أيضاً عند التنقل داخل تطبيقات WebView
+window.addEventListener('pagehide', function() {
+    if (editMode) {
+        toggleEditMode();
+    }
+});
+
+
+// إخفاء الأزرار عند النقر خارجها
+document.addEventListener('touchstart', function(e) {
+    const popup = document.getElementById('editPopup');
+    if (popup.classList.contains('show') && !e.target.closest('.edit-popup')) {
+        // لا نخفي الأزرار تلقائياً، نترك المستخدم يختار
+    }
+});
 </script>
 </body>  
 </html>
