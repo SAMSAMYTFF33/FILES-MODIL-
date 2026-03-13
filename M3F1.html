@@ -23,8 +23,8 @@ font-weight:700;
 --secondary-color:#006233;
 --accent-color:#C6A87C;
 --bg-color:#F4F6F8;
---text-dark:#2C3E50;
---text-light:#596A7B;
+--text-dark:#2C3E50; /* يستخدم للعناوين والنصوص الأساسية */
+--text-light:#596A7B; /* يستخدم للنصوص الثانوية */
 --card-bg:#FFFFFF;
 }
 
@@ -34,7 +34,7 @@ font-weight:700;
 --secondary-color:#2ecc71;
 --accent-color:#d4af37;
 --bg-color:#0f1115;
---text-dark:#e6e6e6;
+--text-dark:#e6e6e6; /* يتحول إلى أبيض كامل في الوضع الليلي */
 --text-light:#b8c0cc;
 --card-bg:#1a1d24;
 }
@@ -54,7 +54,7 @@ body, div, h1, h2, h3, p, section, .card, .section-intro {
 body {
 font-family:'Tajawal',sans-serif;
 background:var(--bg-color);
-color:var(--text-dark);
+color:var(--text-dark); /* لون النص العام للصفحة */
 line-height:1.8;
 padding-bottom:50px;
 }
@@ -215,6 +215,7 @@ h1{
 font-weight:800;
 font-size:2.5rem;
 margin-bottom:10px;
+color:white; /* لون العنوان في الهيدر يبقى أبيض كما هو */
 }
 
 .container{
@@ -259,7 +260,7 @@ border-radius:50px;
 
 .section-intro{
 font-size:1.1rem;
-color:var(--text-light);
+color:var(--text-dark); /* تم التعديل: جعل لون المقدمة أسود/أبيض كامل */
 margin-bottom:30px;
 }
 
@@ -293,17 +294,18 @@ margin-bottom:15px;
 color:var(--primary-color);
 }
 
+/* تنسيق الفقرات داخل البطاقات */
 .card p{
-color:var(--text-light);
+color:var(--text-dark); /* تم التعديل: جعل لون النص أسود/أبيض كامل */
 text-align:justify;
 }
 
-/* تنسيق الفقرات بخط النظام */
+/* تنسيق جميع الفقرات بخط النظام */
 p {
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     font-size: 1rem;
-    font-weight: 400;
-    color: var(--text-light);
+    font-weight: 700; /* جعل الخط عريض */
+    color: var(--text-dark); /* تم التعديل: جعل لون النص أسود/أبيض كامل */
     line-height: 1.8;
     text-align: justify;
 }
