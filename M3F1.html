@@ -206,12 +206,67 @@ margin-bottom:10px;
     transform:scale(1.05);
 }
 
-.confirm-btn {
+.delete-btn {
+    background:#dc3545;
+    color:white;
+}
+
+.edit-btn-popup {
+    background:var(--secondary-color);
+    color:white;
+}
+
+.cancel-btn-popup {
+    background:#6c757d;
+    color:white;
+}
+
+/* أزرار التأكيد والإلغاء أثناء التعديل */
+.confirm-popup {
+    position:fixed;
+    display:flex;
+    gap:8px;
+    background:var(--card-bg);
+    padding:6px 12px;
+    border-radius:40px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    z-index:2000;
+    border:1px solid var(--secondary-color);
+    transform:translate(-50%, -100%);
+    pointer-events:none;
+    opacity:0;
+    transition:0.15s;
+}
+
+.confirm-popup.show {
+    pointer-events:all;
+    opacity:1;
+}
+
+.confirm-popup button {
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:none;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:0.15s;
+    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+}
+
+.confirm-popup button:hover {
+    transform:scale(1.05);
+}
+
+.confirm-edit-btn {
     background:#28a745;
     color:white;
 }
 
-.cancel-btn {
+.cancel-edit-btn {
     background:#dc3545;
     color:white;
 }
@@ -475,7 +530,7 @@ width:200px;
 }
 </style>
 </head>
-<body class="edit-mode-active">
+<body class="">
 <script>
     (function() {
         try {
@@ -491,9 +546,9 @@ width:200px;
 
 <div class="side-menu" id="menu">
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-<button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button>
+<button class="edit-btn" onclick="toggleEditMode()"><span>✎</span> تعديل النصوص</button>
 <button class="add-btn" onclick="openAddModal()">
-    <span>➕</span> إضافة نص
+    <span> 📝</span> إضافة نص
 </button>
 </div>
 
@@ -503,8 +558,8 @@ width:200px;
 
 <div class="container" id="mainContainer">  
     <section class="section-block">  
-        <h2>أولاً: التعريف بالقانون الجنائي</h2>  
-        <p class="section-intro">يُعرف القانون الجنائي بأنه مجموعة القواعد القانونية المنظمة للتجريم والعقاب وتحديد الأفعال المكونة للجرائم، وإجراءات البحث والتحقيق ومسطرة المحاكمة وتنفيذ العقوبة. وترجع تسميته إلى "الجناية" كأخطر الجرائم.</p>  
+          
+          
           
         <div class="cards-grid">  
             <div class="card">  
@@ -515,12 +570,7 @@ width:200px;
             <div class="card">  
                 <h3>المفهوم الضيق</h3>  
                 <p>قصره البعض على القواعد الموضوعية بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>  
-            </div>  
-
-            <div class="card">  
-                <h3>المسطرة الجنائية</h3>  
-                <p>تختص المسطرة الجنائية بإجراءات البحث والتحقيق والمحاكمة وتنفيذ العقوبة، وهي بذلك تُكمل القواعد الموضوعية وتُجسدها على أرض الواقع.</p>  
-            </div>  
+            </div>
         </div>  
     </section>  
 
@@ -537,37 +587,14 @@ width:200px;
             <div class="card">  
                 <h3>القسم الخاص</h3>  
                 <p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>  
-            </div>  
+            </div>    
         </div>  
-    </section>  
-
-    <section class="section-block">  
-        <h2>تطور مؤسسات القانون الجنائي</h2>  
-        <p class="section-intro">يُعدّ تاريخ العقوبة هو تاريخ تطور القانون الجنائي بعينه؛ إذ انتقل هذا القانون عبر الزمن من مرحلة الانتقام الفردي والجماعي، إلى نظام القصاص والدية، حتى استقر الأمر على انفراد الدولة بحق العقاب وتنظيمه. وقد مرّ هذا التطور التاريخي بثلاث مراحل متعاقبة ومتمايزة:</p>  
-          
-        <div class="cards-grid">  
-            <div class="card numbered-card">  
-                <h3>1. مرحلة الأسرة والعشيرة</h3>  
-                <p>كانت العقوبة في بدايتها شأناً خاصاً تتولاه الأسرة أو العشيرة، وكان الانتقام الفردي والجماعي هو الوسيلة الرئيسية للرد على الاعتداء، دون وجود سلطة مركزية تنظم هذا الحق أو تضبطه.</p>  
-            </div>  
-              
-            <div class="card numbered-card">  
-                <h3>2. مرحلة قيام الدولة</h3>  
-                <p>مع نشوء الدولة وتطور مؤسساتها، انتقل حق العقاب تدريجياً من الأفراد والجماعات إلى السلطة العامة. وظهرت أنظمة القصاص والدية كأشكال منظمة للعدالة، إلى أن انفردت الدولة بصلاحية توقيع العقوبات وتنفيذها.</p>  
-            </div>  
-
-            <div class="card numbered-card">  
-                <h3>3. مرحلة البحث العلمي والدراسة الفلسفية</h3>  
-                <p>تمثل هذه المرحلة ذروة التطور، حيث اتجه الفكر الإنساني نحو التأصيل العلمي والفلسفي لمبادئ علم الإجرام. وبات القانون الجنائي موضوع دراسة أكاديمية منهجية تسعى إلى فهم الجريمة وأسبابها وسبل مكافحتها.</p>  
-            </div>  
-        </div>  
-    </section>  
-<section class="section-block"><p class="section-intro"><br></p><div class="cards-grid"><div class="card"><h3><br></h3><p><br></p></div></div></section></div>
-
+    </section>
+<section class="section-block"></section></div>
 <!-- نافذة إضافة نص -->
 <div class="modal-overlay" id="addModal">
     <div class="modal-content">
-        <h3>➕ إضافة نص جديد</h3>
+        <h3>📝 إضافة نص جديد</h3>
         
         <div class="input-group">
             <label>العنوان الأكبر (h1) - اختياري</label>
@@ -596,16 +623,35 @@ width:200px;
         </div>
         <div class="note">يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف</div>
     </div>
+</div> 
+
+<!-- نافذة تأكيد الحذف -->
+<div class="modal-overlay" id="deleteConfirmModal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+        <h3 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ تأكيد الحذف</h3>
+        <p style="margin-bottom: 30px; font-size: 1.1rem;">هل أنت متأكد من حذف هذا العنصر؟</p>
+        <div class="modal-buttons">
+            <button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button>
+            <button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
+        </div>
+    </div> 
+</div> 
+
+<!-- أزرار التعديل والحذف والإلغاء فوق النص (الظهور الأول) -->
+<div class="edit-popup" id="editPopup">
+    <button class="delete-btn" onclick="deleteElement()">🗑️</button>
+    <button class="edit-btn-popup" onclick="prepareEdit()">✎</button>
+    <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
 </div>
 
-<!-- أزرار التعديل الصغيرة فوق النص -->
-<div class="edit-popup" id="editPopup">
-    <button class="cancel-btn" onclick="cancelEdit()">❌</button>
-    <button class="confirm-btn" onclick="confirmEdit()">✅</button>
+<!-- أزرار التأكيد والإلغاء أثناء التعديل (الظهور الثاني) -->
+<div class="confirm-popup" id="confirmPopup">
+    <button class="confirm-edit-btn" onclick="confirmEdit()">✅</button>
+    <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
 </div>
 
 <!-- رسالة تأكيد -->
-<div class="edit-toast" id="editToast">✅ تم الحفظ</div>
+<div class="edit-toast" id="editToast">❌ تم الإلغاء</div>
 
 <script>
 let editMode = false;
@@ -643,6 +689,7 @@ function loadEditModePreference() {
 window.addEventListener('load', function() {
     loadEditModePreference();
     hideEditPopup();
+    hideConfirmPopup();
     currentEditElement = null;
 });
 
@@ -681,6 +728,7 @@ function toggleEditMode() {
             currentEditElement = null;
         }
         hideEditPopup();
+        hideConfirmPopup();
     }
 }
 
@@ -805,41 +853,42 @@ function saveChanges() {
     const saved = saveFileToPath(htmlContent);
 }
 
+// تغيير دالة handleTouchStart لهذا الكود
 function handleTouchStart(e) {
     if (!editMode) return;
     
     const element = e.target.closest('h1, h2, h3, p, .section-intro, .card p');
-    if (!element || element === currentEditElement) return;
+    if (!element) return;
+    
+    // إلغاء أي مؤشر سابق
+    if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+    }
     
     e.preventDefault();
-    longPressedElement = element;
     
-    longPressTimer = setTimeout(() => {
-        if (longPressedElement && editMode) {
-            if (currentEditElement) {
-                currentEditElement.removeAttribute('contenteditable');
-            }
-            
-            currentEditElement = longPressedElement;
-            originalText = currentEditElement.innerText;
-            
-            currentEditElement.setAttribute('contenteditable', 'true');
-            currentEditElement.focus();
-            
-            const range = document.createRange();
-            const sel = window.getSelection();
-            range.selectNodeContents(currentEditElement);
-            sel.removeAllRanges();
-            sel.addRange(range);
-            
-            const popup = document.getElementById('editPopup');
-            const rect = e.touches[0];
-            popup.style.left = rect.clientX + 'px';
-            popup.style.top = (rect.clientY - 50) + 'px';
-            popup.classList.add('show');
-        }
-    }, 600);
+    // إزالة أي تعديل سابق
+    if (currentEditElement) {
+        currentEditElement.removeAttribute('contenteditable');
+    }
+    
+    currentEditElement = element;
+    originalText = currentEditElement.innerText;
+    
+    // إظهار الأزرار الثلاثة (حذف، تعديل، إلغاء) فوراً - بدون تأخير
+    const popup = document.getElementById('editPopup');
+    const rect = e.touches[0];
+    popup.style.left = rect.clientX + 'px';
+    popup.style.top = (rect.clientY - 70) + 'px';
+    popup.classList.add('show');
+    
+    // إخفاء أزرار التأكيد إذا كانت ظاهرة
+    hideConfirmPopup();
 }
+
+// يمكنك إزالة دوال longPressTimer نهائياً لأننا لم نعد بحاجة لها
+// لكن الأفضل تركها للاحتياط
 
 function handleTouchEnd(e) {
     if (longPressTimer) {
@@ -855,14 +904,144 @@ function handleTouchCancel(e) {
     }
 }
 
+// دالة الحذف المباشر بدون تأكيد
+// متغير لحفظ العنصر المراد حذفه مؤقتاً
+let elementToDelete = null;
+
+// دالة فتح نافذة تأكيد الحذف
+function deleteElement() {
+    if (currentEditElement) {
+        // حفظ العنصر المراد حذفه
+        elementToDelete = currentEditElement;
+        
+        // إخفاء البوب أب الحالي
+        hideEditPopup();
+        
+        // فتح نافذة تأكيد الحذف
+        document.getElementById('deleteConfirmModal').classList.add('show');
+    }
+}
+
+// دالة تأكيد الحذف
+function confirmDeleteElement() {
+    if (elementToDelete) {
+        // أولاً: إغلاق نافذة التأكيد وإزالة class show
+        closeDeleteModal();
+        
+        // حذف العنصر
+        if (elementToDelete.closest('.card')) {
+            const card = elementToDelete.closest('.card');
+            const cardsGrid = card.closest('.cards-grid');
+            card.remove();
+            
+            if (cardsGrid && cardsGrid.children.length === 0) {
+                cardsGrid.remove();
+            }
+        } else {
+            elementToDelete.remove();
+        }
+        
+        // ثانياً: حفظ التغييرات (بعد إغلاق النافذة)
+        saveChanges();
+        showToast('🗑️ تم الحذف');
+        
+        elementToDelete = null;
+        currentEditElement = null;
+    }
+}
+
+// دالة إلغاء الحذف
+function cancelDeleteModal() {
+    // أولاً: إغلاق نافذة التأكيد
+    closeDeleteModal();
+    
+    // ثانياً: حفظ التغييرات (النافذة مغلقة)
+    saveChanges();
+    
+    elementToDelete = null;
+    showToast('✖️ تم إلغاء الحذف');
+}
+
+// دالة إغلاق نافذة التأكيد
+function closeDeleteModal() {
+    document.getElementById('deleteConfirmModal').classList.remove('show');
+}
+
+// دالة تحضير التعديل (تظهر أزرار ✅ ❌) مع تحديد النص بالكامل
+function prepareEdit() {
+    if (currentEditElement) {
+        // جعل العنصر قابلاً للتعديل
+        currentEditElement.setAttribute('contenteditable', 'true');
+        currentEditElement.focus();
+        
+        // ✅ وضع المؤشر في نهاية النص (وليس تحديد كل النص)
+        const range = document.createRange();
+        const sel = window.getSelection();
+        
+        // وضع المؤشر في نهاية النص
+        if (currentEditElement.childNodes.length > 0) {
+            const lastNode = currentEditElement.childNodes[currentEditElement.childNodes.length - 1];
+            range.setStartAfter(lastNode);
+        } else {
+            range.selectNodeContents(currentEditElement);
+        }
+        
+        range.collapse(false); // false يعني نهاية النص
+        sel.removeAllRanges();
+        sel.addRange(range);
+        
+        // إخفاء الأزرار الثلاثة
+        hideEditPopup();
+        
+        // إظهار أزرار التأكيد والإلغاء بجانب النص
+        const confirmPopup = document.getElementById('confirmPopup');
+        const rect = currentEditElement.getBoundingClientRect();
+        confirmPopup.style.left = (rect.left + rect.width / 2) + 'px';
+        confirmPopup.style.top = (rect.top - 20) + 'px';
+        confirmPopup.classList.add('show');
+        
+        // ✅ منع التداخل مع أحداث اللمس الطبيعية
+        currentEditElement.addEventListener('touchstart', function(e) {
+            e.stopPropagation(); // نسمح بالحدث ولكن نمنع وصوله للمستمعات الأخرى
+        }, {passive: true});
+    }
+}
+
+// دالة تأكيد التعديل
+function confirmEdit() {
+    if (currentEditElement) {
+        currentEditElement.removeAttribute('contenteditable');
+        
+        // حفظ إذا تغير النص
+        if (currentEditElement.innerText !== originalText) {
+            saveChanges();
+            showToast('✅ تم الحفظ');
+        }
+        
+        // إخفاء أزرار التأكيد
+        hideConfirmPopup();
+        currentEditElement = null;
+    }
+}
+
+// دالة إلغاء التعديل
 function cancelEdit() {
     if (currentEditElement) {
         currentEditElement.innerText = originalText;
         currentEditElement.removeAttribute('contenteditable');
+        
+        // إخفاء أزرار التأكيد
+        hideConfirmPopup();
+        showToast('❌ تم الإلغاء');
         currentEditElement = null;
     }
+}
+
+// دالة إلغاء البوب أب الأول (الأزرار الثلاثة)
+function cancelPopup() {
     hideEditPopup();
-    showToast('❌ تم الإلغاء');
+    currentEditElement = null;
+    showToast('✖️ تم الإلغاء');
 }
 
 function saveFileToPath(content) {
@@ -881,32 +1060,14 @@ function saveFileToPath(content) {
     return false;
 }
 
-function confirmEdit() {
-    if (currentEditElement) {
-        currentEditElement.removeAttribute('contenteditable');
-        
-        const popup = document.getElementById('editPopup');
-        popup.classList.remove('show');
-        popup.removeAttribute('style');
-
-        if (currentEditElement.innerText !== originalText) {
-            const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-            const saved = saveFileToPath(htmlContent);
-            
-            if (saved) {
-                showToast('✅ تم الحفظ');
-            } else {
-                showToast('✅ تم التعديل');
-            }
-        }
-        
-        currentEditElement = null;
-    }
-    hideEditPopup();
-}
-
 function hideEditPopup() {
     document.getElementById('editPopup').classList.remove('show');
+    document.getElementById('editPopup').removeAttribute('style');
+}
+
+function hideConfirmPopup() {
+    document.getElementById('confirmPopup').classList.remove('show');
+    document.getElementById('confirmPopup').removeAttribute('style');
 }
 
 function showToast(message) {
@@ -931,10 +1092,24 @@ document.addEventListener('contextmenu', (e) => {
 });
 
 document.addEventListener('touchmove', (e) => {
-    if (currentEditElement) {
-        e.preventDefault();
+    // فقط نمنع التمرير إذا كان العنصر في وضع التعديل
+    if (currentEditElement && currentEditElement.hasAttribute('contenteditable')) {
+        // لا نستخدم preventDefault هنا - نترك التفاعل طبيعياً
+        // e.preventDefault(); // ← علقنا على هذا السطر
     }
-}, {passive: false});
+}, {passive: true}); // غيرنا إلى passive: true
+
+// إخفاء البوب أب عند النقر خارجها
+document.addEventListener('touchstart', function(e) {
+    const confirmPopup = document.getElementById('confirmPopup');
+    
+    if (confirmPopup.classList.contains('show') && !e.target.closest('.confirm-popup') && !e.target.closest('[contenteditable="true"]')) {
+        // إذا نقر خارج أزرار التأكيد والنص، نلغي التعديل
+        if (currentEditElement && currentEditElement.hasAttribute('contenteditable')) {
+            cancelEdit();
+        }
+    }
+});
 
 window.addEventListener('beforeunload', function() {
     if (editMode) {
@@ -945,13 +1120,6 @@ window.addEventListener('beforeunload', function() {
 window.addEventListener('pagehide', function() {
     if (editMode) {
         toggleEditMode();
-    }
-});
-
-document.addEventListener('touchstart', function(e) {
-    const popup = document.getElementById('editPopup');
-    if (popup.classList.contains('show') && !e.target.closest('.edit-popup')) {
-        // لا نخفي الأزرار تلقائياً
     }
 });
 </script>
