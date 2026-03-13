@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
+<html lang="ar" dir="rtl"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مقدمة في القانون الجنائي</title>
@@ -23,8 +22,8 @@ font-weight:700;
 --secondary-color:#006233;
 --accent-color:#C6A87C;
 --bg-color:#F4F6F8;
---text-dark:#2C3E50; /* يستخدم للعناوين والنصوص الأساسية */
---text-light:#596A7B; /* يستخدم للنصوص الثانوية */
+--text-dark:#2C3E50;
+--text-light:#596A7B;
 --card-bg:#FFFFFF;
 }
 
@@ -34,7 +33,7 @@ font-weight:700;
 --secondary-color:#2ecc71;
 --accent-color:#d4af37;
 --bg-color:#0f1115;
---text-dark:#e6e6e6; /* يتحول إلى أبيض كامل في الوضع الليلي */
+--text-dark:#e6e6e6;
 --text-light:#b8c0cc;
 --card-bg:#1a1d24;
 }
@@ -45,21 +44,18 @@ margin:0;
 padding:0;
 }
 
-/* اجعل الانتقال بين الألوان ناعماً */
 body, div, h1, h2, h3, p, section, .card, .section-intro {
     transition: background-color 0.1s, color 0.1s, border-color 0.1s;
 }
 
-/* تأكد أن جميع العناصر تأخذ ألوان المتغيرات فوراً */
 body {
 font-family:'Tajawal',sans-serif;
 background:var(--bg-color);
-color:var(--text-dark); /* لون النص العام للصفحة */
+color:var(--text-dark);
 line-height:1.8;
 padding-bottom:50px;
 }
 
-/* زر القائمة - هامبرغر بدون إطار */
 .menu-btn{
 position:fixed;
 top:15px;
@@ -77,7 +73,6 @@ line-height:1;
 box-shadow:none;
 }
 
-/* القائمة الجانبية */
 .side-menu{
 position:fixed;
 top:0;
@@ -98,7 +93,6 @@ z-index:999;
 left:0;
 }
 
-/* زر الوضع */
 .theme-btn{
 font-size:22px;
 background:var(--primary-color);
@@ -115,7 +109,6 @@ gap:8px;
 margin-bottom:10px;
 }
 
-/* زر التعديل */
 .edit-btn {
     font-size:18px;
     background:var(--secondary-color);
@@ -130,6 +123,29 @@ margin-bottom:10px;
     justify-content:center;
     gap:8px;
     transition:0.3s;
+    margin-bottom:10px;
+}
+
+.add-btn {
+    font-size:18px;
+    background:var(--accent-color);
+    color:var(--text-dark);
+    border:none;
+    padding:10px;
+    border-radius:8px;
+    cursor:pointer;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:0.3s;
+    font-weight:700;
+}
+
+.add-btn:hover {
+    opacity:0.9;
+    transform:scale(1.02);
 }
 
 .edit-btn:hover {
@@ -142,7 +158,6 @@ margin-bottom:10px;
     color:var(--text-dark);
 }
 
-/* مؤشر أن وضع التعديل نشط */
 .edit-mode-active [contenteditable="true"] {
     outline: 2px dashed var(--secondary-color);
     outline-offset: 2px;
@@ -152,7 +167,6 @@ margin-bottom:10px;
     border-radius: 8px;
 }
 
-/* أزرار التعديل الصغيرة فوق النص - مخفية افتراضياً */
 .edit-popup {
     position:fixed;
     display:flex;
@@ -202,7 +216,119 @@ margin-bottom:10px;
     color:white;
 }
 
-/* الهيدر - بدون ظل */
+/* نافذة إضافة نص */
+.modal-overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:3000;
+    opacity:0;
+    pointer-events:none;
+    transition:0.3s;
+}
+
+.modal-overlay.show {
+    opacity:1;
+    pointer-events:all;
+}
+
+.modal-content {
+    background:var(--card-bg);
+    width:90%;
+    max-width:500px;
+    border-radius:20px;
+    padding:25px;
+    max-height:80vh;
+    overflow-y:auto;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+    border:2px solid var(--secondary-color);
+}
+
+.modal-content h3 {
+    color:var(--primary-color);
+    margin-bottom:20px;
+    font-size:1.5rem;
+    text-align:center;
+}
+
+.input-group {
+    margin-bottom:20px;
+}
+
+.input-group label {
+    display:block;
+    margin-bottom:8px;
+    color:var(--text-dark);
+    font-weight:700;
+    font-size:0.95rem;
+}
+
+.input-group input, 
+.input-group textarea {
+    width:100%;
+    padding:12px 15px;
+    border-radius:12px;
+    border:2px solid var(--text-light);
+    background:var(--bg-color);
+    color:var(--text-dark);
+    font-family:'Tajawal',sans-serif;
+    font-size:1rem;
+    resize:vertical;
+    transition:0.2s;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline:none;
+    border-color:var(--secondary-color);
+    box-shadow:0 0 0 3px rgba(0,98,51,0.2);
+}
+
+.modal-buttons {
+    display:flex;
+    gap:15px;
+    margin-top:25px;
+}
+
+.modal-buttons button {
+    flex:1;
+    padding:12px;
+    border-radius:12px;
+    border:none;
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.modal-buttons button:first-child {
+    background:var(--secondary-color);
+    color:white;
+}
+
+.modal-buttons button:last-child {
+    background:#dc3545;
+    color:white;
+}
+
+.modal-buttons button:hover {
+    transform:scale(1.02);
+    opacity:0.9;
+}
+
+.note {
+    font-size:0.85rem;
+    color:var(--text-light);
+    margin-top:10px;
+    text-align:center;
+}
+
 header{
 background:linear-gradient(135deg,var(--primary-color),#7a1220);
 color:white;
@@ -215,7 +341,7 @@ h1{
 font-weight:800;
 font-size:2.5rem;
 margin-bottom:10px;
-color:white; /* لون العنوان في الهيدر يبقى أبيض كما هو */
+color:white;
 }
 
 .container{
@@ -228,7 +354,6 @@ padding:40px 20px;
 margin-bottom:50px;
 }
 
-/* عناوين */
 h2{
 font-size:1.8rem;
 font-weight:700;
@@ -239,7 +364,6 @@ padding-bottom:15px;
 z-index:1;
 }
 
-/* السطر المتوهج - بدون ظل أحمر */
 h2::after{
 content:"";
 position:absolute;
@@ -260,7 +384,7 @@ border-radius:50px;
 
 .section-intro{
 font-size:1.1rem;
-color:var(--text-dark); /* تم التعديل: جعل لون المقدمة أسود/أبيض كامل */
+color:var(--text-dark);
 margin-bottom:30px;
 }
 
@@ -294,23 +418,20 @@ margin-bottom:15px;
 color:var(--primary-color);
 }
 
-/* تنسيق الفقرات داخل البطاقات */
 .card p{
-color:var(--text-dark); /* تم التعديل: جعل لون النص أسود/أبيض كامل */
+color:var(--text-dark);
 text-align:justify;
 }
 
-/* تنسيق جميع الفقرات بخط النظام */
 p {
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     font-size: 1rem;
-    font-weight: 700; /* جعل الخط عريض */
-    color: var(--text-dark); /* تم التعديل: جعل لون النص أسود/أبيض كامل */
+    font-weight: 700;
+    color: var(--text-dark);
     line-height: 1.8;
     text-align: justify;
 }
 
-/* رسالة تأكيد التعديل */
 .edit-toast {
     position:fixed;
     bottom:20px;
@@ -347,31 +468,32 @@ width:200px;
     height:32px;
     font-size:16px;
 }
+.modal-content {
+    width:95%;
+    padding:20px;
+}
 }
 </style>
 </head>
-<body>
+<body class="edit-mode-active">
 <script>
-    // هذا الكود يعمل فوراً قبل ظهور أي عنصر على الشاشة
     (function() {
         try {
             const savedTheme = localStorage.getItem('darkMode');
             if (savedTheme === 'enabled') {
                 document.body.classList.add('dark-mode');
             }
-        } catch(e) {
-            // تجاهل الخطأ إذا كان localStorage غير متاح
-        }
+        } catch(e) {}
     })();
 </script>
 
-<!-- بداية المحتوى المرئي -->
 <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
 <div class="side-menu" id="menu">
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
-<button class="edit-btn" onclick="toggleEditMode()">
-    <span>✎</span> تعديل النصوص
+<button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button>
+<button class="add-btn" onclick="openAddModal()">
+    <span>➕</span> إضافة نص
 </button>
 </div>
 
@@ -379,7 +501,7 @@ width:200px;
 <h1>مقدمة في التعريف بالقانون الجنائي وتطوره</h1>
 </header>
 
-<div class="container">  
+<div class="container" id="mainContainer">  
     <section class="section-block">  
         <h2>أولاً: التعريف بالقانون الجنائي</h2>  
         <p class="section-intro">يُعرف القانون الجنائي بأنه مجموعة القواعد القانونية المنظمة للتجريم والعقاب وتحديد الأفعال المكونة للجرائم، وإجراءات البحث والتحقيق ومسطرة المحاكمة وتنفيذ العقوبة. وترجع تسميته إلى "الجناية" كأخطر الجرائم.</p>  
@@ -440,16 +562,50 @@ width:200px;
             </div>  
         </div>  
     </section>  
+<section class="section-block"><p class="section-intro"><br></p><div class="cards-grid"><div class="card"><h3><br></h3><p><br></p></div></div></section></div>
+
+<!-- نافذة إضافة نص -->
+<div class="modal-overlay" id="addModal">
+    <div class="modal-content">
+        <h3>➕ إضافة نص جديد</h3>
+        
+        <div class="input-group">
+            <label>العنوان الأكبر (h1) - اختياري</label>
+            <input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
+        </div>
+        
+        <div class="input-group">
+            <label>النص التمهيدي (section-intro) - اختياري</label>
+            <textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
+        </div>
+        
+        <div class="input-group">
+            <label>العنوان الرئيسي (h2) - اختياري</label>
+            <input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
+        </div>
+        
+        <div class="input-group">
+            <label>العنوان الفرعي مع نص (card) - اختياري</label>
+            <input type="text" id="inputCardTitle" placeholder="العنوان الفرعي...">
+            <textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
+        </div>
+        
+        <div class="modal-buttons">
+            <button onclick="addNewContent()">✅ إضافة</button>
+            <button onclick="closeAddModal()">❌ إلغاء</button>
+        </div>
+        <div class="note">يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف</div>
+    </div>
 </div>
 
-<!-- أزرار التعديل الصغيرة فوق النص ❌ ✅ - مخفية افتراضياً -->
+<!-- أزرار التعديل الصغيرة فوق النص -->
 <div class="edit-popup" id="editPopup">
     <button class="cancel-btn" onclick="cancelEdit()">❌</button>
     <button class="confirm-btn" onclick="confirmEdit()">✅</button>
 </div>
 
 <!-- رسالة تأكيد -->
-<div class="edit-toast" id="editToast">تم التعديل بنجاح ✓</div>
+<div class="edit-toast" id="editToast">✅ تم الحفظ</div>
 
 <script>
 let editMode = false;
@@ -484,11 +640,10 @@ function loadEditModePreference() {
     }
 }
 
-// التأكد من إخفاء الأزرار عند تحميل الصفحة
 window.addEventListener('load', function() {
     loadEditModePreference();
-    hideEditPopup(); // إخفاء الأزرار مباشرة
-    currentEditElement = null; // التأكد من عدم وجود عنصر قيد التعديل
+    hideEditPopup();
+    currentEditElement = null;
 });
 
 function toggleMenu(){
@@ -529,6 +684,127 @@ function toggleEditMode() {
     }
 }
 
+// دوال نافذة الإضافة
+function openAddModal() {
+    document.getElementById('addModal').classList.add('show');
+    // إخفاء القائمة الجانبية إذا كانت مفتوحة
+    document.getElementById('menu').classList.remove('open');
+}
+
+function closeAddModal() {
+    document.getElementById('addModal').classList.remove('show');
+    // تفريغ الحقول
+    document.getElementById('inputH1').value = '';
+    document.getElementById('inputIntro').value = '';
+    document.getElementById('inputH2').value = '';
+    document.getElementById('inputCardTitle').value = '';
+    document.getElementById('inputCardText').value = '';
+}
+
+function addNewContent() {
+    const h1Text = document.getElementById('inputH1').value.trim();
+    const introText = document.getElementById('inputIntro').value.trim();
+    const h2Text = document.getElementById('inputH2').value.trim();
+    const cardTitle = document.getElementById('inputCardTitle').value.trim();
+    const cardText = document.getElementById('inputCardText').value.trim();
+    
+    const container = document.getElementById('mainContainer');
+    
+    // إضافة العنوان الأكبر (h1) - يضاف داخل الهيدر
+    if (h1Text !== '') {
+        const header = document.querySelector('header');
+        if (header) {
+            // إضافة عنوان جديد مع الحفاظ على القديم
+            const newH1 = document.createElement('h1');
+            newH1.textContent = h1Text;
+            header.appendChild(newH1);
+        }
+    }
+    
+    // إنشاء قسم جديد إذا تم إضافة أي من h2, intro, أو card
+    if (h2Text !== '' || introText !== '' || (cardTitle !== '' && cardText !== '')) {
+        const newSection = document.createElement('section');
+        newSection.className = 'section-block';
+        
+        // إضافة العنوان الرئيسي h2
+        if (h2Text !== '') {
+            const h2 = document.createElement('h2');
+            h2.textContent = h2Text;
+            newSection.appendChild(h2);
+        }
+        
+        // إضافة النص التمهيدي
+        if (introText !== '') {
+            const intro = document.createElement('p');
+            intro.className = 'section-intro';
+            intro.textContent = introText;
+            newSection.appendChild(intro);
+        }
+        
+        // إضافة البطاقة إذا توفر العنوان والنص
+        if (cardTitle !== '' && cardText !== '') {
+            const cardsGrid = document.createElement('div');
+            cardsGrid.className = 'cards-grid';
+            
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            const cardH3 = document.createElement('h3');
+            cardH3.textContent = cardTitle;
+            
+            const cardP = document.createElement('p');
+            cardP.textContent = cardText;
+            
+            card.appendChild(cardH3);
+            card.appendChild(cardP);
+            cardsGrid.appendChild(card);
+            newSection.appendChild(cardsGrid);
+        }
+        
+        container.appendChild(newSection);
+    } 
+    // إذا تمت إضافة بطاقة فقط بدون h2 أو intro
+    else if (cardTitle !== '' && cardText !== '') {
+        // نضيف البطاقة في قسم جديد بدون عنوان
+        const newSection = document.createElement('section');
+        newSection.className = 'section-block';
+        
+        const cardsGrid = document.createElement('div');
+        cardsGrid.className = 'cards-grid';
+        
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        const cardH3 = document.createElement('h3');
+        cardH3.textContent = cardTitle;
+        
+        const cardP = document.createElement('p');
+        cardP.textContent = cardText;
+        
+        card.appendChild(cardH3);
+        card.appendChild(cardP);
+        cardsGrid.appendChild(card);
+        newSection.appendChild(cardsGrid);
+        
+        container.appendChild(newSection);
+    }
+    
+    // أولاً: إغلاق النافذة وتفريغ الحقول
+    closeAddModal();
+    
+    // ثانياً: حفظ التغييرات (الآن الصفحة نظيفة)
+    saveChanges();
+    
+    // ثالثاً: إظهار رسالة النجاح
+    showToast('✅ تمت الإضافة بنجاح');
+}
+
+function saveChanges() {
+    // حفظ الملف
+    const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    const saved = saveFileToPath(htmlContent);
+}
+
 function handleTouchStart(e) {
     if (!editMode) return;
     
@@ -540,26 +816,22 @@ function handleTouchStart(e) {
     
     longPressTimer = setTimeout(() => {
         if (longPressedElement && editMode) {
-            // إنهاء أي تعديل سابق
             if (currentEditElement) {
                 currentEditElement.removeAttribute('contenteditable');
             }
             
-            // بدء تعديل جديد
             currentEditElement = longPressedElement;
             originalText = currentEditElement.innerText;
             
             currentEditElement.setAttribute('contenteditable', 'true');
             currentEditElement.focus();
             
-            // تحديد النص
             const range = document.createRange();
             const sel = window.getSelection();
             range.selectNodeContents(currentEditElement);
             sel.removeAllRanges();
             sel.addRange(range);
             
-            // إظهار الأزرار فوق النص
             const popup = document.getElementById('editPopup');
             const rect = e.touches[0];
             popup.style.left = rect.clientX + 'px';
@@ -593,17 +865,14 @@ function cancelEdit() {
     showToast('❌ تم الإلغاء');
 }
 
-// دالة لحفظ الملف بعد التعديل
 function saveFileToPath(content) {
     const filePath = '/storage/emulated/0/Android/data/com.S2/files/M3F1.html';
     
-    // استخدام Android Bridge إذا كان متاحاً
     if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
         AndroidBridge.saveFile(filePath, content);
         return true;
     }
     
-    // محاولة استخدام واجهة Android مباشرة
     if (window.Android && typeof window.Android.saveFile === 'function') {
         window.Android.saveFile(filePath, content);
         return true;
@@ -616,17 +885,12 @@ function confirmEdit() {
     if (currentEditElement) {
         currentEditElement.removeAttribute('contenteditable');
         
-        // 1. التنظيف: إخفاء الأزرار وإزالة إحداثيات موقعها "قبل" حفظ الملف
         const popup = document.getElementById('editPopup');
         popup.classList.remove('show');
         popup.removeAttribute('style');
 
         if (currentEditElement.innerText !== originalText) {
-            // 2. الحصول على محتوى HTML بالكامل (نظيف بدون الأزرار الظاهرة)
-            // إضافة DOCTYPE يدوياً لأنه لا يتم تضمينه في outerHTML
             const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-            
-            // 3. حفظ الملف في المسار المطلوب
             const saved = saveFileToPath(htmlContent);
             
             if (saved) {
@@ -640,7 +904,6 @@ function confirmEdit() {
     }
     hideEditPopup();
 }
-
 
 function hideEditPopup() {
     document.getElementById('editPopup').classList.remove('show');
@@ -663,40 +926,34 @@ document.querySelectorAll('h1, h2, h3, p, .section-intro, .card p').forEach(elem
     element.addEventListener('touchcancel', handleTouchCancel);
 });
 
-// منع القائمة الافتراضية
 document.addEventListener('contextmenu', (e) => {
     if (editMode) e.preventDefault();
 });
 
-// منع التمرير أثناء التعديل
 document.addEventListener('touchmove', (e) => {
     if (currentEditElement) {
         e.preventDefault();
     }
 }, {passive: false});
 
-// إنهاء وضع التعديل تلقائياً عند الخروج من الصفحة أو العودة للخلف
 window.addEventListener('beforeunload', function() {
     if (editMode) {
-        toggleEditMode(); // استدعاء الدالة التي تحول الوضع إلى Off
+        toggleEditMode();
     }
 });
 
-// لضمان إغلاق الوضع أيضاً عند التنقل داخل تطبيقات WebView
 window.addEventListener('pagehide', function() {
     if (editMode) {
         toggleEditMode();
     }
 });
 
-
-// إخفاء الأزرار عند النقر خارجها
 document.addEventListener('touchstart', function(e) {
     const popup = document.getElementById('editPopup');
     if (popup.classList.contains('show') && !e.target.closest('.edit-popup')) {
-        // لا نخفي الأزرار تلقائياً، نترك المستخدم يختار
+        // لا نخفي الأزرار تلقائياً
     }
 });
 </script>
-</body>  
-</html>
+  
+</body></html>
