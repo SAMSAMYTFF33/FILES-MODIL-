@@ -3,118 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>القانون الجنائي</title>
+<title>مقدمة في القانون الجنائي</title>
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        background: radial-gradient(circle at center, #001122, #000000 100%);
-        font-family: Arial, Helvetica, sans-serif;
-        color: white;
-        display: flex;
-        justify-content: center;
-        padding: 30px 0;
-    }
+@font-face{
+font-family:'Tajawal';
+src:url('file:///data/data/com.S2/files/Tajawal-Regular.ttf') format('truetype');
+font-weight:400;
+}
 
-    .content-container {
-        width: 90%;
-        max-width: 800px;
-        background: rgba(17, 17, 17, 0.7);
-        padding: 30px;
-        border-radius: 20px;
-        border: 1px solid #0088ff;
-        box-shadow: 0 0 15px rgba(0, 136, 255, 0.2);
-        line-height: 1.8;
-    }
+@font-face{
+font-family:'Tajawal';
+src:url('file:///data/data/com.S2/files/Tajawal-Bold.ttf') format('truetype');
+font-weight:700;
+}
 
-    h1 {
-        text-align: center;
-        color: #00ffff;
-        font-size: 28px;
-        margin-bottom: 30px;
-        text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
-        border-bottom: 2px solid rgba(0, 136, 255, 0.5);
-        padding-bottom: 20px;
-    }
+/* الوضع العادي */
+:root{
+--primary-color:#A6192E;
+--secondary-color:#006233;
+--accent-color:#C6A87C;
+--bg-color:#F4F6F8;
+--text-dark:#2C3E50;
+--text-light:#596A7B;
+--card-bg:#FFFFFF;
+}
 
-    h2 {
-        color: #0088ff;
-        font-size: 22px;
-        margin-top: 35px;
-        margin-bottom: 15px;
-        border-right: 4px solid #00ffff;
-        padding-right: 12px;
-        background: linear-gradient(90deg, rgba(0, 136, 255, 0.1) 0%, transparent 100%);
-        padding-block: 5px;
-    }
+/* الوضع الليلي */
+.dark-mode{
+--primary-color:#ff4d5a;
+--secondary-color:#2ecc71;
+--accent-color:#d4af37;
+--bg-color:#0f1115;
+--text-dark:#e6e6e6;
+--text-light:#b8c0cc;
+--card-bg:#1a1d24;
+}
 
-    h3 {
-        color: #4da6ff;  /* لون أزرق فاتح متناسق مع التصميم */
-        font-size: 18px;
-        margin-top: 25px;
-        margin-bottom: 10px;
-    }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
 
-    p {
-        font-size: 16px;
-        color: #ffffff;
-        margin-bottom: 15px;
-        text-align: justify;
-    }
+body{
+font-family:'Tajawal',sans-serif;
+background:var(--bg-color);
+color:var(--text-dark);
+line-height:1.8;
+padding-bottom:50px;
+}
 
-    @media(max-width: 500px) {
-        .content-container {
-            padding: 20px;
-            width: 85%;
-        }
-        h1 { font-size: 22px; }
-        h2 { font-size: 19px; }
-        h3 { font-size: 17px; }
-        p { font-size: 15px; }
-    }
+/* زر القائمة */
+.menu-btn{
+position:fixed;
+top:15px;
+left:15px;
+font-size:22px;
+background:var(--card-bg);
+color:var(--text-dark);
+border:none;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+box-shadow:0 4px 10px rgba(0,0,0,0.3);
+z-index:1000;
+}
+
+/* القائمة الجانبية */
+.side-menu{
+position:fixed;
+top:0;
+left:-250px;
+width:250px;
+height:auto;
+min-height:auto;
+max-height:fit-content;
+background:var(--card-bg);
+padding:20px;
+transition:0.3s;
+box-shadow:4px 0 20px rgba(0,0,0,0.3);
+border-radius:0 0 20px 0;
+z-index:999;
+}
+
+.side-menu.open{
+left:0;
+}
+
+/* زر الوضع */
+.theme-btn{
+font-size:22px;
+background:var(--primary-color);
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+width:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+/* الهيدر */
+header{
+background:linear-gradient(135deg,var(--primary-color),#7a1220);
+color:white;
+padding:60px 20px;
+text-align:center;
+border-bottom:5px solid var(--accent-color);
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+
+h1{
+font-weight:800;
+font-size:2.5rem;
+margin-bottom:10px;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.section-block{
+margin-bottom:50px;
+}
+
+/* عناوين */
+h2{
+font-size:1.8rem;
+font-weight:700;
+color:var(--primary-color);
+margin-bottom:35px;
+position:relative;
+padding-bottom:15px;
+z-index:1;
+}
+
+/* السطر المتوهج */
+h2::after{
+content:"";
+position:absolute;
+right:0;
+bottom:-8px;
+width:100%;
+height:2px;
+background:linear-gradient(
+to right,
+transparent 0%,
+rgba(255,120,0,0.2) 20%,
+rgba(255,140,0,0.9) 50%,
+rgba(255,120,0,0.2) 80%,
+transparent 100%
+);
+box-shadow:
+0 0 6px rgba(255,120,0,0.8),
+0 0 20px rgba(255,120,0,0.5),
+0 0 40px rgba(255,120,0,0.3);
+border-radius:50px;
+}
+
+.section-intro{
+font-size:1.1rem;
+color:var(--text-light);
+margin-bottom:30px;
+}
+
+.cards-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+}
+
+.card{
+background:var(--card-bg);
+border-radius:12px;
+padding:25px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+border-top:4px solid var(--secondary-color);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+h3{
+font-size:1.3rem;
+color:var(--secondary-color);
+margin-bottom:15px;
+}
+
+.numbered-card h3{
+color:var(--primary-color);
+}
+
+.card p{
+color:var(--text-light);
+text-align:justify;
+}
+
+@media (max-width:768px){
+h1{font-size:2rem;}
+h2{
+font-size:1.5rem;
+}
+.cards-grid{
+grid-template-columns:1fr;
+}
+.side-menu{
+width:200px;
+}
+}
 </style>
 </head>
 <body>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-    <div class="content-container">
-        
-        <h1>مقدمة في التعريف بالقانون الجنائي وتطوره</h1>
+<div class="side-menu" id="menu">
+<button class="theme-btn" onclick="toggleTheme()">🌙</button>
+</div>
 
-        <h2>أولاً: التعريف بالقانون الجنائي</h2>
-        <p>يُعرف القانون الجنائي بأنه مجموعة القواعد القانونية المنظمة للتجريم والعقاب وتحديد الأفعال المكونة للجرائم، وإجراءات البحث والتحقيق ومسطرة المحاكمة وتنفيذ العقوبة. وترجع تسميته إلى "الجناية" كأخطر الجرائم.</p>
+<header>
+<h1>مقدمة في التعريف بالقانون الجنائي وتطوره</h1>
+</header>
 
-        <h3>المفهوم الواسع</h3>
-        <p>يشمل القانون الجنائي بمفهومه الواسع قواعد الموضوع وقواعد الشكل (المسطرة الجنائية) معاً، إذ يُعدّ كلاهما جزءاً لا يتجزأ من المنظومة الجنائية.</p>
+<div class="container">  
+    <section class="section-block">  
+        <h2>أولاً: التعريف بالقانون الجنائي</h2>  
+        <p class="section-intro">يُعرف القانون الجنائي بأنه مجموعة القواعد القانونية المنظمة للتجريم والعقاب وتحديد الأفعال المكونة للجرائم، وإجراءات البحث والتحقيق ومسطرة المحاكمة وتنفيذ العقوبة. وترجع تسميته إلى "الجناية" كأخطر الجرائم.</p>  
+          
+        <div class="cards-grid">  
+            <div class="card">  
+                <h3>المفهوم الواسع</h3>  
+                <p>يشمل القانون الجنائي بمفهومه الواسع قواعد الموضوع وقواعد الشكل (المسطرة الجنائية) معاً، إذ يُعدّ كلاهما جزءاً لا يتجزأ من المنظومة الجنائية.</p>  
+            </div>  
+              
+            <div class="card">  
+                <h3>المفهوم الضيق</h3>  
+                <p>قصره البعض على القواعد الموضوعية  بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>  
+            </div>  
 
-        <h3>المفهوم الضيق</h3>
-        <p>قصره البعض على القواعد الموضوعية المتعلقة بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>
+            <div class="card">  
+                <h3>المسطرة الجنائية</h3>  
+                <p>تختص المسطرة الجنائية بإجراءات البحث والتحقيق والمحاكمة وتنفيذ العقوبة، وهي بذلك تُكمل القواعد الموضوعية وتُجسدها على أرض الواقع.</p>  
+            </div>  
+        </div>  
+    </section>  
 
-        <h3>المسطرة الجنائية</h3>
-        <p>تختص المسطرة الجنائية بإجراءات البحث والتحقيق والمحاكمة وتنفيذ العقوبة، وهي بذلك تُكمل القواعد الموضوعية وتُجسدها على أرض الواقع.</p>
+    <section class="section-block">  
+        <h2>أقسام القانون الجنائي بمفهومه الضيق</h2>  
+        <p class="section-intro">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>  
+          
+        <div class="cards-grid">  
+            <div class="card">  
+                <h3>القسم العام</h3>  
+                <p>يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>  
+            </div>  
+              
+            <div class="card">  
+                <h3>القسم الخاص</h3>  
+                <p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>  
+            </div>  
+        </div>  
+    </section>  
 
-        <h2>أقسام القانون الجنائي بمفهومه الضيق</h2>
-        <p>ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
-        
-        <h3>القسم العام</h3>
-        <p>يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
-        
-        <h3>القسم الخاص</h3>
-        <p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>
+    <section class="section-block">  
+        <h2>تطور مؤسسات القانون الجنائي</h2>  
+        <p class="section-intro">يُعدّ تاريخ العقوبة هو تاريخ تطور القانون الجنائي بعينه؛ إذ انتقل هذا القانون عبر الزمن من مرحلة الانتقام الفردي والجماعي، إلى نظام القصاص والدية، حتى استقر الأمر على انفراد الدولة بحق العقاب وتنظيمه. وقد مرّ هذا التطور التاريخي بثلاث مراحل متعاقبة ومتمايزة:</p>  
+          
+        <div class="cards-grid">  
+            <div class="card numbered-card">  
+                <h3>1. مرحلة الأسرة والعشيرة</h3>  
+                <p>كانت العقوبة في بدايتها شأناً خاصاً تتولاه الأسرة أو العشيرة، وكان الانتقام الفردي والجماعي هو الوسيلة الرئيسية للرد على الاعتداء، دون وجود سلطة مركزية تنظم هذا الحق أو تضبطه.</p>  
+            </div>  
+              
+            <div class="card numbered-card">  
+                <h3>2. مرحلة قيام الدولة</h3>  
+                <p>مع نشوء الدولة وتطور مؤسساتها، انتقل حق العقاب تدريجياً من الأفراد والجماعات إلى السلطة العامة. وظهرت أنظمة القصاص والدية كأشكال منظمة للعدالة، إلى أن انفردت الدولة بصلاحية توقيع العقوبات وتنفيذها.</p>  
+            </div>  
 
-        <h2>تطور مؤسسات القانون الجنائي</h2>
-        <p>يُعدّ تاريخ العقوبة هو تاريخ تطور القانون الجنائي بعينه؛ إذ انتقل هذا القانون عبر الزمن من مرحلة الانتقام الفردي والجماعي، إلى نظام القصاص والدية، حتى استقر الأمر على انفراد الدولة بحق العقاب وتنظيمه. وقد مرّ هذا التطور التاريخي بثلاث مراحل متعاقبة ومتمايزة:</p>
-        
-        <h3>1. مرحلة الأسرة والعشيرة</h3>
-        <p>كانت العقوبة في بدايتها شأناً خاصاً تتولاه الأسرة أو العشيرة، وكان الانتقام الفردي والجماعي هو الوسيلة الرئيسية للرد على الاعتداء، دون وجود سلطة مركزية تنظم هذا الحق أو تضبطه.</p>
-        
-        <h3>2. مرحلة قيام الدولة</h3>
-        <p>مع نشوء الدولة وتطور مؤسساتها، انتقل حق العقاب تدريجياً من الأفراد والجماعات إلى السلطة العامة. وظهرت أنظمة القصاص والدية كأشكال منظمة للعدالة، إلى أن انفردت الدولة بصلاحية توقيع العقوبات وتنفيذها.</p>
-        
-        <h3>3. مرحلة البحث العلمي والدراسة الفلسفية</h3>
-        <p>تمثل هذه المرحلة ذروة التطور، حيث اتجه الفكر الإنساني نحو التأصيل العلمي والفلسفي لمبادئ علم الإجرام. وبات القانون الجنائي موضوع دراسة أكاديمية منهجية تسعى إلى فهم الجريمة وأسبابها وسبل مكافحتها.</p>
+            <div class="card numbered-card">  
+                <h3>3. مرحلة البحث العلمي والدراسة الفلسفية</h3>  
+                <p>تمثل هذه المرحلة ذروة التطور، حيث اتجه الفكر الإنساني نحو التأصيل العلمي والفلسفي لمبادئ علم الإجرام. وبات القانون الجنائي موضوع دراسة أكاديمية منهجية تسعى إلى فهم الجريمة وأسبابها وسبل مكافحتها.</p>  
+            </div>  
+        </div>  
+    </section>  
+</div>
 
-    </div>
+<script>
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("open");
+}
 
-</body>
+function toggleTheme(){
+document.body.classList.toggle("dark-mode");
+// تغيير الأيقونة بين 🌙 و ☀️
+let btn = document.querySelector('.theme-btn');
+if(document.body.classList.contains('dark-mode')){
+btn.innerHTML = '☀️';
+} else {
+btn.innerHTML = '🌙';
+}
+}
+</script>
+</body>  
 </html>
