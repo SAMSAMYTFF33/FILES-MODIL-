@@ -1123,5 +1123,201 @@ window.addEventListener('pagehide', function() {
     }
 });
 </script>
+
+<!-- نظام تتبع التعديلات -->
+<script>
+// ============================================
+// نظام تتبع وحفظ تعديلات المستخدم
+// ============================================
+
+// معرف الملف الحالي
+const CURRENT_FILE = "M3F1.html";
+
+// دالة تحميل/حفظ التعديلات
+const EditTracker = {
+    // تحميل التعديلات من ملف JSON
+    async loadEdits() {
+        try {
+            if (typeof AndroidBridge !== 'undefined') {
+                // سنضيف هذه الدالة في MainActivity.java
+                const editsJson = await AndroidBridge.readFile('edits.json');
+                return JSON.parse(editsJson || '{"version":1,"files":{}}');
+            }
+        } catch (e) {
+            console.log('لا يوجد ملف تعديلات بعد');
+        }
+        return { version: 1, files: {} };
+    },
+
+    // حفظ التعديلات
+    async saveEdits(editsData) {
+        if (typeof AndroidBridge !== 'undefined') {
+            AndroidBridge.saveFile('edits.json', JSON.stringify(editsData, null, 2));
+        }
+    },
+
+    // إنشاء محدد فريد للعنصر
+    getElementSelector(element) {
+        if (!element) return null;
+        
+        // محاولة باستخدام id
+        if (element.id) return `#${element.id}`;
+        
+        let path = [];
+        let current = element;
+        let maxDepth = 10;
+        
+        while (current && current.nodeType === 1 && maxDepth-- > 0) {
+            let selector = current.tagName.toLowerCase();
+            
+            // إضافة class إذا وجد
+            if (current.className) {
+                let classes = current.className.split(/\s+/).filter(c => c);
+                if (classes.length > 0) {
+                    selector += '.' + classes.join('.');
+                }
+            }
+            
+            // إضافة index
+            if (current.parentNode) {
+                let siblings = Array.from(current.parentNode.children).filter(c => c.tagName === current.tagName);
+                if (siblings.length > 1) {
+                    let index = siblings.indexOf(current) + 1;
+                    selector += `:nth-child(${index})`;
+                }
+            }
+            
+            path.unshift(selector);
+            current = current.parentNode;
+            
+            if (current && current.tagName === 'BODY') break;
+        }
+        
+        return path.join(' > ');
+    },
+
+    // الحصول على نص مختصر للعنصر للمساعدة في البحث البديل
+    getElementSignature(element) {
+        return {
+            tag: element.tagName,
+            text_start: element.innerText?.substring(0, 30),
+            class: element.className,
+            depth: this.getElementDepth(element)
+        };
+    },
+
+    getElementDepth(element) {
+        let depth = 0;
+        while (element.parentNode) {
+            depth++;
+            element = element.parentNode;
+        }
+        return depth;
+    },
+
+    // تسجيل تعديل
+    async recordEdit(type, details) {
+        try {
+            const edits = await this.loadEdits();
+            
+            if (!edits.files[CURRENT_FILE]) {
+                edits.files[CURRENT_FILE] = {
+                    file_version: 1,
+                    edits: []
+                };
+            }
+            
+            // إضافة التعديل الجديد
+            edits.files[CURRENT_FILE].edits.push({
+                id: `edit_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+                type: type,
+                timestamp: new Date().toISOString(),
+                ...details
+            });
+            
+            // حفظ التعديلات
+            await this.saveEdits(edits);
+            
+            console.log(`تم تسجيل ${type}:`, details);
+            return true;
+        } catch (e) {
+            console.error('فشل تسجيل التعديل:', e);
+            return false;
+        }
+    }
+};
+
+// ============================================
+// تعديل دوال التحرير الحالية
+// ============================================
+
+// حفظ الدالة الأصلية
+const originalConfirmEdit = confirmEdit;
+const originalDeleteElement = deleteElement;
+const originalAddNewContent = addNewContent;
+
+// تعديل دالة تأكيد التعديل
+confirmEdit = async function() {
+    if (currentEditElement) {
+        const selector = EditTracker.getElementSelector(currentEditElement);
+        const signature = EditTracker.getElementSignature(currentEditElement);
+        
+        // تسجيل التعديل
+        await EditTracker.recordEdit('modify', {
+            selector: selector,
+            signature: signature,
+            old_content: originalText,
+            new_content: currentEditElement.innerText,
+            element_type: currentEditElement.tagName
+        });
+        
+        // استدعاء الدالة الأصلية
+        originalConfirmEdit();
+    }
+};
+
+// تعديل دالة الحذف
+deleteElement = async function() {
+    if (currentEditElement) {
+        const selector = EditTracker.getElementSelector(currentEditElement);
+        const html = currentEditElement.outerHTML;
+        
+        // تسجيل الحذف
+        await EditTracker.recordEdit('delete', {
+            selector: selector,
+            html: html,
+            element_type: currentEditElement.tagName
+        });
+        
+        // استدعاء الدالة الأصلية
+        originalDeleteElement();
+    }
+};
+
+// تعديل دالة الإضافة
+addNewContent = async function() {
+    // هذا يفترض أن لديك دالة addNewContent في الكود
+    // سنقوم بتعديلها بنفس الطريقة
+    if (typeof originalAddNewContent === 'function') {
+        // الحصول على آخر عنصر تمت إضافته (هذا يتطلب تعديل حسب كودك)
+        // مثال مبسط:
+        const newElement = document.querySelector('.card:last-child');
+        if (newElement) {
+            await EditTracker.recordEdit('add', {
+                position: {
+                    relation: 'append',
+                    target: 'section:last-child'
+                },
+                html: newElement.outerHTML,
+                element_type: 'card'
+            });
+        }
+        
+        originalAddNewContent();
+    }
+};
+
+console.log('✅ نظام تتبع التعديلات نشط');
+</script>
   
 </body></html>
