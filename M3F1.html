@@ -530,7 +530,7 @@ padding:20px;
 }
 </style>
  </head>
- <body>
+ <body class="edit-mode-active">
   <script>
 (function() {
 try {
@@ -544,23 +544,23 @@ document.body.classList.add('dark-mode');
   <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">🌙</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> 📝</span> إضافة نص </button>
   </div>
   <header>
-   <h1 id="h1_0">مقدمة في التعريف&nbsp;</h1>
+   <h1 id="h1_0" contenteditable="true">مقدمة في التعريف&nbsp;</h1>
   </header>
   <div class="container" id="mainContainer">
    <section class="section-block">
     
    </section>
    <section class="section-block">
-    <h2 id="h2_0">أقسام القانون الجنائي بمفهومه&nbsp;</h2>
-    <p class="section-intro" id="p_0">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
+    <h2 id="h2_0" contenteditable="true">أقسام القانون الجنائي بمفهومه 6</h2>
+    <p class="section-intro" id="p_0" contenteditable="true">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
     <div class="cards-grid">
      <div class="card">
       <h3 id="h3_0">القسم العام&nbsp;</h3>
-      <p id="card_p_1">يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
+      <p id="card_p_1" contenteditable="true">يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
      </div>
      <div class="card">
       <h3 id="h3_1" contenteditable="true">القسم الخاص&nbsp;</h3>
-      <p id="card_p_2">يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل</p>
+      <p id="card_p_2" contenteditable="true">يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل</p>
      </div>
     </div>
    </section>
@@ -568,7 +568,7 @@ document.body.classList.add('dark-mode');
   <section class="section-block"></section><section class="section-block"></section></div> <!-- نافذة إضافة نص -->
   <div class="modal-overlay" id="addModal">
    <div class="modal-content">
-    <h3 id="h3_2">📝 إضافة نص جديد</h3>
+    <h3 id="h3_2" contenteditable="true">📝 إضافة نص جديد</h3>
     <div class="input-group"><label>العنوان الأكبر (h1) - اختياري</label> <input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
     </div>
     <div class="input-group"><label>النص التمهيدي (section-intro) - اختياري</label> <textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
@@ -586,18 +586,18 @@ document.body.classList.add('dark-mode');
   </div> <!-- نافذة تأكيد الحذف -->
   <div class="modal-overlay" id="deleteConfirmModal">
    <div class="modal-content" style="max-width: 400px; text-align: center;">
-    <h3 style="color: var(--primary-color); margin-bottom: 20px;" id="h3_3">⚠️ تأكيد الحذف</h3>
-    <p style="margin-bottom: 30px; font-size: 1.1rem;" id="p_1">هل أنت متأكد من حذف هذا العنصر؟</p>
+    <h3 style="color: var(--primary-color); margin-bottom: 20px;" id="h3_3" contenteditable="true">⚠️ تأكيد الحذف</h3>
+    <p style="margin-bottom: 30px; font-size: 1.1rem;" id="p_1" contenteditable="true">هل أنت متأكد من حذف هذا العنصر؟</p>
     <div class="modal-buttons"><button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button> <button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
     </div>
    </div>
   </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص -->
   <div class="edit-popup" id="editPopup" style=""><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
   </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل -->
-  <div class="confirm-popup" id="confirmPopup"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  <div class="confirm-popup show" id="confirmPopup" style="left: 175.254px; top: 131.663px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
 </div>
 
-  <div class="edit-toast" id="editToast">❌ تم الإلغاء</div>
+  <div class="edit-toast" id="editToast">✖️ تم الإلغاء</div>
   <script>
 let editMode = false;
 let currentEditElement = null;
@@ -652,18 +652,22 @@ document.querySelector('.theme-btn').innerHTML = '🌙';
 }
 
 // استرجاع حالة وضع التعديل
+// استرجاع حالة وضع التعديل
 function loadEditModePreference() {
     const savedEditMode = localStorage.getItem('editMode');
+    
     if (savedEditMode === 'enabled') {
         editMode = true;
         document.body.classList.add('edit-mode-active');
         document.querySelector('.edit-btn').innerHTML = '<span>✓</span> إنهاء التعديل';
+        
+        // لا نضيف contenteditable تلقائياً، فقط نفعّل وضع التحديد
     } else {
         editMode = false;
         document.body.classList.remove('edit-mode-active');
         document.querySelector('.edit-btn').innerHTML = '<span>✎</span> تعديل النصوص';
         
-        // ⭐ الحل: إزالة خاصية التعديل من كل العناصر عند بدء الصفحة إذا كان الوضع مغلقاً
+        // التأكد من إزالة خاصية التعديل من جميع العناصر
         document.querySelectorAll('[contenteditable="true"]').forEach(el => {
             el.removeAttribute('contenteditable');
         });
@@ -753,6 +757,8 @@ localStorage.setItem('darkMode', 'disabled');
 }
 
 // تشغيل وإيقاف وضع التعديل
+
+// تشغيل وإيقاف وضع التعديل
 function toggleEditMode() {
     editMode = !editMode;
     const editBtn = document.querySelector('.edit-btn');
@@ -762,13 +768,15 @@ function toggleEditMode() {
         body.classList.add('edit-mode-active');
         editBtn.innerHTML = '<span>✓</span> إنهاء التعديل';
         localStorage.setItem('editMode', 'enabled');
-        showToast('وضع التعديل نشط');
+        
+        // لا نضيف contenteditable تلقائياً هنا أيضاً
+        showToast('وضع التعديل نشط - اضغط مطولاً لاختيار نص');
     } else {
         body.classList.remove('edit-mode-active');
         editBtn.innerHTML = '<span>✎</span> تعديل النصوص';
         localStorage.setItem('editMode', 'disabled');
         
-        // ⭐ الحل للمشكلة: مسح خاصية التعديل من جميع العناصر في الصفحة دفعة واحدة
+        // إزالة خاصية التعديل من أي عنصر كان في وضع التعديل
         document.querySelectorAll('[contenteditable="true"]').forEach(el => {
             el.removeAttribute('contenteditable');
         });
@@ -1226,4 +1234,5 @@ toggleEditMode();
 });
 </script>
  
+
 </body></html>
