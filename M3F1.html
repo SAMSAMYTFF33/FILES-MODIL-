@@ -45,7 +45,7 @@ padding:0;
 }
 
 body, div, h1, h2, h3, p, section, .card, .section-intro {
-    transition: background-color 0.1s, color 0.1s, border-color 0.1s;
+transition: background-color 0.1s, color 0.1s, border-color 0.1s;
 }
 
 body {
@@ -110,278 +110,278 @@ margin-bottom:10px;
 }
 
 .edit-btn {
-    font-size:18px;
-    background:var(--secondary-color);
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    transition:0.3s;
-    margin-bottom:10px;
+font-size:18px;
+background:var(--secondary-color);
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+width:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+transition:0.3s;
+margin-bottom:10px;
 }
 
 .add-btn {
-    font-size:18px;
-    background:var(--accent-color);
-    color:var(--text-dark);
-    border:none;
-    padding:10px;
-    border-radius:8px;
-    cursor:pointer;
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    transition:0.3s;
-    font-weight:700;
+font-size:18px;
+background:var(--accent-color);
+color:var(--text-dark);
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+width:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+transition:0.3s;
+font-weight:700;
 }
 
 .add-btn:hover {
-    opacity:0.9;
-    transform:scale(1.02);
+opacity:0.9;
+transform:scale(1.02);
 }
 
 .edit-btn:hover {
-    opacity:0.9;
-    transform:scale(1.02);
+opacity:0.9;
+transform:scale(1.02);
 }
 
 .edit-mode-active .edit-btn {
-    background:var(--accent-color);
-    color:var(--text-dark);
+background:var(--accent-color);
+color:var(--text-dark);
 }
 
 .edit-mode-active [contenteditable="true"] {
-    outline: 2px dashed var(--secondary-color);
-    outline-offset: 2px;
-    background-color: rgba(0,98,51,0.05);
-    cursor: text;
-    padding: 5px;
-    border-radius: 8px;
+outline: 2px dashed var(--secondary-color);
+outline-offset: 2px;
+background-color: rgba(0,98,51,0.05);
+cursor: text;
+padding: 5px;
+border-radius: 8px;
 }
 
 .edit-popup {
-    position:fixed;
-    display:flex;
-    gap:8px;
-    background:var(--card-bg);
-    padding:6px 12px;
-    border-radius:40px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
-    z-index:2000;
-    border:1px solid var(--secondary-color);
-    transform:translate(-50%, -100%);
-    pointer-events:none;
-    opacity:0;
-    transition:0.15s;
+position:fixed;
+display:flex;
+gap:8px;
+background:var(--card-bg);
+padding:6px 12px;
+border-radius:40px;
+box-shadow:0 2px 10px rgba(0,0,0,0.2);
+z-index:2000;
+border:1px solid var(--secondary-color);
+transform:translate(-50%, -100%);
+pointer-events:none;
+opacity:0;
+transition:0.15s;
 }
 
 .edit-popup.show {
-    pointer-events:all;
-    opacity:1;
+pointer-events:all;
+opacity:1;
 }
 
 .edit-popup button {
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    border:none;
-    font-size:18px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:0.15s;
-    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+width:36px;
+height:36px;
+border-radius:50%;
+border:none;
+font-size:18px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.15s;
+box-shadow:0 1px 3px rgba(0,0,0,0.1);
 }
 
 .edit-popup button:hover {
-    transform:scale(1.05);
+transform:scale(1.05);
 }
 
 .delete-btn {
-    background:#dc3545;
-    color:white;
+background:#dc3545;
+color:white;
 }
 
 .edit-btn-popup {
-    background:var(--secondary-color);
-    color:white;
+background:var(--secondary-color);
+color:white;
 }
 
 .cancel-btn-popup {
-    background:#6c757d;
-    color:white;
+background:#6c757d;
+color:white;
 }
 
 /* أزرار التأكيد والإلغاء أثناء التعديل */
 .confirm-popup {
-    position:fixed;
-    display:flex;
-    gap:8px;
-    background:var(--card-bg);
-    padding:6px 12px;
-    border-radius:40px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.2);
-    z-index:2000;
-    border:1px solid var(--secondary-color);
-    transform:translate(-50%, -100%);
-    pointer-events:none;
-    opacity:0;
-    transition:0.15s;
+position:fixed;
+display:flex;
+gap:8px;
+background:var(--card-bg);
+padding:6px 12px;
+border-radius:40px;
+box-shadow:0 2px 10px rgba(0,0,0,0.2);
+z-index:2000;
+border:1px solid var(--secondary-color);
+transform:translate(-50%, -100%);
+pointer-events:none;
+opacity:0;
+transition:0.15s;
 }
 
 .confirm-popup.show {
-    pointer-events:all;
-    opacity:1;
+pointer-events:all;
+opacity:1;
 }
 
 .confirm-popup button {
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    border:none;
-    font-size:18px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:0.15s;
-    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+width:36px;
+height:36px;
+border-radius:50%;
+border:none;
+font-size:18px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:0.15s;
+box-shadow:0 1px 3px rgba(0,0,0,0.1);
 }
 
 .confirm-popup button:hover {
-    transform:scale(1.05);
+transform:scale(1.05);
 }
 
 .confirm-edit-btn {
-    background:#28a745;
-    color:white;
+background:#28a745;
+color:white;
 }
 
 .cancel-edit-btn {
-    background:#dc3545;
-    color:white;
+background:#dc3545;
+color:white;
 }
 
 /* نافذة إضافة نص */
 .modal-overlay {
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background:rgba(0,0,0,0.7);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:3000;
-    opacity:0;
-    pointer-events:none;
-    transition:0.3s;
+position:fixed;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,0.7);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:3000;
+opacity:0;
+pointer-events:none;
+transition:0.3s;
 }
 
 .modal-overlay.show {
-    opacity:1;
-    pointer-events:all;
+opacity:1;
+pointer-events:all;
 }
 
 .modal-content {
-    background:var(--card-bg);
-    width:90%;
-    max-width:500px;
-    border-radius:20px;
-    padding:25px;
-    max-height:80vh;
-    overflow-y:auto;
-    box-shadow:0 10px 40px rgba(0,0,0,0.5);
-    border:2px solid var(--secondary-color);
+background:var(--card-bg);
+width:90%;
+max-width:500px;
+border-radius:20px;
+padding:25px;
+max-height:80vh;
+overflow-y:auto;
+box-shadow:0 10px 40px rgba(0,0,0,0.5);
+border:2px solid var(--secondary-color);
 }
 
 .modal-content h3 {
-    color:var(--primary-color);
-    margin-bottom:20px;
-    font-size:1.5rem;
-    text-align:center;
+color:var(--primary-color);
+margin-bottom:20px;
+font-size:1.5rem;
+text-align:center;
 }
 
 .input-group {
-    margin-bottom:20px;
+margin-bottom:20px;
 }
 
 .input-group label {
-    display:block;
-    margin-bottom:8px;
-    color:var(--text-dark);
-    font-weight:700;
-    font-size:0.95rem;
+display:block;
+margin-bottom:8px;
+color:var(--text-dark);
+font-weight:700;
+font-size:0.95rem;
 }
 
-.input-group input, 
+.input-group input,
 .input-group textarea {
-    width:100%;
-    padding:12px 15px;
-    border-radius:12px;
-    border:2px solid var(--text-light);
-    background:var(--bg-color);
-    color:var(--text-dark);
-    font-family:'Tajawal',sans-serif;
-    font-size:1rem;
-    resize:vertical;
-    transition:0.2s;
+width:100%;
+padding:12px 15px;
+border-radius:12px;
+border:2px solid var(--text-light);
+background:var(--bg-color);
+color:var(--text-dark);
+font-family:'Tajawal',sans-serif;
+font-size:1rem;
+resize:vertical;
+transition:0.2s;
 }
 
 .input-group input:focus,
 .input-group textarea:focus {
-    outline:none;
-    border-color:var(--secondary-color);
-    box-shadow:0 0 0 3px rgba(0,98,51,0.2);
+outline:none;
+border-color:var(--secondary-color);
+box-shadow:0 0 0 3px rgba(0,98,51,0.2);
 }
 
 .modal-buttons {
-    display:flex;
-    gap:15px;
-    margin-top:25px;
+display:flex;
+gap:15px;
+margin-top:25px;
 }
 
 .modal-buttons button {
-    flex:1;
-    padding:12px;
-    border-radius:12px;
-    border:none;
-    font-size:1rem;
-    font-weight:700;
-    cursor:pointer;
-    transition:0.2s;
+flex:1;
+padding:12px;
+border-radius:12px;
+border:none;
+font-size:1rem;
+font-weight:700;
+cursor:pointer;
+transition:0.2s;
 }
 
 .modal-buttons button:first-child {
-    background:var(--secondary-color);
-    color:white;
+background:var(--secondary-color);
+color:white;
 }
 
 .modal-buttons button:last-child {
-    background:#dc3545;
-    color:white;
+background:#dc3545;
+color:white;
 }
 
 .modal-buttons button:hover {
-    transform:scale(1.02);
-    opacity:0.9;
+transform:scale(1.02);
+opacity:0.9;
 }
 
 .note {
-    font-size:0.85rem;
-    color:var(--text-light);
-    margin-top:10px;
-    text-align:center;
+font-size:0.85rem;
+color:var(--text-light);
+margin-top:10px;
+text-align:center;
 }
 
 header{
@@ -479,32 +479,32 @@ text-align:justify;
 }
 
 p {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    line-height: 1.8;
-    text-align: justify;
+font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+font-size: 1rem;
+font-weight: 700;
+color: var(--text-dark);
+line-height: 1.8;
+text-align: justify;
 }
 
 .edit-toast {
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:var(--secondary-color);
-    color:white;
-    padding:8px 16px;
-    border-radius:8px;
-    font-size:13px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.2);
-    z-index:2000;
-    opacity:0;
-    transition:0.2s;
-    pointer-events:none;
+position:fixed;
+bottom:20px;
+right:20px;
+background:var(--secondary-color);
+color:white;
+padding:8px 16px;
+border-radius:8px;
+font-size:13px;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+z-index:2000;
+opacity:0;
+transition:0.2s;
+pointer-events:none;
 }
 
 .edit-toast.show {
-    opacity:1;
+opacity:1;
 }
 
 @media (max-width:768px){
@@ -519,27 +519,27 @@ grid-template-columns:1fr;
 width:200px;
 }
 .edit-popup button {
-    width:32px;
-    height:32px;
-    font-size:16px;
+width:32px;
+height:32px;
+font-size:16px;
 }
 .modal-content {
-    width:95%;
-    padding:20px;
+width:95%;
+padding:20px;
 }
 }
 </style>
 </head>
 <body class="">
 <script>
-    (function() {
-        try {
-            const savedTheme = localStorage.getItem('darkMode');
-            if (savedTheme === 'enabled') {
-                document.body.classList.add('dark-mode');
-            }
-        } catch(e) {}
-    })();
+(function() {
+try {
+const savedTheme = localStorage.getItem('darkMode');
+if (savedTheme === 'enabled') {
+document.body.classList.add('dark-mode');
+}
+} catch(e) {}
+})();
 </script>
 
 <button class="menu-btn" onclick="toggleMenu()">☰</button>
@@ -548,7 +548,7 @@ width:200px;
 <button class="theme-btn" onclick="toggleTheme()">🌙</button>
 <button class="edit-btn" onclick="toggleEditMode()"><span>✎</span> تعديل النصوص</button>
 <button class="add-btn" onclick="openAddModal()">
-    <span> 📝</span> إضافة نص
+<span> 📝</span> إضافة نص
 </button>
 </div>
 
@@ -556,98 +556,98 @@ width:200px;
 <h1>مقدمة في التعريف بالقانون الجنائي وتطوره</h1>
 </header>
 
-<div class="container" id="mainContainer">  
-    <section class="section-block">  
-          
-          
-          
-        <div class="cards-grid">  
-            <div class="card">  
-                <h3>المفهوم الواسع</h3>  
-                <p>يشمل القانون الجنائي بمفهومه الواسع قواعد الموضوع وقواعد الشكل (المسطرة الجنائية) معاً، إذ يُعدّ كلاهما جزءاً لا يتجزأ من المنظومة الجنائية.</p>  
-            </div>  
-              
-            <div class="card">  
-                <h3>المفهوم الضيق</h3>  
-                <p>قصره البعض على القواعد الموضوعية بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>  
-            </div>
-        </div>  
-    </section>  
+<div class="container" id="mainContainer">
+<section class="section-block">
 
-    <section class="section-block">  
-        <h2>أقسام القانون الجنائي بمفهومه الضيق</h2>  
-        <p class="section-intro">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>  
-          
-        <div class="cards-grid">  
-            <div class="card">  
-                <h3>القسم العام</h3>  
-                <p>يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>  
-            </div>  
-              
-            <div class="card">  
-                <h3>القسم الخاص</h3>  
-                <p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>  
-            </div>    
-        </div>  
-    </section>
+
+
+<div class="cards-grid">
+<div class="card">
+<h3>المفهوم الواسع</h3>
+<p>يشمل القانون الجنائي بمفهومه الواسع قواعد الموضوع وقواعد الشكل (المسطرة الجنائية) معاً، إذ يُعدّ كلاهما جزءاً لا يتجزأ من المنظومة الجنائية.</p>
+</div>
+
+<div class="card">
+<h3>المفهوم الضيق</h3>
+<p>قصره البعض على القواعد الموضوعية بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>
+</div>
+</div>
+</section>
+
+<section class="section-block">
+<h2>أقسام القانون الجنائي بمفهومه الضيق</h2>
+<p class="section-intro">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
+
+<div class="cards-grid">
+<div class="card">
+<h3>القسم العام</h3>
+<p>يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
+</div>
+
+<div class="card">
+<h3>القسم الخاص</h3>
+<p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>
+</div>
+</div>
+</section>
 <section class="section-block"></section></div>
 <!-- نافذة إضافة نص -->
 <div class="modal-overlay" id="addModal">
-    <div class="modal-content">
-        <h3>📝 إضافة نص جديد</h3>
-        
-        <div class="input-group">
-            <label>العنوان الأكبر (h1) - اختياري</label>
-            <input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
-        </div>
-        
-        <div class="input-group">
-            <label>النص التمهيدي (section-intro) - اختياري</label>
-            <textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
-        </div>
-        
-        <div class="input-group">
-            <label>العنوان الرئيسي (h2) - اختياري</label>
-            <input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
-        </div>
-        
-        <div class="input-group">
-            <label>العنوان الفرعي مع نص (card) - اختياري</label>
-            <input type="text" id="inputCardTitle" placeholder="العنوان الفرعي...">
-            <textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
-        </div>
-        
-        <div class="modal-buttons">
-            <button onclick="addNewContent()">✅ إضافة</button>
-            <button onclick="closeAddModal()">❌ إلغاء</button>
-        </div>
-        <div class="note">يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف</div>
-    </div>
-</div> 
+<div class="modal-content">
+<h3>📝 إضافة نص جديد</h3>
+
+<div class="input-group">
+<label>العنوان الأكبر (h1) - اختياري</label>
+<input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
+</div>
+
+<div class="input-group">
+<label>النص التمهيدي (section-intro) - اختياري</label>
+<textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
+</div>
+
+<div class="input-group">
+<label>العنوان الرئيسي (h2) - اختياري</label>
+<input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
+</div>
+
+<div class="input-group">
+<label>العنوان الفرعي مع نص (card) - اختياري</label>
+<input type="text" id="inputCardTitle" placeholder="العنوان الفرعي...">
+<textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
+</div>
+
+<div class="modal-buttons">
+<button onclick="addNewContent()">✅ إضافة</button>
+<button onclick="closeAddModal()">❌ إلغاء</button>
+</div>
+<div class="note">يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف</div>
+</div>
+</div>
 
 <!-- نافذة تأكيد الحذف -->
 <div class="modal-overlay" id="deleteConfirmModal">
-    <div class="modal-content" style="max-width: 400px; text-align: center;">
-        <h3 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ تأكيد الحذف</h3>
-        <p style="margin-bottom: 30px; font-size: 1.1rem;">هل أنت متأكد من حذف هذا العنصر؟</p>
-        <div class="modal-buttons">
-            <button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button>
-            <button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
-        </div>
-    </div> 
-</div> 
+<div class="modal-content" style="max-width: 400px; text-align: center;">
+<h3 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ تأكيد الحذف</h3>
+<p style="margin-bottom: 30px; font-size: 1.1rem;">هل أنت متأكد من حذف هذا العنصر؟</p>
+<div class="modal-buttons">
+<button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button>
+<button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
+</div>
+</div>
+</div>
 
 <!-- أزرار التعديل والحذف والإلغاء فوق النص (الظهور الأول) -->
 <div class="edit-popup" id="editPopup">
-    <button class="delete-btn" onclick="deleteElement()">🗑️</button>
-    <button class="edit-btn-popup" onclick="prepareEdit()">✎</button>
-    <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
+<button class="delete-btn" onclick="deleteElement()">🗑️</button>
+<button class="edit-btn-popup" onclick="prepareEdit()">✎</button>
+<button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
 </div>
 
 <!-- أزرار التأكيد والإلغاء أثناء التعديل (الظهور الثاني) -->
 <div class="confirm-popup" id="confirmPopup">
-    <button class="confirm-edit-btn" onclick="confirmEdit()">✅</button>
-    <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+<button class="confirm-edit-btn" onclick="confirmEdit()">✅</button>
+<button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
 </div>
 
 <!-- رسالة تأكيد -->
@@ -662,35 +662,35 @@ let longPressedElement = null;
 
 // استرجاع حالة الوضع الداكن عند تحميل الصفحة
 function loadThemePreference() {
-    const savedTheme = localStorage.getItem('darkMode');
-    if (savedTheme === 'enabled') {
-        document.body.classList.add('dark-mode');
-        document.querySelector('.theme-btn').innerHTML = '☀️';
-    } else {
-        document.body.classList.remove('dark-mode');
-        document.querySelector('.theme-btn').innerHTML = '🌙';
-    }
+const savedTheme = localStorage.getItem('darkMode');
+if (savedTheme === 'enabled') {
+document.body.classList.add('dark-mode');
+document.querySelector('.theme-btn').innerHTML = '☀️';
+} else {
+document.body.classList.remove('dark-mode');
+document.querySelector('.theme-btn').innerHTML = '🌙';
+}
 }
 
 // استرجاع حالة وضع التعديل
 function loadEditModePreference() {
-    const savedEditMode = localStorage.getItem('editMode');
-    if (savedEditMode === 'enabled') {
-        editMode = true;
-        document.body.classList.add('edit-mode-active');
-        document.querySelector('.edit-btn').innerHTML = '<span>✓</span> إنهاء التعديل';
-    } else {
-        editMode = false;
-        document.body.classList.remove('edit-mode-active');
-        document.querySelector('.edit-btn').innerHTML = '<span>✎</span> تعديل النصوص';
-    }
+const savedEditMode = localStorage.getItem('editMode');
+if (savedEditMode === 'enabled') {
+editMode = true;
+document.body.classList.add('edit-mode-active');
+document.querySelector('.edit-btn').innerHTML = '<span>✓</span> إنهاء التعديل';
+} else {
+editMode = false;
+document.body.classList.remove('edit-mode-active');
+document.querySelector('.edit-btn').innerHTML = '<span>✎</span> تعديل النصوص';
+}
 }
 
 window.addEventListener('load', function() {
-    loadEditModePreference();
-    hideEditPopup();
-    hideConfirmPopup();
-    currentEditElement = null;
+loadEditModePreference();
+hideEditPopup();
+hideConfirmPopup();
+currentEditElement = null;
 });
 
 function toggleMenu(){
@@ -710,198 +710,198 @@ localStorage.setItem('darkMode', 'disabled');
 }
 
 function toggleEditMode() {
-    editMode = !editMode;
-    const editBtn = document.querySelector('.edit-btn');
-    const body = document.body;
-    
-    if (editMode) {
-        body.classList.add('edit-mode-active');
-        editBtn.innerHTML = '<span>✓</span> إنهاء التعديل';
-        localStorage.setItem('editMode', 'enabled');
-        showToast('وضع التعديل نشط');
-    } else {
-        body.classList.remove('edit-mode-active');
-        editBtn.innerHTML = '<span>✎</span> تعديل النصوص';
-        localStorage.setItem('editMode', 'disabled');
-        if (currentEditElement) {
-            currentEditElement.removeAttribute('contenteditable');
-            currentEditElement = null;
-        }
-        hideEditPopup();
-        hideConfirmPopup();
-    }
+editMode = !editMode;
+const editBtn = document.querySelector('.edit-btn');
+const body = document.body;
+
+if (editMode) {
+body.classList.add('edit-mode-active');
+editBtn.innerHTML = '<span>✓</span> إنهاء التعديل';
+localStorage.setItem('editMode', 'enabled');
+showToast('وضع التعديل نشط');
+} else {
+body.classList.remove('edit-mode-active');
+editBtn.innerHTML = '<span>✎</span> تعديل النصوص';
+localStorage.setItem('editMode', 'disabled');
+if (currentEditElement) {
+currentEditElement.removeAttribute('contenteditable');
+currentEditElement = null;
+}
+hideEditPopup();
+hideConfirmPopup();
+}
 }
 
 // دوال نافذة الإضافة
 function openAddModal() {
-    document.getElementById('addModal').classList.add('show');
-    // إخفاء القائمة الجانبية إذا كانت مفتوحة
-    document.getElementById('menu').classList.remove('open');
+document.getElementById('addModal').classList.add('show');
+// إخفاء القائمة الجانبية إذا كانت مفتوحة
+document.getElementById('menu').classList.remove('open');
 }
 
 function closeAddModal() {
-    document.getElementById('addModal').classList.remove('show');
-    // تفريغ الحقول
-    document.getElementById('inputH1').value = '';
-    document.getElementById('inputIntro').value = '';
-    document.getElementById('inputH2').value = '';
-    document.getElementById('inputCardTitle').value = '';
-    document.getElementById('inputCardText').value = '';
+document.getElementById('addModal').classList.remove('show');
+// تفريغ الحقول
+document.getElementById('inputH1').value = '';
+document.getElementById('inputIntro').value = '';
+document.getElementById('inputH2').value = '';
+document.getElementById('inputCardTitle').value = '';
+document.getElementById('inputCardText').value = '';
 }
 
 function addNewContent() {
-    const h1Text = document.getElementById('inputH1').value.trim();
-    const introText = document.getElementById('inputIntro').value.trim();
-    const h2Text = document.getElementById('inputH2').value.trim();
-    const cardTitle = document.getElementById('inputCardTitle').value.trim();
-    const cardText = document.getElementById('inputCardText').value.trim();
-    
-    const container = document.getElementById('mainContainer');
-    
-    // إضافة العنوان الأكبر (h1) - يضاف داخل الهيدر
-    if (h1Text !== '') {
-        const header = document.querySelector('header');
-        if (header) {
-            // إضافة عنوان جديد مع الحفاظ على القديم
-            const newH1 = document.createElement('h1');
-            newH1.textContent = h1Text;
-            header.appendChild(newH1);
-        }
-    }
-    
-    // إنشاء قسم جديد إذا تم إضافة أي من h2, intro, أو card
-    if (h2Text !== '' || introText !== '' || (cardTitle !== '' && cardText !== '')) {
-        const newSection = document.createElement('section');
-        newSection.className = 'section-block';
-        
-        // إضافة العنوان الرئيسي h2
-        if (h2Text !== '') {
-            const h2 = document.createElement('h2');
-            h2.textContent = h2Text;
-            newSection.appendChild(h2);
-        }
-        
-        // إضافة النص التمهيدي
-        if (introText !== '') {
-            const intro = document.createElement('p');
-            intro.className = 'section-intro';
-            intro.textContent = introText;
-            newSection.appendChild(intro);
-        }
-        
-        // إضافة البطاقة إذا توفر العنوان والنص
-        if (cardTitle !== '' && cardText !== '') {
-            const cardsGrid = document.createElement('div');
-            cardsGrid.className = 'cards-grid';
-            
-            const card = document.createElement('div');
-            card.className = 'card';
-            
-            const cardH3 = document.createElement('h3');
-            cardH3.textContent = cardTitle;
-            
-            const cardP = document.createElement('p');
-            cardP.textContent = cardText;
-            
-            card.appendChild(cardH3);
-            card.appendChild(cardP);
-            cardsGrid.appendChild(card);
-            newSection.appendChild(cardsGrid);
-        }
-        
-        container.appendChild(newSection);
-    } 
-    // إذا تمت إضافة بطاقة فقط بدون h2 أو intro
-    else if (cardTitle !== '' && cardText !== '') {
-        // نضيف البطاقة في قسم جديد بدون عنوان
-        const newSection = document.createElement('section');
-        newSection.className = 'section-block';
-        
-        const cardsGrid = document.createElement('div');
-        cardsGrid.className = 'cards-grid';
-        
-        const card = document.createElement('div');
-        card.className = 'card';
-        
-        const cardH3 = document.createElement('h3');
-        cardH3.textContent = cardTitle;
-        
-        const cardP = document.createElement('p');
-        cardP.textContent = cardText;
-        
-        card.appendChild(cardH3);
-        card.appendChild(cardP);
-        cardsGrid.appendChild(card);
-        newSection.appendChild(cardsGrid);
-        
-        container.appendChild(newSection);
-    }
-    
-    // أولاً: إغلاق النافذة وتفريغ الحقول
-    closeAddModal();
-    
-    // ثانياً: حفظ التغييرات (الآن الصفحة نظيفة)
-    saveChanges();
-    
-    // ثالثاً: إظهار رسالة النجاح
-    showToast('✅ تمت الإضافة بنجاح');
+const h1Text = document.getElementById('inputH1').value.trim();
+const introText = document.getElementById('inputIntro').value.trim();
+const h2Text = document.getElementById('inputH2').value.trim();
+const cardTitle = document.getElementById('inputCardTitle').value.trim();
+const cardText = document.getElementById('inputCardText').value.trim();
+
+const container = document.getElementById('mainContainer');
+
+// إضافة العنوان الأكبر (h1) - يضاف داخل الهيدر
+if (h1Text !== '') {
+const header = document.querySelector('header');
+if (header) {
+// إضافة عنوان جديد مع الحفاظ على القديم
+const newH1 = document.createElement('h1');
+newH1.textContent = h1Text;
+header.appendChild(newH1);
+}
+}
+
+// إنشاء قسم جديد إذا تم إضافة أي من h2, intro, أو card
+if (h2Text !== '' || introText !== '' || (cardTitle !== '' && cardText !== '')) {
+const newSection = document.createElement('section');
+newSection.className = 'section-block';
+
+// إضافة العنوان الرئيسي h2
+if (h2Text !== '') {
+const h2 = document.createElement('h2');
+h2.textContent = h2Text;
+newSection.appendChild(h2);
+}
+
+// إضافة النص التمهيدي
+if (introText !== '') {
+const intro = document.createElement('p');
+intro.className = 'section-intro';
+intro.textContent = introText;
+newSection.appendChild(intro);
+}
+
+// إضافة البطاقة إذا توفر العنوان والنص
+if (cardTitle !== '' && cardText !== '') {
+const cardsGrid = document.createElement('div');
+cardsGrid.className = 'cards-grid';
+
+const card = document.createElement('div');
+card.className = 'card';
+
+const cardH3 = document.createElement('h3');
+cardH3.textContent = cardTitle;
+
+const cardP = document.createElement('p');
+cardP.textContent = cardText;
+
+card.appendChild(cardH3);
+card.appendChild(cardP);
+cardsGrid.appendChild(card);
+newSection.appendChild(cardsGrid);
+}
+
+container.appendChild(newSection);
+}
+// إذا تمت إضافة بطاقة فقط بدون h2 أو intro
+else if (cardTitle !== '' && cardText !== '') {
+// نضيف البطاقة في قسم جديد بدون عنوان
+const newSection = document.createElement('section');
+newSection.className = 'section-block';
+
+const cardsGrid = document.createElement('div');
+cardsGrid.className = 'cards-grid';
+
+const card = document.createElement('div');
+card.className = 'card';
+
+const cardH3 = document.createElement('h3');
+cardH3.textContent = cardTitle;
+
+const cardP = document.createElement('p');
+cardP.textContent = cardText;
+
+card.appendChild(cardH3);
+card.appendChild(cardP);
+cardsGrid.appendChild(card);
+newSection.appendChild(cardsGrid);
+
+container.appendChild(newSection);
+}
+
+// أولاً: إغلاق النافذة وتفريغ الحقول
+closeAddModal();
+
+// ثانياً: حفظ التغييرات (الآن الصفحة نظيفة)
+saveChanges();
+
+// ثالثاً: إظهار رسالة النجاح
+showToast('✅ تمت الإضافة بنجاح');
 }
 
 function saveChanges() {
-    // حفظ الملف
-    const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    const saved = saveFileToPath(htmlContent);
+// حفظ الملف
+const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+const saved = saveFileToPath(htmlContent);
 }
 
 // تغيير دالة handleTouchStart لهذا الكود
 function handleTouchStart(e) {
-    if (!editMode) return;
-    
-    const element = e.target.closest('h1, h2, h3, p, .section-intro, .card p');
-    if (!element) return;
-    
-    // إلغاء أي مؤشر سابق
-    if (longPressTimer) {
-        clearTimeout(longPressTimer);
-        longPressTimer = null;
-    }
-    
-    e.preventDefault();
-    
-    // إزالة أي تعديل سابق
-    if (currentEditElement) {
-        currentEditElement.removeAttribute('contenteditable');
-    }
-    
-    currentEditElement = element;
-    originalText = currentEditElement.innerText;
-    
-    // إظهار الأزرار الثلاثة (حذف، تعديل، إلغاء) فوراً - بدون تأخير
-    const popup = document.getElementById('editPopup');
-    const rect = e.touches[0];
-    popup.style.left = rect.clientX + 'px';
-    popup.style.top = (rect.clientY - 70) + 'px';
-    popup.classList.add('show');
-    
-    // إخفاء أزرار التأكيد إذا كانت ظاهرة
-    hideConfirmPopup();
+if (!editMode) return;
+
+const element = e.target.closest('h1, h2, h3, p, .section-intro, .card p');
+if (!element) return;
+
+// إلغاء أي مؤشر سابق
+if (longPressTimer) {
+clearTimeout(longPressTimer);
+longPressTimer = null;
+}
+
+e.preventDefault();
+
+// إزالة أي تعديل سابق
+if (currentEditElement) {
+currentEditElement.removeAttribute('contenteditable');
+}
+
+currentEditElement = element;
+originalText = currentEditElement.innerText;
+
+// إظهار الأزرار الثلاثة (حذف، تعديل، إلغاء) فوراً - بدون تأخير
+const popup = document.getElementById('editPopup');
+const rect = e.touches[0];
+popup.style.left = rect.clientX + 'px';
+popup.style.top = (rect.clientY - 70) + 'px';
+popup.classList.add('show');
+
+// إخفاء أزرار التأكيد إذا كانت ظاهرة
+hideConfirmPopup();
 }
 
 // يمكنك إزالة دوال longPressTimer نهائياً لأننا لم نعد بحاجة لها
 // لكن الأفضل تركها للاحتياط
 
 function handleTouchEnd(e) {
-    if (longPressTimer) {
-        clearTimeout(longPressTimer);
-        longPressTimer = null;
-    }
+if (longPressTimer) {
+clearTimeout(longPressTimer);
+longPressTimer = null;
+}
 }
 
 function handleTouchCancel(e) {
-    if (longPressTimer) {
-        clearTimeout(longPressTimer);
-        longPressTimer = null;
-    }
+if (longPressTimer) {
+clearTimeout(longPressTimer);
+longPressTimer = null;
+}
 }
 
 // دالة الحذف المباشر بدون تأكيد
@@ -910,414 +910,218 @@ let elementToDelete = null;
 
 // دالة فتح نافذة تأكيد الحذف
 function deleteElement() {
-    if (currentEditElement) {
-        // حفظ العنصر المراد حذفه
-        elementToDelete = currentEditElement;
-        
-        // إخفاء البوب أب الحالي
-        hideEditPopup();
-        
-        // فتح نافذة تأكيد الحذف
-        document.getElementById('deleteConfirmModal').classList.add('show');
-    }
+if (currentEditElement) {
+// حفظ العنصر المراد حذفه
+elementToDelete = currentEditElement;
+
+// إخفاء البوب أب الحالي
+hideEditPopup();
+
+// فتح نافذة تأكيد الحذف
+document.getElementById('deleteConfirmModal').classList.add('show');
+}
 }
 
 // دالة تأكيد الحذف
 function confirmDeleteElement() {
-    if (elementToDelete) {
-        // أولاً: إغلاق نافذة التأكيد وإزالة class show
-        closeDeleteModal();
-        
-        // حذف العنصر
-        if (elementToDelete.closest('.card')) {
-            const card = elementToDelete.closest('.card');
-            const cardsGrid = card.closest('.cards-grid');
-            card.remove();
-            
-            if (cardsGrid && cardsGrid.children.length === 0) {
-                cardsGrid.remove();
-            }
-        } else {
-            elementToDelete.remove();
-        }
-        
-        // ثانياً: حفظ التغييرات (بعد إغلاق النافذة)
-        saveChanges();
-        showToast('🗑️ تم الحذف');
-        
-        elementToDelete = null;
-        currentEditElement = null;
-    }
+if (elementToDelete) {
+// أولاً: إغلاق نافذة التأكيد وإزالة class show
+closeDeleteModal();
+
+// حذف العنصر
+if (elementToDelete.closest('.card')) {
+const card = elementToDelete.closest('.card');
+const cardsGrid = card.closest('.cards-grid');
+card.remove();
+
+if (cardsGrid && cardsGrid.children.length === 0) {
+cardsGrid.remove();
+}
+} else {
+elementToDelete.remove();
+}
+
+// ثانياً: حفظ التغييرات (بعد إغلاق النافذة)
+saveChanges();
+showToast('🗑️ تم الحذف');
+
+elementToDelete = null;
+currentEditElement = null;
+}
 }
 
 // دالة إلغاء الحذف
 function cancelDeleteModal() {
-    // أولاً: إغلاق نافذة التأكيد
-    closeDeleteModal();
-    
-    // ثانياً: حفظ التغييرات (النافذة مغلقة)
-    saveChanges();
-    
-    elementToDelete = null;
-    showToast('✖️ تم إلغاء الحذف');
+// أولاً: إغلاق نافذة التأكيد
+closeDeleteModal();
+
+// ثانياً: حفظ التغييرات (النافذة مغلقة)
+saveChanges();
+
+elementToDelete = null;
+showToast('✖️ تم إلغاء الحذف');
 }
 
 // دالة إغلاق نافذة التأكيد
 function closeDeleteModal() {
-    document.getElementById('deleteConfirmModal').classList.remove('show');
+document.getElementById('deleteConfirmModal').classList.remove('show');
 }
 
 // دالة تحضير التعديل (تظهر أزرار ✅ ❌) مع تحديد النص بالكامل
 function prepareEdit() {
-    if (currentEditElement) {
-        // جعل العنصر قابلاً للتعديل
-        currentEditElement.setAttribute('contenteditable', 'true');
-        currentEditElement.focus();
-        
-        // ✅ وضع المؤشر في نهاية النص (وليس تحديد كل النص)
-        const range = document.createRange();
-        const sel = window.getSelection();
-        
-        // وضع المؤشر في نهاية النص
-        if (currentEditElement.childNodes.length > 0) {
-            const lastNode = currentEditElement.childNodes[currentEditElement.childNodes.length - 1];
-            range.setStartAfter(lastNode);
-        } else {
-            range.selectNodeContents(currentEditElement);
-        }
-        
-        range.collapse(false); // false يعني نهاية النص
-        sel.removeAllRanges();
-        sel.addRange(range);
-        
-        // إخفاء الأزرار الثلاثة
-        hideEditPopup();
-        
-        // إظهار أزرار التأكيد والإلغاء بجانب النص
-        const confirmPopup = document.getElementById('confirmPopup');
-        const rect = currentEditElement.getBoundingClientRect();
-        confirmPopup.style.left = (rect.left + rect.width / 2) + 'px';
-        confirmPopup.style.top = (rect.top - 20) + 'px';
-        confirmPopup.classList.add('show');
-        
-        // ✅ منع التداخل مع أحداث اللمس الطبيعية
-        currentEditElement.addEventListener('touchstart', function(e) {
-            e.stopPropagation(); // نسمح بالحدث ولكن نمنع وصوله للمستمعات الأخرى
-        }, {passive: true});
-    }
+if (currentEditElement) {
+// جعل العنصر قابلاً للتعديل
+currentEditElement.setAttribute('contenteditable', 'true');
+currentEditElement.focus();
+
+// ✅ وضع المؤشر في نهاية النص (وليس تحديد كل النص)
+const range = document.createRange();
+const sel = window.getSelection();
+
+// وضع المؤشر في نهاية النص
+if (currentEditElement.childNodes.length > 0) {
+const lastNode = currentEditElement.childNodes[currentEditElement.childNodes.length - 1];
+range.setStartAfter(lastNode);
+} else {
+range.selectNodeContents(currentEditElement);
+}
+
+range.collapse(false); // false يعني نهاية النص
+sel.removeAllRanges();
+sel.addRange(range);
+
+// إخفاء الأزرار الثلاثة
+hideEditPopup();
+
+// إظهار أزرار التأكيد والإلغاء بجانب النص
+const confirmPopup = document.getElementById('confirmPopup');
+const rect = currentEditElement.getBoundingClientRect();
+confirmPopup.style.left = (rect.left + rect.width / 2) + 'px';
+confirmPopup.style.top = (rect.top - 20) + 'px';
+confirmPopup.classList.add('show');
+
+// ✅ منع التداخل مع أحداث اللمس الطبيعية
+currentEditElement.addEventListener('touchstart', function(e) {
+e.stopPropagation(); // نسمح بالحدث ولكن نمنع وصوله للمستمعات الأخرى
+}, {passive: true});
+}
 }
 
 // دالة تأكيد التعديل
 function confirmEdit() {
-    if (currentEditElement) {
-        currentEditElement.removeAttribute('contenteditable');
-        
-        // حفظ إذا تغير النص
-        if (currentEditElement.innerText !== originalText) {
-            saveChanges();
-            showToast('✅ تم الحفظ');
-        }
-        
-        // إخفاء أزرار التأكيد
-        hideConfirmPopup();
-        currentEditElement = null;
-    }
+if (currentEditElement) {
+currentEditElement.removeAttribute('contenteditable');
+
+// حفظ إذا تغير النص
+if (currentEditElement.innerText !== originalText) {
+saveChanges();
+showToast('✅ تم الحفظ');
+}
+
+// إخفاء أزرار التأكيد
+hideConfirmPopup();
+currentEditElement = null;
+}
 }
 
 // دالة إلغاء التعديل
 function cancelEdit() {
-    if (currentEditElement) {
-        currentEditElement.innerText = originalText;
-        currentEditElement.removeAttribute('contenteditable');
-        
-        // إخفاء أزرار التأكيد
-        hideConfirmPopup();
-        showToast('❌ تم الإلغاء');
-        currentEditElement = null;
-    }
+if (currentEditElement) {
+currentEditElement.innerText = originalText;
+currentEditElement.removeAttribute('contenteditable');
+
+// إخفاء أزرار التأكيد
+hideConfirmPopup();
+showToast('❌ تم الإلغاء');
+currentEditElement = null;
+}
 }
 
 // دالة إلغاء البوب أب الأول (الأزرار الثلاثة)
 function cancelPopup() {
-    hideEditPopup();
-    currentEditElement = null;
-    showToast('✖️ تم الإلغاء');
+hideEditPopup();
+currentEditElement = null;
+showToast('✖️ تم الإلغاء');
 }
 
 function saveFileToPath(content) {
-    const filePath = '/storage/emulated/0/Android/data/com.S2/files/M3F1.html';
-    
-    if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
-        AndroidBridge.saveFile(filePath, content);
-        return true;
-    }
-    
-    if (window.Android && typeof window.Android.saveFile === 'function') {
-        window.Android.saveFile(filePath, content);
-        return true;
-    }
-    
-    return false;
+const filePath = '/storage/emulated/0/Android/data/com.S2/files/M3F1.html';
+
+if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
+AndroidBridge.saveFile(filePath, content);
+return true;
+}
+
+if (window.Android && typeof window.Android.saveFile === 'function') {
+window.Android.saveFile(filePath, content);
+return true;
+}
+
+return false;
 }
 
 function hideEditPopup() {
-    document.getElementById('editPopup').classList.remove('show');
-    document.getElementById('editPopup').removeAttribute('style');
+document.getElementById('editPopup').classList.remove('show');
+document.getElementById('editPopup').removeAttribute('style');
 }
 
 function hideConfirmPopup() {
-    document.getElementById('confirmPopup').classList.remove('show');
-    document.getElementById('confirmPopup').removeAttribute('style');
+document.getElementById('confirmPopup').classList.remove('show');
+document.getElementById('confirmPopup').removeAttribute('style');
 }
 
 function showToast(message) {
-    const toast = document.getElementById('editToast');
-    toast.textContent = message;
-    toast.classList.add('show');
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 1500);
+const toast = document.getElementById('editToast');
+toast.textContent = message;
+toast.classList.add('show');
+
+setTimeout(() => {
+toast.classList.remove('show');
+}, 1500);
 }
 
 // إضافة مستمعي الأحداث للعناصر
 document.querySelectorAll('h1, h2, h3, p, .section-intro, .card p').forEach(element => {
-    element.addEventListener('touchstart', handleTouchStart, {passive: false});
-    element.addEventListener('touchend', handleTouchEnd);
-    element.addEventListener('touchcancel', handleTouchCancel);
+element.addEventListener('touchstart', handleTouchStart, {passive: false});
+element.addEventListener('touchend', handleTouchEnd);
+element.addEventListener('touchcancel', handleTouchCancel);
 });
 
 document.addEventListener('contextmenu', (e) => {
-    if (editMode) e.preventDefault();
+if (editMode) e.preventDefault();
 });
 
 document.addEventListener('touchmove', (e) => {
-    // فقط نمنع التمرير إذا كان العنصر في وضع التعديل
-    if (currentEditElement && currentEditElement.hasAttribute('contenteditable')) {
-        // لا نستخدم preventDefault هنا - نترك التفاعل طبيعياً
-        // e.preventDefault(); // ← علقنا على هذا السطر
-    }
+// فقط نمنع التمرير إذا كان العنصر في وضع التعديل
+if (currentEditElement && currentEditElement.hasAttribute('contenteditable')) {
+// لا نستخدم preventDefault هنا - نترك التفاعل طبيعياً
+// e.preventDefault(); // ← علقنا على هذا السطر
+}
 }, {passive: true}); // غيرنا إلى passive: true
 
 // إخفاء البوب أب عند النقر خارجها
 document.addEventListener('touchstart', function(e) {
-    const confirmPopup = document.getElementById('confirmPopup');
-    
-    if (confirmPopup.classList.contains('show') && !e.target.closest('.confirm-popup') && !e.target.closest('[contenteditable="true"]')) {
-        // إذا نقر خارج أزرار التأكيد والنص، نلغي التعديل
-        if (currentEditElement && currentEditElement.hasAttribute('contenteditable')) {
-            cancelEdit();
-        }
-    }
+const confirmPopup = document.getElementById('confirmPopup');
+
+if (confirmPopup.classList.contains('show') && !e.target.closest('.confirm-popup') && !e.target.closest('[contenteditable="true"]')) {
+// إذا نقر خارج أزرار التأكيد والنص، نلغي التعديل
+if (currentEditElement && currentEditElement.hasAttribute('contenteditable')) {
+cancelEdit();
+}
+}
 });
 
 window.addEventListener('beforeunload', function() {
-    if (editMode) {
-        toggleEditMode();
-    }
+if (editMode) {
+toggleEditMode();
+}
 });
 
 window.addEventListener('pagehide', function() {
-    if (editMode) {
-        toggleEditMode();
-    }
+if (editMode) {
+toggleEditMode();
+}
 });
 </script>
 
-<!-- نظام تتبع التعديلات -->
-<script>
-// ============================================
-// نظام تتبع وحفظ تعديلات المستخدم
-// ============================================
-
-// معرف الملف الحالي
-const CURRENT_FILE = "M3F1.html";
-
-// دالة تحميل/حفظ التعديلات
-const EditTracker = {
-    // تحميل التعديلات من ملف JSON
-    async loadEdits() {
-        try {
-            if (typeof AndroidBridge !== 'undefined') {
-                // سنضيف هذه الدالة في MainActivity.java
-                const editsJson = await AndroidBridge.readFile('edits.json');
-                return JSON.parse(editsJson || '{"version":1,"files":{}}');
-            }
-        } catch (e) {
-            console.log('لا يوجد ملف تعديلات بعد');
-        }
-        return { version: 1, files: {} };
-    },
-
-    // حفظ التعديلات
-    async saveEdits(editsData) {
-        if (typeof AndroidBridge !== 'undefined') {
-            AndroidBridge.saveFile('edits.json', JSON.stringify(editsData, null, 2));
-        }
-    },
-
-    // إنشاء محدد فريد للعنصر
-    getElementSelector(element) {
-        if (!element) return null;
-        
-        // محاولة باستخدام id
-        if (element.id) return `#${element.id}`;
-        
-        let path = [];
-        let current = element;
-        let maxDepth = 10;
-        
-        while (current && current.nodeType === 1 && maxDepth-- > 0) {
-            let selector = current.tagName.toLowerCase();
-            
-            // إضافة class إذا وجد
-            if (current.className) {
-                let classes = current.className.split(/\s+/).filter(c => c);
-                if (classes.length > 0) {
-                    selector += '.' + classes.join('.');
-                }
-            }
-            
-            // إضافة index
-            if (current.parentNode) {
-                let siblings = Array.from(current.parentNode.children).filter(c => c.tagName === current.tagName);
-                if (siblings.length > 1) {
-                    let index = siblings.indexOf(current) + 1;
-                    selector += `:nth-child(${index})`;
-                }
-            }
-            
-            path.unshift(selector);
-            current = current.parentNode;
-            
-            if (current && current.tagName === 'BODY') break;
-        }
-        
-        return path.join(' > ');
-    },
-
-    // الحصول على نص مختصر للعنصر للمساعدة في البحث البديل
-    getElementSignature(element) {
-        return {
-            tag: element.tagName,
-            text_start: element.innerText?.substring(0, 30),
-            class: element.className,
-            depth: this.getElementDepth(element)
-        };
-    },
-
-    getElementDepth(element) {
-        let depth = 0;
-        while (element.parentNode) {
-            depth++;
-            element = element.parentNode;
-        }
-        return depth;
-    },
-
-    // تسجيل تعديل
-    async recordEdit(type, details) {
-        try {
-            const edits = await this.loadEdits();
-            
-            if (!edits.files[CURRENT_FILE]) {
-                edits.files[CURRENT_FILE] = {
-                    file_version: 1,
-                    edits: []
-                };
-            }
-            
-            // إضافة التعديل الجديد
-            edits.files[CURRENT_FILE].edits.push({
-                id: `edit_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
-                type: type,
-                timestamp: new Date().toISOString(),
-                ...details
-            });
-            
-            // حفظ التعديلات
-            await this.saveEdits(edits);
-            
-            console.log(`تم تسجيل ${type}:`, details);
-            return true;
-        } catch (e) {
-            console.error('فشل تسجيل التعديل:', e);
-            return false;
-        }
-    }
-};
-
-// ============================================
-// تعديل دوال التحرير الحالية
-// ============================================
-
-// حفظ الدالة الأصلية
-const originalConfirmEdit = confirmEdit;
-const originalDeleteElement = deleteElement;
-const originalAddNewContent = addNewContent;
-
-// تعديل دالة تأكيد التعديل
-confirmEdit = async function() {
-    if (currentEditElement) {
-        const selector = EditTracker.getElementSelector(currentEditElement);
-        const signature = EditTracker.getElementSignature(currentEditElement);
-        
-        // تسجيل التعديل
-        await EditTracker.recordEdit('modify', {
-            selector: selector,
-            signature: signature,
-            old_content: originalText,
-            new_content: currentEditElement.innerText,
-            element_type: currentEditElement.tagName
-        });
-        
-        // استدعاء الدالة الأصلية
-        originalConfirmEdit();
-    }
-};
-
-// تعديل دالة الحذف
-deleteElement = async function() {
-    if (currentEditElement) {
-        const selector = EditTracker.getElementSelector(currentEditElement);
-        const html = currentEditElement.outerHTML;
-        
-        // تسجيل الحذف
-        await EditTracker.recordEdit('delete', {
-            selector: selector,
-            html: html,
-            element_type: currentEditElement.tagName
-        });
-        
-        // استدعاء الدالة الأصلية
-        originalDeleteElement();
-    }
-};
-
-// تعديل دالة الإضافة
-addNewContent = async function() {
-    // هذا يفترض أن لديك دالة addNewContent في الكود
-    // سنقوم بتعديلها بنفس الطريقة
-    if (typeof originalAddNewContent === 'function') {
-        // الحصول على آخر عنصر تمت إضافته (هذا يتطلب تعديل حسب كودك)
-        // مثال مبسط:
-        const newElement = document.querySelector('.card:last-child');
-        if (newElement) {
-            await EditTracker.recordEdit('add', {
-                position: {
-                    relation: 'append',
-                    target: 'section:last-child'
-                },
-                html: newElement.outerHTML,
-                element_type: 'card'
-            });
-        }
-        
-        originalAddNewContent();
-    }
-};
-
-console.log('✅ نظام تتبع التعديلات نشط');
-</script>
-  
 </body></html>
