@@ -530,7 +530,7 @@ padding:20px;
 }
 </style>
  </head>
- <body class="dark-mode edit-mode-active">
+ <body class="dark-mode">
   <script>
 (function() {
 try {
@@ -541,7 +541,7 @@ document.body.classList.add('dark-mode');
 } catch(e) {}
 })();
 </script> <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">☀️</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> 📝</span> إضافة نص </button>
+  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">☀️</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✎</span> تعديل النصوص</button> <button class="add-btn" onclick="openAddModal()"> <span> 📝</span> إضافة نص </button>
   </div>
   <header>
    <h1 id="h1_0">مقدمة في التعريف&nbsp;</h1>
@@ -551,12 +551,12 @@ document.body.classList.add('dark-mode');
     
    </section>
    <section class="section-block">
-    <h2 id="h2_0">أقسام القانون الجنائي بمفهومه&nbsp;</h2>
+    <h2 id="h2_0">أقسام القانون الجنائي بمفهومه</h2>
     
     <div class="cards-grid">
      <div class="card">
-      <h3 id="h3_0">القسم العام&nbsp;&nbsp;</h3>
-      <p id="card_p_1" contenteditable="true">يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء&nbsp;</p>
+      <h3 id="h3_0">القسم العامن&nbsp; ..</h3>
+      <p id="card_p_1">يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء&nbsp;</p>
      </div>
      <div class="card">
       <h3 id="h3_1">القسم الخاص&nbsp;</h3>
@@ -594,7 +594,7 @@ document.body.classList.add('dark-mode');
   </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص -->
   <div class="edit-popup" id="editPopup" style=""><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
   </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل -->
-  <div class="confirm-popup show" id="confirmPopup" style="left: 175.254px; top: 417.647px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  <div class="confirm-popup" id="confirmPopup" style="left: 175.254px; top: 254.402px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
 </div>
 
   <div class="edit-toast" id="editToast">وضع التعديل نشط - اضغط مطولاً لاختيار نص</div>
@@ -928,44 +928,71 @@ showToast('✅ تمت الإضافة بنجاح');
 }
 
 function saveChanges() {
-    // ✅ أخفي الأزرار المنبثقة قبل أخذ نسخة
+    // 1. إخفاء جميع القوائم والنوافذ المنبثقة فوراً
+    const menu = document.getElementById("menu");
+    if (menu) menu.classList.remove("open"); // إغلاق زر الإعدادات/القائمة الجانبية
+    
     document.getElementById('editPopup').classList.remove('show');
     document.getElementById('confirmPopup').classList.remove('show');
+    document.getElementById('addModal').classList.remove('show');
+    document.getElementById('deleteConfirmModal').classList.remove('show');
     
+    // 2. إيقاف وضع التعديل بصرياً قبل الحفظ (لإعادة الأزرار لشكلها الطبيعي)
+    const editBtn = document.querySelector('.edit-btn');
+    if (editBtn) {
+        editBtn.innerHTML = '<span>✎</span> تعديل النصوص';
+    }
+    document.body.classList.remove('edit-mode-active');
+
+    // 3. إزالة خاصية التعديل من أي عنصر نشط
+    document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+        el.removeAttribute('contenteditable');
+    });
+
+    // 4. الحفظ الآن والصفحة "نظيفة"
     const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    
     if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
         AndroidBridge.saveFile('/storage/emulated/0/Android/data/com.S2/files/M3F1.html', htmlContent);
     }
+    
+    // 5. اختياري: إعادة وضع التعديل للعمل بعد الحفظ إذا كنت لا تزال داخل التطبيق
+    // editMode = false; // نضبط المتغير ليتوافق مع الحالة الجديدة
 }
+
+
 
 function handleTouchStart(e) {
-if (!editMode) return;
+    if (!editMode) return;
 
-const element = e.target.closest('h1, h2, h3, p, .section-intro, .card p');
-if (!element) return;
+    // إذا كان العنصر الذي لمسته هو نفسه الذي يتم تعديله حالياً، اترك المتصفح يقوم بعمله
+    if (e.target.hasAttribute('contenteditable')) {
+        return; 
+    }
 
-if (longPressTimer) {
-clearTimeout(longPressTimer);
-longPressTimer = null;
+    const element = e.target.closest('h1, h2, h3, p, .section-intro, .card p');
+    if (!element) return;
+
+    // إزالة السطر التالي أو جعله مشروطاً
+    // e.preventDefault(); 
+
+    if (longPressTimer) {
+        clearTimeout(longPressTimer);
+    }
+
+    // تفعيل التحديد فقط عند الضغط المطول أو النقر لاختيار العنصر
+    currentEditElement = element;
+    originalText = currentEditElement.innerText;
+
+    const popup = document.getElementById('editPopup');
+    const touch = e.touches[0];
+    popup.style.left = touch.clientX + 'px';
+    popup.style.top = (touch.clientY - 70) + 'px';
+    popup.classList.add('show');
+
+    hideConfirmPopup();
 }
 
-e.preventDefault();
-
-if (currentEditElement) {
-currentEditElement.removeAttribute('contenteditable');
-}
-
-currentEditElement = element;
-originalText = currentEditElement.innerText;
-
-const popup = document.getElementById('editPopup');
-const rect = e.touches[0];
-popup.style.left = rect.clientX + 'px';
-popup.style.top = (rect.clientY - 70) + 'px';
-popup.classList.add('show');
-
-hideConfirmPopup();
-}
 
 function handleTouchEnd(e) {
 if (longPressTimer) {
@@ -1272,5 +1299,6 @@ toggleEditMode();
 });
 </script>
  
+
 
 </body></html>
