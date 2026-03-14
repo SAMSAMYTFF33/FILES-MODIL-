@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مقدمة في القانون الجنائي</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مقدمة في القانون الجنائي</title>
+  <style>
 @font-face{
 font-family:'Tajawal';
 src:url('file:///data/data/com.S2/files/Tajawal-Regular.ttf') format('truetype');
@@ -529,9 +529,9 @@ padding:20px;
 }
 }
 </style>
-</head>
-<body class="edit-mode-active">
-<script>
+ </head>
+ <body class="edit-mode-active">
+  <script>
 (function() {
 try {
 const savedTheme = localStorage.getItem('darkMode');
@@ -540,120 +540,73 @@ document.body.classList.add('dark-mode');
 }
 } catch(e) {}
 })();
-</script>
-
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-<div class="side-menu" id="menu">
-<button class="theme-btn" onclick="toggleTheme()">🌙</button>
-<button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button>
-<button class="add-btn" onclick="openAddModal()">
-<span> 📝</span> إضافة نص
-</button>
-</div>
-
-<header>
-<h1>مقدمة في التعريف بالقانون الجنائي وتطوره</h1>
-</header>
-
-<div class="container" id="mainContainer">
-<section class="section-block">
-
-
-
-<div class="cards-grid">
-<div class="card">
-<h3>المفهوم الواسع&nbsp; ..</h3>
-<p>يشمل القانون الجنائي بمفهومه الواسع قواعد الموضوع وقواعد الشكل (المسطرة الجنائية) معاً، إذ يُعدّ كلاهما جزءاً لا يتجزأ من المنظومة الجنائية.</p>
-</div>
-
-<div class="card">
-<h3>المفهوم الضيق</h3>
-<p>قصره البعض على القواعد الموضوعية بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>
-</div>
-</div>
-</section>
-
-<section class="section-block">
-<h2>أقسام القانون الجنائي بمفهومه الضيق</h2>
-<p class="section-intro">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
-
-<div class="cards-grid">
-<div class="card">
-<h3>القسم العام</h3>
-<p>يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
-</div>
-
-<div class="card">
-<h3>القسم الخاص</h3>
-<p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>
-</div>
-</div>
-</section>
-<section class="section-block"></section></div>
-<!-- نافذة إضافة نص -->
-<div class="modal-overlay" id="addModal">
-<div class="modal-content">
-<h3>📝 إضافة نص جديد</h3>
-
-<div class="input-group">
-<label>العنوان الأكبر (h1) - اختياري</label>
-<input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
-</div>
-
-<div class="input-group">
-<label>النص التمهيدي (section-intro) - اختياري</label>
-<textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
-</div>
-
-<div class="input-group">
-<label>العنوان الرئيسي (h2) - اختياري</label>
-<input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
-</div>
-
-<div class="input-group">
-<label>العنوان الفرعي مع نص (card) - اختياري</label>
-<input type="text" id="inputCardTitle" placeholder="العنوان الفرعي...">
-<textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
-</div>
-
-<div class="modal-buttons">
-<button onclick="addNewContent()">✅ إضافة</button>
-<button onclick="closeAddModal()">❌ إلغاء</button>
-</div>
-<div class="note">يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف</div>
-</div>
-</div>
-
-<!-- نافذة تأكيد الحذف -->
-<div class="modal-overlay" id="deleteConfirmModal">
-<div class="modal-content" style="max-width: 400px; text-align: center;">
-<h3 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ تأكيد الحذف</h3>
-<p style="margin-bottom: 30px; font-size: 1.1rem;">هل أنت متأكد من حذف هذا العنصر؟</p>
-<div class="modal-buttons">
-<button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button>
-<button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
-</div>
-</div>
-</div>
-
-<!-- أزرار التعديل والحذف والإلغاء فوق النص (الظهور الأول) -->
-<div class="edit-popup" id="editPopup" style="">
-<button class="delete-btn" onclick="deleteElement()">🗑️</button>
-<button class="edit-btn-popup" onclick="prepareEdit()">✎</button>
-<button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
-</div>
-
-<!-- أزرار التأكيد والإلغاء أثناء التعديل (الظهور الثاني) -->
-<div class="confirm-popup show" id="confirmPopup" style="left: 175.254px; top: 277.83px;">
-<button class="confirm-edit-btn" onclick="confirmEdit()">✅</button>
-<button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
-</div>
-
-<!-- رسالة تأكيد -->
-<div class="edit-toast" id="editToast">وضع التعديل نشط</div>
-
-<script>
+</script> <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">🌙</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> 📝</span> إضافة نص </button>
+  </div>
+  <header>
+   <h1>مقدمة في التعريف بالقانون الجنائي وتطوره&nbsp;</h1>
+  </header>
+  <div class="container" id="mainContainer">
+   <section class="section-block">
+    <div class="cards-grid">
+     <div class="card">
+      <h3>المفهوم الواسع&nbsp;&nbsp;</h3>
+      <p>يشمل القانون الجنائي بمفهومه الواسع قواعد الموضوع وقواعد الشكل (المسطرة الجنائية) معاً، إذ يُعدّ كلاهما جزءاً لا يتجزأ من المنظومة الجنائية.</p>
+     </div>
+     <div class="card">
+      <h3>المفهوم الضيق</h3>
+      <p>قصره البعض على القواعد الموضوعية بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>
+     </div>
+    </div>
+   </section>
+   <section class="section-block">
+    <h2>أقسام القانون الجنائي بمفهومه الضيق</h2>
+    <p class="section-intro">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
+    <div class="cards-grid">
+     <div class="card">
+      <h3>القسم العام</h3>
+      <p>يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
+     </div>
+     <div class="card">
+      <h3>القسم الخاص</h3>
+      <p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>
+     </div>
+    </div>
+   </section>
+   <section class="section-block"></section>
+  </div> <!-- نافذة إضافة نص -->
+  <div class="modal-overlay" id="addModal">
+   <div class="modal-content">
+    <h3>📝 إضافة نص جديد</h3>
+    <div class="input-group"><label>العنوان الأكبر (h1) - اختياري</label> <input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
+    </div>
+    <div class="input-group"><label>النص التمهيدي (section-intro) - اختياري</label> <textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
+    </div>
+    <div class="input-group"><label>العنوان الرئيسي (h2) - اختياري</label> <input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
+    </div>
+    <div class="input-group"><label>العنوان الفرعي مع نص (card) - اختياري</label> <input type="text" id="inputCardTitle" placeholder="العنوان الفرعي..."> <textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
+    </div>
+    <div class="modal-buttons"><button onclick="addNewContent()">✅ إضافة</button> <button onclick="closeAddModal()">❌ إلغاء</button>
+    </div>
+    <div class="note">
+     يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف
+    </div>
+   </div>
+  </div> <!-- نافذة تأكيد الحذف -->
+  <div class="modal-overlay" id="deleteConfirmModal">
+   <div class="modal-content" style="max-width: 400px; text-align: center;">
+    <h3 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ تأكيد الحذف</h3>
+    <p style="margin-bottom: 30px; font-size: 1.1rem;">هل أنت متأكد من حذف هذا العنصر؟</p>
+    <div class="modal-buttons"><button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button> <button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
+    </div>
+   </div>
+  </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص (الظهور الأول) -->
+  <div class="edit-popup" id="editPopup" style=""><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
+  </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل (الظهور الثاني) -->
+  <div class="confirm-popup show" id="confirmPopup" style="left: 175.254px; top: 277.83px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  </div> <!-- رسالة تأكيد -->
+  <div class="edit-toast" id="editToast">✅ تم الحفظ</div>
+  <script>
 let editMode = false;
 let currentEditElement = null;
 let originalText = '';
@@ -1123,5 +1076,5 @@ toggleEditMode();
 }
 });
 </script>
-
+ 
 </body></html>
