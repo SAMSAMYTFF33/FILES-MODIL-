@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مقدمة في القانون الجنائي</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مقدمة في القانون الجنائي</title>
+  <style>
 @font-face{
 font-family:'Tajawal';
 src:url('file:///data/data/com.S2/files/Tajawal-Regular.ttf') format('truetype');
@@ -529,10 +529,9 @@ padding:20px;
 }
 }
 </style>
-</head>
-
-<body class="edit-mode-active">
-<script>
+ </head>
+ <body class="edit-mode-active">
+  <script>
 (function() {
 try {
 const savedTheme = localStorage.getItem('darkMode');
@@ -541,125 +540,108 @@ document.body.classList.add('dark-mode');
 }
 } catch(e) {}
 })();
-</script>
-
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-<div class="side-menu" id="menu">
-<button class="theme-btn" onclick="toggleTheme()">🌙</button>
-<button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button>
-<button class="add-btn" onclick="openAddModal()">
-<span> 📝</span> إضافة نص
-</button>
-</div>
-
-<header>
-<h1>مقدمة في التعريف بالقانون الجنائي وتطوره</h1>
-</header>
-
-<div class="container" id="mainContainer">
-<section class="section-block">
-
-<div class="cards-grid">
-<div class="card">
-<h3>المفهوم الواسع&nbsp; ..</h3>
-<p>يشمل القانون الجنائي بمفهومه الواسع قواعد الموضوع وقواعد الشكل (المسطرة الجنائية) معاً، إذ يُعدّ كلاهما جزءاً لا يتجزأ من المنظومة الجنائية.</p>
-</div>
-
-<div class="card">
-<h3>المفهوم الضيق</h3>
-<p>قصره البعض على القواعد الموضوعية بالتجريم والمسؤولية الجنائية والعقوبات والتدابير، دون أن تشمل قواعد المسطرة الجنائية.</p>
-</div>
-</div>
-</section>
-
-<section class="section-block">
-<h2>أقسام القانون الجنائي بمفهومه الضيق</h2>
-<p class="section-intro">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
-
-<div class="cards-grid">
-<div class="card">
-<h3>القسم العام</h3>
-<p>يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
-</div>
-
-<div class="card">
-<h3>القسم الخاص</h3>
-<p>يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل أركان كل جريمة والعقوبة المترتبة عليها.</p>
-</div>
-</div>
-</section>
-<section class="section-block"></section></div>
-
-<!-- نافذة إضافة نص -->
-<div class="modal-overlay" id="addModal">
-<div class="modal-content">
-<h3>📝 إضافة نص جديد</h3>
-
-<div class="input-group">
-<label>العنوان الأكبر (h1) - اختياري</label>
-<input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
-</div>
-
-<div class="input-group">
-<label>النص التمهيدي (section-intro) - اختياري</label>
-<textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
-</div>
-
-<div class="input-group">
-<label>العنوان الرئيسي (h2) - اختياري</label>
-<input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
-</div>
-
-<div class="input-group">
-<label>العنوان الفرعي مع نص (card) - اختياري</label>
-<input type="text" id="inputCardTitle" placeholder="العنوان الفرعي...">
-<textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
-</div>
-
-<div class="modal-buttons">
-<button onclick="addNewContent()">✅ إضافة</button>
-<button onclick="closeAddModal()">❌ إلغاء</button>
-</div>
-<div class="note">يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف</div>
-</div>
-</div>
-
-<!-- نافذة تأكيد الحذف -->
-<div class="modal-overlay" id="deleteConfirmModal">
-<div class="modal-content" style="max-width: 400px; text-align: center;">
-<h3 style="color: var(--primary-color); margin-bottom: 20px;">⚠️ تأكيد الحذف</h3>
-<p style="margin-bottom: 30px; font-size: 1.1rem;">هل أنت متأكد من حذف هذا العنصر؟</p>
-<div class="modal-buttons">
-<button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button>
-<button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
-</div>
-</div>
-</div>
-
-<!-- أزرار التعديل والحذف والإلغاء فوق النص -->
-<div class="edit-popup" id="editPopup">
-<button class="delete-btn" onclick="deleteElement()">🗑️</button>
-<button class="edit-btn-popup" onclick="prepareEdit()">✎</button>
-<button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
-</div>
-
-<!-- أزرار التأكيد والإلغاء أثناء التعديل -->
-<div class="confirm-popup" id="confirmPopup">
-<button class="confirm-edit-btn" onclick="confirmEdit()">✅</button>
-<button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
-</div>
-
-<!-- رسالة تأكيد -->
-<div class="edit-toast" id="editToast">وضع التعديل نشط</div>
-
-<script>
+</script> <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">🌙</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> 📝</span> إضافة نص </button>
+  </div>
+  <header>
+   <h1 contenteditable="true" id="h1_0">مقدمة في التعريف&nbsp;</h1>
+  </header>
+  <div class="container" id="mainContainer">
+   <section class="section-block">
+    <div class="cards-grid">
+     <div class="card">
+      <p id="card_p_0">ن</p>
+     </div>
+     
+    </div>
+   </section>
+   <section class="section-block">
+    <h2 id="h2_0">أقسام القانون الجنائي بمفهومه الضيق</h2>
+    <p class="section-intro" id="p_0">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
+    <div class="cards-grid">
+     <div class="card">
+      <h3 id="h3_0">القسم العام&nbsp; &nbsp; .</h3>
+      <p id="card_p_1">يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء.</p>
+     </div>
+     <div class="card">
+      <h3 id="h3_1">القسم الخاص</h3>
+      <p id="card_p_2" contenteditable="true">يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل</p>
+     </div>
+    </div>
+   </section>
+   <section class="section-block"></section>
+  <section class="section-block"></section><section class="section-block"></section></div> <!-- نافذة إضافة نص -->
+  <div class="modal-overlay" id="addModal">
+   <div class="modal-content">
+    <h3 id="h3_2">📝 إضافة نص جديد</h3>
+    <div class="input-group"><label>العنوان الأكبر (h1) - اختياري</label> <input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
+    </div>
+    <div class="input-group"><label>النص التمهيدي (section-intro) - اختياري</label> <textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
+    </div>
+    <div class="input-group"><label>العنوان الرئيسي (h2) - اختياري</label> <input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
+    </div>
+    <div class="input-group"><label>العنوان الفرعي مع نص (card) - اختياري</label> <input type="text" id="inputCardTitle" placeholder="العنوان الفرعي..."> <textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
+    </div>
+    <div class="modal-buttons"><button onclick="addNewContent()">✅ إضافة</button> <button onclick="closeAddModal()">❌ إلغاء</button>
+    </div>
+    <div class="note">
+     يمكنك تعبئة حقل واحد أو أكثر - الحقول الفارغة لن تُضاف
+    </div>
+   </div>
+  </div> <!-- نافذة تأكيد الحذف -->
+  <div class="modal-overlay" id="deleteConfirmModal">
+   <div class="modal-content" style="max-width: 400px; text-align: center;">
+    <h3 style="color: var(--primary-color); margin-bottom: 20px;" id="h3_3">⚠️ تأكيد الحذف</h3>
+    <p style="margin-bottom: 30px; font-size: 1.1rem;" id="p_1">هل أنت متأكد من حذف هذا العنصر؟</p>
+    <div class="modal-buttons"><button onclick="confirmDeleteElement()" style="background: #dc3545; color: white;">🗑️ تأكيد الحذف</button> <button onclick="cancelDeleteModal()" style="background: var(--secondary-color); color: white;">❌ إلغاء</button>
+    </div>
+   </div>
+  </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص -->
+  <div class="edit-popup" id="editPopup"><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
+  </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل -->
+  <div class="confirm-popup show" id="confirmPopup" style="left: 175.254px; top: 430.345px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  </div> <!-- رسالة تأكيد -->
+  <div class="edit-toast" id="editToast">✅ تم الحفظ</div>
+  <script>
 let editMode = false;
 let currentEditElement = null;
 let originalText = '';
 let longPressTimer = null;
 let longPressedElement = null;
 let elementToDelete = null;
+
+// ⭐ دالة إضافة أرقام فريدة لكل العناصر
+function giveUniqueIds() {
+    // الفقرات العادية
+    document.querySelectorAll('p:not(.card p)').forEach((el, index) => {
+        if (!el.id) el.id = 'p_' + index;
+    });
+    
+    // الفقرات داخل البطاقات
+    document.querySelectorAll('.card p').forEach((el, index) => {
+        if (!el.id) el.id = 'card_p_' + index;
+    });
+    
+    // العناوين الرئيسية
+    document.querySelectorAll('h1').forEach((el, index) => {
+        if (!el.id) el.id = 'h1_' + index;
+    });
+    
+    // العناوين الثانوية
+    document.querySelectorAll('h2').forEach((el, index) => {
+        if (!el.id) el.id = 'h2_' + index;
+    });
+    
+    // العناوين الفرعية
+    document.querySelectorAll('h3').forEach((el, index) => {
+        if (!el.id) el.id = 'h3_' + index;
+    });
+    
+    // النص التمهيدي
+    document.querySelectorAll('.section-intro').forEach((el, index) => {
+        if (!el.id) el.id = 'intro_' + index;
+    });
+}
 
 // استرجاع حالة الوضع الداكن عند تحميل الصفحة
 function loadThemePreference() {
@@ -692,43 +674,64 @@ loadEditModePreference();
 hideEditPopup();
 hideConfirmPopup();
 currentEditElement = null;
+giveUniqueIds();  // ⭐ أضف هذا السطر
 });
 
 // دالة لتسجيل التعديلات في ملف JSON
+// دالة لتسجيل التعديلات في ملف JSON (محسنة للحفاظ على جميع التعديلات)
 function recordEdit(editData) {
-// اسم الملف الحالي
-const currentFile = 'M3F1.html';
-const editsFile = '/storage/emulated/0/Android/data/com.S2/files/edits.json';
+    // ⭐ إضافة ID العنصر للتعديل
+    if (currentEditElement && currentEditElement.id) {
+        editData.element_id = currentEditElement.id;
+    }
     
-// محاولة قراءة الملف الموجود
-let edits = {};
+    // اسم الملف الحالي
+    const currentFile = 'M3F1.html';
+    const editsFile = '/storage/emulated/0/Android/data/com.S2/files/edits.json';
     
-if (typeof AndroidBridge !== 'undefined' && AndroidBridge.readFile) {
-const existingContent = AndroidBridge.readFile(editsFile);
-if (existingContent) {
-try {
-edits = JSON.parse(existingContent);
-} catch(e) {
-console.log('خطأ في قراءة ملف التعديلات:', e);
-}
-}
-}
+    // هيكل البيانات الأساسي
+    let edits = {};
     
-// إذا لم يكن هناك مصفوفة تعديلات لهذا الملف، أنشئ واحدة
-if (!edits[currentFile]) {
-edits[currentFile] = {
-edits: []
-};
-}
+    try {
+        // محاولة قراءة الملف الموجود
+        if (typeof AndroidBridge !== 'undefined' && AndroidBridge.readFile) {
+            const existingContent = AndroidBridge.readFile(editsFile);
+            if (existingContent && existingContent.trim() !== '') {
+                try {
+                    const parsed = JSON.parse(existingContent);
+                    if (parsed && typeof parsed === 'object') {
+                        edits = parsed;
+                    }
+                } catch(e) {
+                    console.log('خطأ في قراءة الملف، سيتم إنشاء ملف جديد');
+                }
+            }
+        }
+    } catch (error) {
+        console.log('خطأ في الوصول للملف');
+    }
     
-// أضف التعديل الجديد
-edits[currentFile].edits.push(editData);
+    // التأكد من وجود هيكل البيانات الصحيح
+    if (!edits[currentFile]) {
+        edits[currentFile] = { edits: [] };
+    }
+    if (!edits[currentFile].edits) {
+        edits[currentFile].edits = [];
+    }
     
-// احفظ الملف
-if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
-AndroidBridge.saveFile(editsFile, JSON.stringify(edits, null, 2));
-console.log('تم تسجيل التعديل:', editData);
-}
+    // إضافة معرف فريد للتعديل
+    editData.id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+    editData.timestamp = Date.now();
+    
+    // إضافة التعديل الجديد إلى المصفوفة (وليس استبدالها)
+    edits[currentFile].edits.push(editData);
+    
+    // حفظ الملف
+    if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
+        const jsonString = JSON.stringify(edits, null, 2);
+        AndroidBridge.saveFile(editsFile, jsonString);
+        console.log('تم تسجيل التعديل بنجاح');
+    }
 }
 
 function toggleMenu(){
@@ -1036,6 +1039,38 @@ document.getElementById('deleteConfirmModal').classList.remove('show');
 
 function prepareEdit() {
 if (currentEditElement) {
+// ⭐ إضافة ID فريد إذا لم يكن موجوداً
+if (!currentEditElement.id) {
+// نعطي ID حسب نوع العنصر
+const tagName = currentEditElement.tagName.toLowerCase();
+if (tagName === 'p') {
+if (currentEditElement.closest('.card')) {
+// إذا كانت فقرة داخل بطاقة
+const cardPCount = document.querySelectorAll('.card p').length;
+currentEditElement.id = 'card_p_' + cardPCount;
+} else {
+// فقرة عادية
+const pCount = document.querySelectorAll('p:not(.card p)').length;
+currentEditElement.id = 'p_' + pCount;
+}
+} else if (tagName === 'h1') {
+const h1Count = document.querySelectorAll('h1').length;
+currentEditElement.id = 'h1_' + h1Count;
+} else if (tagName === 'h2') {
+const h2Count = document.querySelectorAll('h2').length;
+currentEditElement.id = 'h2_' + h2Count;
+} else if (tagName === 'h3') {
+const h3Count = document.querySelectorAll('h3').length;
+currentEditElement.id = 'h3_' + h3Count;
+} else if (currentEditElement.classList.contains('section-intro')) {
+const introCount = document.querySelectorAll('.section-intro').length;
+currentEditElement.id = 'intro_' + introCount;
+} else {
+// لو أي عنصر آخر
+currentEditElement.id = 'el_' + Date.now();
+}
+}
+
 currentEditElement.setAttribute('contenteditable', 'true');
 currentEditElement.focus();
 
@@ -1183,6 +1218,5 @@ toggleEditMode();
 }
 });
 </script>
-
-</body>
-</html>
+ 
+</body></html>
