@@ -530,7 +530,7 @@ padding:20px;
 }
 </style>
  </head>
- <body class="dark-mode">
+ <body class="dark-mode edit-mode-active">
   <script>
 (function() {
 try {
@@ -541,7 +541,7 @@ document.body.classList.add('dark-mode');
 } catch(e) {}
 })();
 </script> <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">☀️</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✎</span> تعديل النصوص</button> <button class="add-btn" onclick="openAddModal()"> <span> 📝</span> إضافة نص </button>
+  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">الوضع الافتراضي</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> </span> إضافة نص </button>
   </div>
   <header>
    <h1 id="h1_0">مقدمة في التعريف&nbsp;</h1>
@@ -555,7 +555,7 @@ document.body.classList.add('dark-mode');
     
     <div class="cards-grid">
      <div class="card">
-      <h3 id="h3_0">القسم العامن&nbsp; ..</h3>
+      <h3 id="h3_0" contenteditable="true">القسم العام</h3>
       <p id="card_p_1">يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء&nbsp;</p>
      </div>
      <div class="card">
@@ -568,14 +568,14 @@ document.body.classList.add('dark-mode');
   <section class="section-block"></section><section class="section-block"></section><section class="section-block"></section></div> <!-- نافذة إضافة نص -->
   <div class="modal-overlay" id="addModal">
    <div class="modal-content">
-    <h3 id="h3_2">📝 إضافة نص جديد</h3>
-    <div class="input-group"><label>العنوان الأكبر (h1) - اختياري</label> <input type="text" id="inputH1" placeholder="أدخل العنوان الرئيسي للصفحة...">
+    <h3 id="h3_2"> إضافة نص </h3>
+    <div class="input-group"><label>العنوان صفحة  - اختياري</label> <input type="text" id="inputH1" placeholder="...">
     </div>
-    <div class="input-group"><label>النص التمهيدي (section-intro) - اختياري</label> <textarea id="inputIntro" rows="3" placeholder="أدخل نص تمهيدي..."></textarea>
+    <div class="input-group"><label>النص التمهيدي  - اختياري</label> <textarea id="inputIntro" rows="3" placeholder="..."></textarea>
     </div>
-    <div class="input-group"><label>العنوان الرئيسي (h2) - اختياري</label> <input type="text" id="inputH2" placeholder="أدخل عنوان قسم رئيسي...">
+    <div class="input-group"><label>العنوان الرئيسي  - اختياري</label> <input type="text" id="inputH2" placeholder="...">
     </div>
-    <div class="input-group"><label>العنوان الفرعي مع نص (card) - اختياري</label> <input type="text" id="inputCardTitle" placeholder="العنوان الفرعي..."> <textarea id="inputCardText" rows="2" placeholder="النص داخل البطاقة..." style="margin-top:10px;"></textarea>
+    <div class="input-group"><label>العنوان الفرعي مع نص - اختياري</label> <input type="text" id="inputCardTitle" placeholder="العنوان الفرعي..."> <textarea id="inputCardText" rows="2" placeholder="النص داخل العنوان الفرعي ..." style="margin-top:10px;"></textarea>
     </div>
     <div class="modal-buttons"><button onclick="addNewContent()">✅ إضافة</button> <button onclick="closeAddModal()">❌ إلغاء</button>
     </div>
@@ -594,10 +594,10 @@ document.body.classList.add('dark-mode');
   </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص -->
   <div class="edit-popup" id="editPopup" style=""><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
   </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل -->
-  <div class="confirm-popup" id="confirmPopup" style="left: 175.254px; top: 254.402px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  <div class="confirm-popup" id="confirmPopup" style="left: 175.254px; top: 365.446px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
 </div>
 
-  <div class="edit-toast" id="editToast">وضع التعديل نشط - اضغط مطولاً لاختيار نص</div>
+  <div class="edit-toast" id="editToast">✖️ تم الإلغاء</div>
   <script>
 let editMode = false;
 let currentEditElement = null;
@@ -644,10 +644,10 @@ function loadThemePreference() {
 const savedTheme = localStorage.getItem('darkMode');
 if (savedTheme === 'enabled') {
 document.body.classList.add('dark-mode');
-document.querySelector('.theme-btn').innerHTML = '☀️';
+document.querySelector('.theme-btn').innerHTML = 'الوضع الافتراضي';
 } else {
 document.body.classList.remove('dark-mode');
-document.querySelector('.theme-btn').innerHTML = '🌙';
+document.querySelector('.theme-btn').innerHTML = 'الوضع الداكن ';
 }
 }
 
@@ -665,7 +665,7 @@ function loadEditModePreference() {
     } else {
         editMode = false;
         document.body.classList.remove('edit-mode-active');
-        document.querySelector('.edit-btn').innerHTML = '<span>✎</span> تعديل النصوص';
+        document.querySelector('.edit-btn').innerHTML = '<span></span> تعديل النص ';
         
         // التأكد من إزالة خاصية التعديل من جميع العناصر
         document.querySelectorAll('[contenteditable="true"]').forEach(el => {
@@ -748,10 +748,10 @@ function toggleTheme(){
 document.body.classList.toggle("dark-mode");
 let btn = document.querySelector('.theme-btn');
 if(document.body.classList.contains('dark-mode')){
-btn.innerHTML = '☀️';
+btn.innerHTML = 'الوضع الافتراضي';
 localStorage.setItem('darkMode', 'enabled');
 } else {
-btn.innerHTML = '🌙';
+btn.innerHTML = 'الوضع الداكن ';
 localStorage.setItem('darkMode', 'disabled');
 }
 }
@@ -773,7 +773,7 @@ function toggleEditMode() {
         showToast('وضع التعديل نشط - اضغط مطولاً لاختيار نص');
     } else {
         body.classList.remove('edit-mode-active');
-        editBtn.innerHTML = '<span>✎</span> تعديل النصوص';
+        editBtn.innerHTML = '<span></span> تعديل النص ';
         localStorage.setItem('editMode', 'disabled');
         
         // إزالة خاصية التعديل من أي عنصر كان في وضع التعديل
@@ -928,38 +928,22 @@ showToast('✅ تمت الإضافة بنجاح');
 }
 
 function saveChanges() {
-    // 1. إخفاء جميع القوائم والنوافذ المنبثقة فوراً
-    const menu = document.getElementById("menu");
-    if (menu) menu.classList.remove("open"); // إغلاق زر الإعدادات/القائمة الجانبية
-    
+    // إخفاء العناصر المنبثقة يدوياً قبل الحفظ لضمان عدم تسجيلها في ملف HTML
     document.getElementById('editPopup').classList.remove('show');
     document.getElementById('confirmPopup').classList.remove('show');
     document.getElementById('addModal').classList.remove('show');
     document.getElementById('deleteConfirmModal').classList.remove('show');
     
-    // 2. إيقاف وضع التعديل بصرياً قبل الحفظ (لإعادة الأزرار لشكلها الطبيعي)
-    const editBtn = document.querySelector('.edit-btn');
-    if (editBtn) {
-        editBtn.innerHTML = '<span>✎</span> تعديل النصوص';
-    }
-    document.body.classList.remove('edit-mode-active');
-
-    // 3. إزالة خاصية التعديل من أي عنصر نشط
+    // إزالة خاصية التعديل من أي عنصر نشط قبل الحفظ
     document.querySelectorAll('[contenteditable="true"]').forEach(el => {
         el.removeAttribute('contenteditable');
     });
 
-    // 4. الحفظ الآن والصفحة "نظيفة"
     const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-    
     if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
         AndroidBridge.saveFile('/storage/emulated/0/Android/data/com.S2/files/M3F1.html', htmlContent);
     }
-    
-    // 5. اختياري: إعادة وضع التعديل للعمل بعد الحفظ إذا كنت لا تزال داخل التطبيق
-    // editMode = false; // نضبط المتغير ليتوافق مع الحالة الجديدة
 }
-
 
 
 function handleTouchStart(e) {
