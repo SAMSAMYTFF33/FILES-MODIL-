@@ -985,60 +985,69 @@ document.getElementById('deleteConfirmModal').classList.add('show');
 }
 }
 
+
 function confirmDeleteElement() {
-if (elementToDelete) {
-let selector = '';
-if (elementToDelete.tagName === 'H1') selector = 'header h1';
-else if (elementToDelete.tagName === 'H2') selector = 'h2';
-else if (elementToDelete.tagName === 'H3') selector = 'h3';
-else if (elementToDelete.classList.contains('section-intro')) selector = '.section-intro';
-else if (elementToDelete.tagName === 'P') {
-if (elementToDelete.closest('.card')) {
-selector = '.card p';
-} else {
-selector = 'p';
-}
-}
-
-if (elementToDelete.closest('.card')) {
-const card = elementToDelete.closest('.card');
-const cardsGrid = card.closest('.cards-grid');
+    if (elementToDelete) {
+        
+        // التحقق مما إذا كان العنصر المطلوب حذفه موجوداً داخل بطاقة
+        if (elementToDelete.closest('.card')) {
+            const card = elementToDelete.closest('.card');
+            const cardsGrid = card.closest('.cards-grid');
             
-recordEdit({
-type: "delete",
-timestamp: Date.now(),
-selector: {
-type: "css",
-value: selector
-},
-deleted_content: elementToDelete.outerHTML
-});
-            
-card.remove();
-if (cardsGrid && cardsGrid.children.length === 0) {
-cardsGrid.remove();
-}
-} else {
-recordEdit({
-type: "delete",
-timestamp: Date.now(),
-selector: {
-type: "css",
-value: selector
-},
-deleted_content: elementToDelete.outerHTML
-});
-            
-elementToDelete.remove();
-}
+            // إضافة ID للبطاقة إذا لم يكن موجوداً لتسهيل العثور عليها وحذفها في Java
+            if (!card.id) {
+                card.id = 'card_' + Date.now();
+            }
 
-closeDeleteModal();
-saveChanges();
-showToast('🗑️ تم الحذف');
+            // ⭐ التعديل الأهم: تسجيل حذف البطاقة بالكامل بدلاً من العنصر الداخلي
+            recordEdit({
+                type: "delete",
+                timestamp: Date.now(),
+                element_id: card.id, // نرسل ID البطاقة
+                selector: {
+                    type: "css",
+                    value: `#${card.id}` // نستخدم الـ ID كمحدد لضمان الدقة العالية
+                },
+                deleted_content: card.outerHTML // نسجل كود البطاقة بأكملها
+            });
+            
+            // حذف البطاقة من الواجهة
+            card.remove();
+            
+            // إذا أصبحت شبكة البطاقات فارغة، نحذفها أيضاً
+            if (cardsGrid && cardsGrid.children.length === 0) {
+                cardsGrid.remove();
+            }
 
-elementToDelete = null;
-currentEditElement = null;
-}
+        } else {
+            // ⭐ التعامل مع العناصر العادية (خارج البطاقات)
+            let selector = '';
+            if (elementToDelete.tagName === 'H1') selector = 'header h1';
+            else if (elementToDelete.tagName === 'H2') selector = 'h2';
+            else if (elementToDelete.classList.contains('section-intro')) selector = '.section-intro';
+            else if (elementToDelete.tagName === 'P') selector = 'p';
+
+            recordEdit({
+                type: "delete",
+                timestamp: Date.now(),
+                element_id: elementToDelete.id, // من المهم إرسال الـ ID إذا كان متوفراً
+                selector: {
+                    type: "css",
+                    value: elementToDelete.id ? `#${elementToDelete.id}` : selector
+                },
+                deleted_content: elementToDelete.outerHTML
+            });
+            
+            elementToDelete.remove();
+        }
+
+        closeDeleteModal();
+        saveChanges();
+        showToast('🗑️ تم الحذف');
+
+        elementToDelete = null;
+        currentEditElement = null;
+    }
 }
 
 function cancelDeleteModal() {
