@@ -552,7 +552,7 @@ document.body.classList.add('dark-mode');
    </section>
    <section class="section-block">
     <h2 id="h2_0">أقسام القانون الجنائي بمفهومه الضيق</h2>
-    <p class="section-intro" id="p_0" contenteditable="true">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين</p>
+    <p class="section-intro" id="p_0">ينقسم القانون الجنائي بمفهومه الضيق إلى قسمين رئيسيين:</p>
     <div class="cards-grid">
      <div class="card">
       <h3 id="h3_0" contenteditable="true">القسم العام</h3>
@@ -561,10 +561,6 @@ document.body.classList.add('dark-mode');
      <div class="card">
       <h3 id="h3_1">القسم الخاص</h3>
       <p id="card_p_2" contenteditable="true">يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل</p>
-     </div>
-  <div class="card">
-      <h3 id="h3_2"> تجريبي </h3>
-      <p id="card_p_3" contenteditable="true">يشمل القسم الخاص النصوص المهتمة بالجرائم المختلفة وبيان شروطها وعقوباتها المقررة، وهو التطبيق العملي للمبادئ العامة على كل جريمة بعينها، حيث يُفصّل</p>
      </div>
     </div>
    </section>
@@ -598,10 +594,10 @@ document.body.classList.add('dark-mode');
   </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص -->
   <div class="edit-popup" id="editPopup" style=""><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
   </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل -->
-  <div class="confirm-popup show" id="confirmPopup" style="left: 175.254px; top: 351.552px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  <div class="confirm-popup show" id="confirmPopup" style="left: 175.254px; top: 464.939px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
   </div> <!-- رسالة تأكيد -->
-  <div class="edit-toast" id="editToast">وضع التعديل نشط</div>
-  <script>
+  <div class="edit-toast" id="editToast">✖️ تم الإلغاء</div>
+<script>
 let editMode = false;
 let currentEditElement = null;
 let originalText = '';
@@ -729,10 +725,35 @@ function recordEdit(editData) {
         edits[currentFile].edits = [];
     }
     
-    editData.id = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-    editData.timestamp = Date.now();
+    // ⭐⭐⭐ التعديل هنا: إزالة الوقت وإبقاء id عشوائي فقط ⭐⭐⭐
+    editData.id = Math.random().toString(36).substr(2, 12);  // 12 حرف عشوائي فقط
+    // editData.timestamp = Date.now();  // تم حذف السطر
     
-    edits[currentFile].edits.push(editData);
+    // ⭐⭐⭐ تحديث التعديل السابق إذا وجد ⭐⭐⭐
+    if (editData.type === 'modify' && editData.element_id) {
+        const editsList = edits[currentFile].edits;
+        let found = false;
+        
+        // نبحث من الآخر (آخر تعديل أولاً)
+        for (let i = editsList.length - 1; i >= 0; i--) {
+            const oldEdit = editsList[i];
+            if (oldEdit.type === 'modify' && oldEdit.element_id === editData.element_id) {
+                // وجدنا تعديل سابق → نحدثه
+                oldEdit.new_content = editData.new_content;
+                oldEdit.id = editData.id;  // تحديث المعرف
+                found = true;
+                break;
+            }
+        }
+        
+        // إذا ما لقينا تعديل سابق، نضيف جديد
+        if (!found) {
+            edits[currentFile].edits.push(editData);
+        }
+    } else {
+        // للإضافة أو الحذف، نضيف جديد دائماً
+        edits[currentFile].edits.push(editData);
+    }
     
     if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
         const jsonString = JSON.stringify(edits, null, 2);
