@@ -551,11 +551,11 @@ document.body.classList.add('dark-mode');
     
    </section>
    <section class="section-block">
-    <h2 id="h2_0">أقسام القانون الجنائي بمفهومه</h2>
+    <h2 id="h2_0">أقسام القانون الجنائي بمفهومه&nbsp;</h2>
     
     <div class="cards-grid">
      <div class="card">
-      <h3 id="h3_0" contenteditable="true">القسم العام</h3>
+      <h3 id="h3_0">القسم العام</h3>
       <p id="card_p_1">يتناول القسم العام المبادئ العامة للتجريم والمسؤولية الجنائية والعقوبة والتدابير الوقائية، وهو الإطار النظري الذي تقوم عليه سائر أحكام القانون الجنائي، إذ يُرسي القواعد الكلية التي تسري على جميع الجرائم دون استثناء&nbsp;</p>
      </div>
      <div class="card">
@@ -564,8 +564,7 @@ document.body.classList.add('dark-mode');
      </div>
     </div>
    </section>
-   <section class="section-block"></section>
-  <section class="section-block"></section><section class="section-block"></section><section class="section-block"></section></div> <!-- نافذة إضافة نص -->
+ <!-- نافذة إضافة نص -->
   <div class="modal-overlay" id="addModal">
    <div class="modal-content">
     <h3 id="h3_2"> إضافة نص </h3>
@@ -594,10 +593,10 @@ document.body.classList.add('dark-mode');
   </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص -->
   <div class="edit-popup" id="editPopup" style=""><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
   </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل -->
-  <div class="confirm-popup" id="confirmPopup" style="left: 175.254px; top: 365.446px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  <div class="confirm-popup" id="confirmPopup" style="left: 175.254px; top: 254.402px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
 </div>
 
-  <div class="edit-toast" id="editToast">✖️ تم الإلغاء</div>
+  <div class="edit-toast" id="editToast">وضع التعديل نشط - اضغط مطولاً لاختيار نص</div>
   <script>
 let editMode = false;
 let currentEditElement = null;
@@ -804,127 +803,87 @@ document.getElementById('inputCardText').value = '';
 }
 
 function addNewContent() {
-const h1Text = document.getElementById('inputH1').value.trim();
-const introText = document.getElementById('inputIntro').value.trim();
-const h2Text = document.getElementById('inputH2').value.trim();
-const cardTitle = document.getElementById('inputCardTitle').value.trim();
-const cardText = document.getElementById('inputCardText').value.trim();
+    const h1Text = document.getElementById('inputH1').value.trim();
+    const introText = document.getElementById('inputIntro').value.trim();
+    const h2Text = document.getElementById('inputH2').value.trim();
+    const cardTitle = document.getElementById('inputCardTitle').value.trim();
+    const cardText = document.getElementById('inputCardText').value.trim();
 
-const container = document.getElementById('mainContainer');
+    const container = document.getElementById('mainContainer');
 
-// إضافة العنوان الأكبر (h1) - يضاف داخل الهيدر
-if (h1Text !== '') {
-const header = document.querySelector('header');
-if (header) {
-const newH1 = document.createElement('h1');
-newH1.textContent = h1Text;
-header.appendChild(newH1);
+    if (h1Text !== '') {
+        const header = document.querySelector('header');
+        if (header) {
+            const newH1 = document.createElement('h1');
+            newH1.textContent = h1Text;
+            header.appendChild(newH1);
+            newH1.addEventListener('touchstart', handleTouchStart, {passive: false});
             
-// تسجيل عملية الإضافة
-recordEdit({
-type: "add",
-timestamp: Date.now(),
-position: {
-relation: "append",
-target: "header"
-},
-html: `<h1>${h1Text}</h1>`
-});
-}
-}
+            recordEdit({ type: "add", timestamp: Date.now(), position: { relation: "append", target: "header" }, html: `<h1>${h1Text}</h1>` });
+        }
+    }
 
-// إنشاء قسم جديد إذا تم إضافة أي من h2, intro, أو card
-if (h2Text !== '' || introText !== '' || (cardTitle !== '' && cardText !== '')) {
-const newSection = document.createElement('section');
-newSection.className = 'section-block';
+    if (h2Text !== '' || introText !== '' || cardTitle !== '' || cardText !== '') {
+        const newSection = document.createElement('section');
+        newSection.className = 'section-block';
 
-// إضافة العنوان الرئيسي h2
-if (h2Text !== '') {
-const h2 = document.createElement('h2');
-h2.textContent = h2Text;
-newSection.appendChild(h2);
-}
+        if (h2Text !== '') {
+            const h2 = document.createElement('h2');
+            h2.textContent = h2Text;
+            newSection.appendChild(h2);
+            h2.addEventListener('touchstart', handleTouchStart, {passive: false});
+        }
 
-// إضافة النص التمهيدي
-if (introText !== '') {
-const intro = document.createElement('p');
-intro.className = 'section-intro';
-intro.textContent = introText;
-newSection.appendChild(intro);
-}
+        if (introText !== '') {
+            const intro = document.createElement('p');
+            intro.className = 'section-intro';
+            intro.textContent = introText;
+            newSection.appendChild(intro);
+            intro.addEventListener('touchstart', handleTouchStart, {passive: false});
+        }
 
-// إضافة البطاقة إذا توفر العنوان والنص
-if (cardTitle !== '' && cardText !== '') {
-const cardsGrid = document.createElement('div');
-cardsGrid.className = 'cards-grid';
+        if (cardTitle !== '' || cardText !== '') {
+            const cardsGrid = document.createElement('div');
+            cardsGrid.className = 'cards-grid';
+            const card = document.createElement('div');
+            card.className = 'card';
 
-const card = document.createElement('div');
-card.className = 'card';
+            // 🛠️ تعديل: لا يتم إنشاء h3 إذا كان العنوان الفرعي فارغاً
+            if (cardTitle !== '') {
+                const cardH3 = document.createElement('h3');
+                cardH3.textContent = cardTitle;
+                card.appendChild(cardH3);
+                cardH3.addEventListener('touchstart', handleTouchStart, {passive: false});
+            }
 
-const cardH3 = document.createElement('h3');
-cardH3.textContent = cardTitle;
+            // 🛠️ تعديل: لا يتم إنشاء p إذا كان نص البطاقة فارغاً
+            if (cardText !== '') {
+                const cardP = document.createElement('p');
+                cardP.textContent = cardText;
+                card.appendChild(cardP);
+                cardP.addEventListener('touchstart', handleTouchStart, {passive: false});
+            }
 
-const cardP = document.createElement('p');
-cardP.textContent = cardText;
+            cardsGrid.appendChild(card);
+            newSection.appendChild(cardsGrid);
+        }
 
-card.appendChild(cardH3);
-card.appendChild(cardP);
-cardsGrid.appendChild(card);
-newSection.appendChild(cardsGrid);
-}
-
-container.appendChild(newSection);
-            
-// تسجيل عملية إضافة القسم
-recordEdit({
-type: "add",
-timestamp: Date.now(),
-position: {
-relation: "append",
-target: "#mainContainer"
-},
-html: newSection.outerHTML
-});
-}
-// إذا تمت إضافة بطاقة فقط بدون h2 أو intro
-else if (cardTitle !== '' && cardText !== '') {
-const newSection = document.createElement('section');
-newSection.className = 'section-block';
-
-const cardsGrid = document.createElement('div');
-cardsGrid.className = 'cards-grid';
-
-const card = document.createElement('div');
-card.className = 'card';
-
-const cardH3 = document.createElement('h3');
-cardH3.textContent = cardTitle;
-
-const cardP = document.createElement('p');
-cardP.textContent = cardText;
-
-card.appendChild(cardH3);
-card.appendChild(cardP);
-cardsGrid.appendChild(card);
-newSection.appendChild(cardsGrid);
+        container.appendChild(newSection);
         
-container.appendChild(newSection);
-        
-// تسجيل عملية إضافة البطاقة
-recordEdit({
-type: "add",
-timestamp: Date.now(),
-position: {
-relation: "append",
-target: "#mainContainer"
-},
-html: newSection.outerHTML
-});
-}
+        recordEdit({
+            type: "add",
+            timestamp: Date.now(),
+            position: { relation: "append", target: "#mainContainer" },
+            html: newSection.outerHTML
+        });
+    }
 
-closeAddModal();
-saveChanges();
-showToast('✅ تمت الإضافة بنجاح');
+    // ⭐ إعطاء IDs فريدة للعناصر الجديدة فوراً لكي يتعرف عليها نظام الحذف
+    giveUniqueIds(); 
+
+    closeAddModal();
+    saveChanges();
+    showToast('✅ تمت الإضافة بنجاح');
 }
 
 function saveChanges() {
@@ -1001,13 +960,14 @@ document.getElementById('deleteConfirmModal').classList.add('show');
 }
 
 
+
 function confirmDeleteElement() {
     if (elementToDelete) {
         
-        // 🧹 [الخطوة الجديدة] إجبار الشاشة على إخفاء أزرار ✅ و ❌ قبل الحذف والحفظ
+        // 🧹 إجبار الشاشة على إخفاء أزرار ✅ و ❌ قبل الحذف والحفظ
         try {
             if (typeof cancelEdit === 'function') cancelEdit();
-        } catch(e) {} // نتجاهل أي خطأ لو لم يكن هناك عنصر قيد التعديل
+        } catch(e) {}
         
         // إخفاء الأزرار العائمة يدوياً لضمان عدم حفظها في الكود
         document.querySelectorAll('.action-buttons, #actionButtons, #editButtons, .edit-buttons').forEach(el => {
@@ -1020,65 +980,66 @@ function confirmDeleteElement() {
             el.removeAttribute('contenteditable');
         });
 
-
-        // التحقق مما إذا كان العنصر المطلوب حذفه موجوداً داخل بطاقة
         const card = elementToDelete.closest('.card');
+        const section = elementToDelete.closest('.section-block');
         
         if (card) {
+            // الحالة 1: إذا كان العنصر هو العنوان (H3 أو H2) - نحذف البطاقة كاملة كما في كودك
             if (elementToDelete.tagName === 'H3' || elementToDelete.tagName === 'H2') {
                 const cardsGrid = card.closest('.cards-grid');
                 const targetId = elementToDelete.id;
 
-                const tempElement = currentEditElement;
-                currentEditElement = null; 
-
                 recordEdit({
                     type: "delete",
                     timestamp: Date.now(),
-                    selector: {
-                        type: "css",
-                        value: `.card:has(#${targetId})` 
-                    },
+                    selector: { type: "css", value: `.card:has(#${targetId})` },
                     deleted_content: card.outerHTML
                 });
 
-                currentEditElement = tempElement;
-                
                 card.remove(); 
                 
                 if (cardsGrid && cardsGrid.children.length === 0) {
                     cardsGrid.remove();
                 }
             } 
+            // الحالة 2: إذا كان العنصر هو النص (P)
             else if (elementToDelete.tagName === 'P') {
                 recordEdit({
                     type: "delete",
                     timestamp: Date.now(),
-                    selector: {
-                        type: "css",
-                        value: `#${elementToDelete.id}`
-                    },
+                    selector: { type: "css", value: `#${elementToDelete.id}` },
                     deleted_content: elementToDelete.outerHTML
                 });
                 
                 elementToDelete.remove();
+
+                // 🛠️ [تعديل] إذا بقى الإطار (البطاقة) فارغاً بعد حذف النص P، نحذف الإطار تماماً
+                if (card.children.length === 0 || (card.children.length === 1 && card.querySelectorAll('h3, h2, p').length === 0)) {
+                    const cardsGrid = card.closest('.cards-grid');
+                    card.remove();
+                    if (cardsGrid && cardsGrid.children.length === 0) {
+                        cardsGrid.remove();
+                    }
+                }
             }
         } 
         else {
+            // حذف العناصر التي ليست داخل بطاقة (مثل العناوين الرئيسية)
             recordEdit({
                 type: "delete",
                 timestamp: Date.now(),
-                selector: {
-                    type: "css",
-                    value: `#${elementToDelete.id}`
-                },
+                selector: { type: "css", value: `#${elementToDelete.id}` },
                 deleted_content: elementToDelete.outerHTML
             });
             
             elementToDelete.remove();
         }
 
-        // إغلاق النافذة والحفظ بعد أن تأكدنا من نظافة الواجهة
+        // 🛠️ [تعديل] إذا أصبح القسم (Section) فارغاً تماماً، نحذفه لضمان نظافة الصفحة
+        if (section && section.querySelectorAll('h1, h2, h3, p').length === 0) {
+            section.remove();
+        }
+
         closeDeleteModal();
         saveChanges();
         showToast('🗑️ تم الحذف بنجاح');
@@ -1087,7 +1048,6 @@ function confirmDeleteElement() {
         currentEditElement = null;
     }
 }
-
 
 
 function cancelDeleteModal() {
