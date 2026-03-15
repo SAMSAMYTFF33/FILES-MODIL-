@@ -437,7 +437,7 @@ document.body.classList.add('dark-mode');
 } catch(e) {}
 })();
 </script> <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">الوضع الافتراضي</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> </span> إضافة نص </button>
+  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">الوضع الداكن</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> </span> إضافة نص </button>
   </div>
   <header>
    <h1 id="h1_0">مقدمة في التعريف&nbsp;</h1>
@@ -534,7 +534,7 @@ function giveUniqueIds() {
     });
 }
 
-// استرجاع حالة الوضع الداكن عند تحميل الصفحة
+// استرجاع حالة الوضع الافتراضي  عند تحميل الصفحة
 function loadThemePreference() {
 const savedTheme = localStorage.getItem('darkMode');
 if (savedTheme === 'enabled') {
@@ -542,7 +542,7 @@ document.body.classList.add('dark-mode');
 document.querySelector('.theme-btn').innerHTML = 'الوضع الافتراضي';
 } else {
 document.body.classList.remove('dark-mode');
-document.querySelector('.theme-btn').innerHTML = 'الوضع الداكن ';
+document.querySelector('.theme-btn').innerHTML = 'الوضع الافتراضي  ';
 }
 }
 
@@ -643,10 +643,10 @@ function toggleTheme(){
 document.body.classList.toggle("dark-mode");
 let btn = document.querySelector('.theme-btn');
 if(document.body.classList.contains('dark-mode')){
-btn.innerHTML = 'الوضع الافتراضي';
+btn.innerHTML = 'الوضع الداكن';
 localStorage.setItem('darkMode', 'enabled');
 } else {
-btn.innerHTML = 'الوضع الداكن ';
+btn.innerHTML = 'الوضع الافتراضي';
 localStorage.setItem('darkMode', 'disabled');
 }
 }
