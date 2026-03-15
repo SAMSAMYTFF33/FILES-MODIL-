@@ -4,19 +4,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مقدمة في القانون الجنائي</title>
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
 
-@font-face {
+@@font-face {
   font-family: 'Tajawal';
-  src: url('file:///data/data/com.S2/files/Tajawal-Regular.ttf') format('truetype');
+  /* المسار الصحيح للملف في ذاكرة الهاتف */
+  src: url('file:///storage/emulated/0/Android/data/com.S2/files/Tajawal-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Tajawal';
-  src: url('file:///data/data/com.S2/files/Tajawal-Bold.ttf') format('truetype');
+  src: url('file:///storage/emulated/0/Android/data/com.S2/files/Tajawal-Bold.ttf') format('truetype');
   font-weight: 700;
 }
+
+
 
 :root {
   /* الوضع العادي (Light Mode) - نقي وعصري */
