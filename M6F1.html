@@ -235,7 +235,7 @@ p {
   transition: 0.3s;
 }
 
-.menu-btn:hover {
+.menu-btn.active {
   transform: rotate(90deg);
   box-shadow: var(--neon-glow);
 }
@@ -574,7 +574,7 @@ function recordEdit(editData) {
     }
     
     // اسم الملف الحالي
-    const currentFile = 'M6F1.html';
+    const currentFile = 'M7F1.html';
     const editsFile = '/storage/emulated/0/Android/data/com.S2/files/edits.json';
     
     // هيكل البيانات الأساسي
@@ -623,7 +623,8 @@ function recordEdit(editData) {
 }
 
 function toggleMenu(){
-document.getElementById("menu").classList.toggle("open");
+  document.getElementById("menu").classList.toggle("open");
+  document.querySelector(".menu-btn").classList.toggle("active"); /* هذا السطر الجديد لتدوير الزر وإرجاعه */
 }
 
 function toggleTheme(){
@@ -783,7 +784,7 @@ function saveChanges() {
 
     const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
     if (typeof AndroidBridge !== 'undefined' && AndroidBridge.saveFile) {
-        AndroidBridge.saveFile('/storage/emulated/0/Android/data/com.S2/files/M6F1.html', htmlContent);
+        AndroidBridge.saveFile('/storage/emulated/0/Android/data/com.S2/files/M7F1.html', htmlContent);
     }
 }
 
