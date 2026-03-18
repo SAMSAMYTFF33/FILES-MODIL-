@@ -426,7 +426,7 @@ p {
 
 </style>
  </head>
- <body class="dark-mode edit-mode-active">
+ <body class="">
   <script>
 (function() {
 try {
@@ -437,7 +437,7 @@ document.body.classList.add('dark-mode');
 } catch(e) {}
 })();
 </script> <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">الوضع الداكن</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> </span> إضافة نص </button>
+  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">الوضع الافتراضي  </button> <button class="edit-btn" onclick="toggleEditMode()"><span></span> تعديل النص </button> <button class="add-btn" onclick="openAddModal()"> <span> </span> إضافة نص </button>
   </div>
   <header>
    
@@ -474,9 +474,9 @@ document.body.classList.add('dark-mode');
     </div>
    </div>
   </div> <!-- أزرار التعديل والحذف والإلغاء فوق النص -->
-  <div class="edit-popup" id="editPopup" style=""><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
+  <div class="edit-popup" id="editPopup"><button class="delete-btn" onclick="deleteElement()">🗑️</button> <button class="edit-btn-popup" onclick="prepareEdit()">✎</button> <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
   </div> <!-- أزرار التأكيد والإلغاء أثناء التعديل -->
-  <div class="confirm-popup" id="confirmPopup" style="left: 175.254px; top: 60px;"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+  <div class="confirm-popup" id="confirmPopup"><button class="confirm-edit-btn" onclick="confirmEdit()">✅</button> <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
 </div>
 
   <div class="edit-toast" id="editToast">وضع التعديل نشط - اضغط مطولاً لاختيار نص</div>
@@ -1128,4 +1128,4 @@ toggleEditMode();
  
 
 
-</div></body></html>
+<section class="section-block"><div class="cards-grid"><div class="card"><h3 id="h3_2">Hi my love</h3><p id="card_p_0">Hi</p></div></div></section></div></body></html>
