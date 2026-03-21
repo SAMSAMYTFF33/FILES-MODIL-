@@ -246,8 +246,7 @@
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
     <div class="side-menu" id="menu">
-        <button class="theme-btn" onclick="toggleTheme()">الوضع الفاتح</button>
-        <button class="edit-btn" onclick="toggleEditMode()"><i class="fa-solid fa-check"></i> إنهاء التعديل</button>
+                <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button>
         <button class="add-btn" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> إضافة فصل جديد</button>
     </div>
 
@@ -283,7 +282,7 @@
         </div>
     </div>
 
-    <div class="edit-popup" id="editPopup" style="left: 298px; top: 81px;">
+    <div class="edit-popup" id="editPopup" style="left: 285px; top: 110px;">
         <button class="delete-btn" onclick="deleteElement()"><i class="fa-solid fa-trash"></i></button>
         <button class="edit-btn-popup" onclick="prepareEdit()"><i class="fa-solid fa-pen"></i></button>
         <button class="cancel-btn-popup" onclick="cancelPopup()"><i class="fa-solid fa-xmark"></i></button>
@@ -294,7 +293,7 @@
         <button class="cancel-edit-btn" onclick="cancelEdit()"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div class="edit-toast" id="editToast"></div>
+    <div class="edit-toast" id="editToast">وضع التعديل نشط</div>
 
     <script>
         // --- لم يتم تعديل أي من وظائف الجافاسكريبت الأصلية ---
@@ -386,31 +385,16 @@
         }
 
         function loadThemePreference() {
-            const savedTheme = localStorage.getItem('M1_Theme');
-            const themeBtn = document.querySelector('.theme-btn');
-            if (savedTheme === 'light') {
-                document.body.classList.remove('dark-mode');
-                themeBtn.innerHTML = 'الوضع الداكن';
-            } else {
-                document.body.classList.add('dark-mode');
-                themeBtn.innerHTML = 'الوضع الفاتح';
-            }
-        }
+    const savedTheme = localStorage.getItem('s2-theme');
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+    } else {
+        document.body.classList.add('dark-mode');
+    }
+}
 
-        function toggleTheme() {
-            const isDark = document.body.classList.contains('dark-mode');
-            const themeBtn = document.querySelector('.theme-btn');
 
-            if (isDark) {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('M1_Theme', 'light');
-                themeBtn.innerHTML = 'الوضع الداكن';
-            } else {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('M1_Theme', 'dark');
-                themeBtn.innerHTML = 'الوضع الفاتح';
-            }
-        }
+        
 
         function loadEditModePreference() {
             const savedEditMode = localStorage.getItem('M1_EditMode');
@@ -466,10 +450,19 @@
             originalText = currentEditElement.innerText;
 
             const touch = e.touches ? e.touches[0] : e;
-            const popup = document.getElementById('editPopup');
-            popup.style.left = touch.clientX + 'px';
-            popup.style.top = (touch.clientY - 70) + 'px';
-            popup.classList.add('show');
+const popup = document.getElementById('editPopup');
+const rect = currentEditElement.getBoundingClientRect();
+
+let popY = rect.top - 10; // محاولة وضع الأزرار فوق الفصل بقليل
+// إذا كان الفصل قريباً جداً من أعلى الشاشة، نعكس المكان ليصبح تحت الفصل
+if (popY < 60) {
+    popY = rect.bottom + 60; 
+}
+
+popup.style.left = touch.clientX + 'px';
+popup.style.top = popY + 'px';
+popup.classList.add('show');
+
 
             hideConfirmPopup();
         }
@@ -559,10 +552,18 @@
                 hideEditPopup();
                 
                 const rect = currentEditElement.getBoundingClientRect();
-                const confirmPopup = document.getElementById('confirmPopup');
-                confirmPopup.style.left = (rect.left + rect.width / 2) + 'px';
-                confirmPopup.style.top = (rect.top - 20) + 'px';
-                confirmPopup.classList.add('show');
+const confirmPopup = document.getElementById('confirmPopup');
+
+let popY = rect.top - 10;
+// نفس المنطق، حماية الأزرار من الخروج من الشاشة
+if (popY < 60) {
+    popY = rect.bottom + 60;
+}
+
+confirmPopup.style.left = (rect.left + rect.width / 2) + 'px';
+confirmPopup.style.top = popY + 'px';
+confirmPopup.classList.add('show');
+
             }
         }
 
@@ -659,4 +660,4 @@
     </script>
 
 
-</body></html> 
+</body></html>
