@@ -21,17 +21,17 @@
         }
 
         :root {
-            /* --- التعديل هنا: تحديث الألوان والمتغيرات من الكود الأول --- */
-            --primary: #00ff88;
-            --secondary: #00bdff;
-            --bg-dark: #050a0a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            /* --accent-color: #f6b93b;  لم يتم استخدامه في التصميم الجديد */
-            --text-dark: #fff; /* النص أصبح أبيض */
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-            --neon-glow: 0 0 15px rgba(0, 255, 136, 0.2);
-        }
+    /* ألوان الوضع الفاتح */
+    --primary: #00a859; /* درجة أخضر أغمق قليلاً لتكون واضحة على الخلفية الفاتحة */
+    --secondary: #008cb3;
+    --bg-dark: #f4f6f9; /* خلفية بيضاء/رمادية فاتحة */
+    --card-bg: rgba(0, 0, 0, 0.05); /* خلفية العناصر تصبح داكنة بشفافية */
+    --glass-border: rgba(0, 0, 0, 0.1); /* حواف داكنة بشفافية */
+    --text-dark: #1a1a1a; /* نص داكن جداً ليظهر على الخلفية الفاتحة */
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --neon-glow: 0 0 15px rgba(0, 168, 89, 0.2);
+}
+
 
         /* تم تعديل الـ dark-mode ليتوافق مع الألوان الجديدة */
         .dark-mode {
@@ -127,7 +127,11 @@
             box-shadow: var(--glass-shadow); transition: 0.3s;
         }
 
-        .menu-btn:hover { transform: rotate(90deg); box-shadow: var(--neon-glow); }
+        /* نحتفظ بالتوهج عند اللمس ولكن نزيل الدوران */
+.menu-btn:hover { box-shadow: var(--neon-glow); }
+
+/* نضيف كلاس جديد مسؤول عن الدوران فقط */
+.menu-btn.rotate-active { transform: rotate(90deg); }
 
         .side-menu {
             position: fixed; top: 0; left: -320px;
@@ -224,12 +228,16 @@
         .modal-buttons button:hover { transform: translateY(-3px); }
 
         .edit-toast {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
-            background: rgba(10, 14, 23, 0.9); backdrop-filter: blur(10px); color: #fff;
-            padding: 12px 25px; border-radius: 50px; font-size: 14px; font-weight: 700;
-            border: 1px solid var(--secondary); box-shadow: var(--neon-glow);
-            z-index: 4000; opacity: 0; transition: 0.3s; pointer-events: none;
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
+            background: var(--bg-dark); backdrop-filter: blur(15px); color: var(--text-dark);
+            padding: 12px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+            border: 1px solid var(--glass-border); border-right: 4px solid var(--primary);
+            box-shadow: var(--glass-shadow); z-index: 4000; opacity: 0; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none; display: flex; align-items: center; gap: 12px;
         }
+        .edit-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .edit-toast i { color: var(--primary); font-size: 18px; }
         .edit-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
 </head>
@@ -238,9 +246,8 @@
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
     <div class="side-menu" id="menu">
-        <button class="theme-btn" onclick="toggleTheme()">الوضع الفاتح</button>
-        <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button>
-        <button class="add-btn" onclick="openAddModal()"><span>+</span> إضافة فصل جديد</button>
+                <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button>
+        <button class="add-btn" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> إضافة فصل جديد</button>
     </div>
 
     <div class="container" id="mainContainer">
@@ -258,35 +265,35 @@
                 <input type="text" id="inputChapterName" placeholder="أدخل اسم الفصل (مثال: الفصل الثالث)">
             </div>
             <div class="modal-buttons">
-                <button onclick="addNewChapter()" style="background: var(--secondary); color: #000;">✅ إضافة</button>
-                <button onclick="closeAddModal()" style="background: transparent; border: 1px solid var(--text-dark); color: var(--text-dark);">❌ إلغاء</button>
+                <button onclick="addNewChapter()" style="background: var(--secondary); color: #000;"><i class="fa-solid fa-check"></i> إضافة</button>
+                <button onclick="closeAddModal()" style="background: transparent; border: 1px solid var(--text-dark); color: var(--text-dark);"><i class="fa-solid fa-xmark"></i> إلغاء</button>
             </div>
         </div>
     </div>
 
     <div class="modal-overlay" id="deleteConfirmModal">
         <div class="modal-content">
-            <h3 style="color: #ff4757;">⚠️ تأكيد الحذف</h3>
+            <h3 style="color: #ff4757;"><i class="fa-solid fa-triangle-exclamation"></i> تأكيد الحذف</h3>
             <p style="margin-bottom: 20px; font-size: 1.1rem;">هل أنت متأكد من حذف هذا الفصل؟</p>
             <div class="modal-buttons">
-                <button onclick="confirmDeleteElement()" style="background: #ff4757; color: white;">🗑️ حذف</button>
-                <button onclick="closeDeleteModal()" style="background: var(--secondary); color: #000;">❌ إلغاء</button>
+                <button onclick="confirmDeleteElement()" style="background: #ff4757; color: white;"><i class="fa-solid fa-trash"></i> حذف</button>
+                <button onclick="closeDeleteModal()" style="background: var(--secondary); color: #000;"><i class="fa-solid fa-xmark"></i> إلغاء</button>
             </div>
         </div>
     </div>
 
-    <div class="edit-popup" id="editPopup" style="left: 298px; top: 81px;">
-        <button class="delete-btn" onclick="deleteElement()">🗑️</button>
-        <button class="edit-btn-popup" onclick="prepareEdit()">✎</button>
-        <button class="cancel-btn-popup" onclick="cancelPopup()">✖</button>
+    <div class="edit-popup" id="editPopup" style="left: 292px; top: 116.313px;">
+        <button class="delete-btn" onclick="deleteElement()"><i class="fa-solid fa-trash"></i></button>
+        <button class="edit-btn-popup" onclick="prepareEdit()"><i class="fa-solid fa-pen"></i></button>
+        <button class="cancel-btn-popup" onclick="cancelPopup()"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
     <div class="confirm-popup" id="confirmPopup" style="left: 175.254px; top: 40px;">
-        <button class="confirm-edit-btn" onclick="confirmEdit()">✅</button>
-        <button class="cancel-edit-btn" onclick="cancelEdit()">❌</button>
+        <button class="confirm-edit-btn" onclick="confirmEdit()"><i class="fa-solid fa-check"></i></button>
+        <button class="cancel-edit-btn" onclick="cancelEdit()"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div class="edit-toast" id="editToast">🗑️ تم الحذف</div>
+    <div class="edit-toast" id="editToast">وضع التعديل نشط</div>
 
     <script>
         // --- لم يتم تعديل أي من وظائف الجافاسكريبت الأصلية ---
@@ -378,31 +385,16 @@
         }
 
         function loadThemePreference() {
-            const savedTheme = localStorage.getItem('M2_Theme');
-            const themeBtn = document.querySelector('.theme-btn');
-            if (savedTheme === 'light') {
-                document.body.classList.remove('dark-mode');
-                themeBtn.innerHTML = 'الوضع الداكن';
-            } else {
-                document.body.classList.add('dark-mode');
-                themeBtn.innerHTML = 'الوضع الفاتح';
-            }
-        }
+    const savedTheme = localStorage.getItem('s2-theme');
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+    } else {
+        document.body.classList.add('dark-mode');
+    }
+}
 
-        function toggleTheme() {
-            const isDark = document.body.classList.contains('dark-mode');
-            const themeBtn = document.querySelector('.theme-btn');
 
-            if (isDark) {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('M2_Theme', 'light');
-                themeBtn.innerHTML = 'الوضع الداكن';
-            } else {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('M2_Theme', 'dark');
-                themeBtn.innerHTML = 'الوضع الفاتح';
-            }
-        }
+        
 
         function loadEditModePreference() {
             const savedEditMode = localStorage.getItem('M2_EditMode');
@@ -410,7 +402,12 @@
             else disableEditMode();
         }
 
-        function toggleMenu() { document.getElementById("menu").classList.toggle("open"); }
+        function toggleMenu() { 
+    // فتح وإغلاق القائمة الجانبية
+    document.getElementById("menu").classList.toggle("open"); 
+    // تدوير الزر وإرجاعه لطبيعته
+    document.querySelector(".menu-btn").classList.toggle("rotate-active");
+}
 
         function toggleEditMode() {
             editMode = !editMode;
@@ -453,10 +450,19 @@
             originalText = currentEditElement.innerText;
 
             const touch = e.touches ? e.touches[0] : e;
-            const popup = document.getElementById('editPopup');
-            popup.style.left = touch.clientX + 'px';
-            popup.style.top = (touch.clientY - 70) + 'px';
-            popup.classList.add('show');
+const popup = document.getElementById('editPopup');
+const rect = currentEditElement.getBoundingClientRect();
+
+let popY = rect.top - 10; // محاولة وضع الأزرار فوق الفصل بقليل
+// إذا كان الفصل قريباً جداً من أعلى الشاشة، نعكس المكان ليصبح تحت الفصل
+if (popY < 60) {
+    popY = rect.bottom + 60; 
+}
+
+popup.style.left = touch.clientX + 'px';
+popup.style.top = popY + 'px';
+popup.classList.add('show');
+
 
             hideConfirmPopup();
         }
@@ -536,7 +542,7 @@
             
             closeAddModal();
             saveChanges();
-            showToast(`✅ تم إنشاء ${chapterName}`);
+            showToast(`  تم إنشاء ${chapterName}`);
         }
 
         function prepareEdit() {
@@ -546,10 +552,18 @@
                 hideEditPopup();
                 
                 const rect = currentEditElement.getBoundingClientRect();
-                const confirmPopup = document.getElementById('confirmPopup');
-                confirmPopup.style.left = (rect.left + rect.width / 2) + 'px';
-                confirmPopup.style.top = (rect.top - 20) + 'px';
-                confirmPopup.classList.add('show');
+const confirmPopup = document.getElementById('confirmPopup');
+
+let popY = rect.top - 10;
+// نفس المنطق، حماية الأزرار من الخروج من الشاشة
+if (popY < 60) {
+    popY = rect.bottom + 60;
+}
+
+confirmPopup.style.left = (rect.left + rect.width / 2) + 'px';
+confirmPopup.style.top = popY + 'px';
+confirmPopup.classList.add('show');
+
             }
         }
 
@@ -561,7 +575,7 @@
                     updateChapterLog(currentEditElement.id, newText, currentEditElement.getAttribute('href'), 'active');
                     
                     saveChanges();
-                    showToast('✅ تم تحديث الاسم');
+                    showToast('  تم تحديث الاسم');
                 } else {
                     currentEditElement.innerText = originalText;
                 }
@@ -602,7 +616,7 @@
                 elementToDelete.remove();
                 closeDeleteModal();
                 saveChanges();
-                showToast('🗑️ تم الحذف');
+                showToast(' تم الحذف');
                 elementToDelete = null;
                 currentEditElement = null;
             }
@@ -615,7 +629,7 @@
 
         function showToast(msg) {
             const toast = document.getElementById('editToast');
-            toast.textContent = msg;
+            toast.innerHTML = msg;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
