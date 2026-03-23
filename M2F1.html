@@ -2,7 +2,6 @@
 <html lang="ar" dir="rtl"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مقدمة في القانون الجنائي</title>
   <style>
 
 @@font-face {
@@ -22,6 +21,7 @@
 
 :root {
   /* الوضع العادي (Light Mode) - نقي وعصري */
+  --primary: #00a859; /* لون الزر الموحد */
   --primary-color: #4a69bd;
   --secondary-color: #079992;
   --accent-color: #f6b93b;
@@ -36,6 +36,7 @@
 
 .dark-mode {
   /* الوضع الليلي (Dark Mode) - تأثير سايبر بانك / نيون / زجاجي */
+  --primary: #00ff88; /* لون الزر الموحد */
   --primary-color: #82ccdd;
   --secondary-color: #b8e994;
   --accent-color: #fad390;
@@ -219,26 +220,20 @@ p {
 
 /* القائمة الجانبية وزر القائمة */
 .menu-btn {
-  position: fixed;
-  top: 20px; left: 20px;
-  font-size: 24px;
-  width: 50px; height: 50px;
-  border-radius: 15px;
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  color: var(--primary-color);
-  border: 1px solid var(--glass-border);
-  cursor: pointer;
-  z-index: 1000;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: var(--glass-shadow);
-  transition: 0.3s;
+    position: fixed; top: 20px; left: 20px;
+    font-size: 24px; width: 50px; height: 50px;
+    border-radius: 15px; background: var(--card-bg);
+    backdrop-filter: blur(10px); color: var(--primary); /* تم توحيد اللون هنا */
+    border: 1px solid var(--glass-border); cursor: pointer;
+    z-index: 1000; display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--glass-shadow); transition: 0.3s;
 }
 
-.menu-btn:hover {
-  transform: rotate(90deg);
-  box-shadow: var(--neon-glow);
-}
+/* نحتفظ بالتوهج عند اللمس ولكن نزيل الدوران */
+.menu-btn:hover { box-shadow: var(--neon-glow); }
+
+/* نضيف كلاس جديد مسؤول عن الدوران فقط */
+.menu-btn.rotate-active { transform: rotate(90deg); }
 
 .side-menu {
   position: fixed;
@@ -430,18 +425,21 @@ p {
   <script>
 (function() {
 try {
-const savedTheme = localStorage.getItem('darkMode');
-if (savedTheme === 'enabled') {
+const savedTheme = localStorage.getItem('s2-theme');
+if (savedTheme === 'light') {
+document.body.classList.remove('dark-mode');
+} else {
 document.body.classList.add('dark-mode');
 }
 } catch(e) {}
 })();
-</script> <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <div class="side-menu" id="menu"><button class="theme-btn" onclick="toggleTheme()">الوضع الداكن</button> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> </span> إضافة نص </button>
+</script>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <div class="side-menu" id="menu"> <button class="edit-btn" onclick="toggleEditMode()"><span>✓</span> إنهاء التعديل</button> <button class="add-btn" onclick="openAddModal()"> <span> </span> إضافة نص </button>
   </div>
   <header>
    
-  <h1 id="h1_0">.... edit&nbsp;</h1></header>
+  <h1 id="h1_0">.... edit&nbsp;&nbsp;</h1></header>
   <div class="container" id="mainContainer">
    <section class="section-block">
     
@@ -523,15 +521,14 @@ function giveUniqueIds() {
 
 // استرجاع حالة الوضع الافتراضي  عند تحميل الصفحة
 function loadThemePreference() {
-const savedTheme = localStorage.getItem('darkMode');
-if (savedTheme === 'enabled') {
-document.body.classList.add('dark-mode');
-document.querySelector('.theme-btn').innerHTML = 'الوضع الافتراضي';
-} else {
-document.body.classList.remove('dark-mode');
-document.querySelector('.theme-btn').innerHTML = 'الوضع الافتراضي  ';
+    const savedTheme = localStorage.getItem('s2-theme');
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+    } else {
+        document.body.classList.add('dark-mode');
+    }
 }
-}
+
 
 // استرجاع حالة وضع التعديل
 // استرجاع حالة وضع التعديل
@@ -624,21 +621,10 @@ function recordEdit(editData) {
 
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("open");
+document.querySelector('.menu-btn').classList.toggle("rotate-active");
 }
 
-function toggleTheme(){
-document.body.classList.toggle("dark-mode");
-let btn = document.querySelector('.theme-btn');
-if(document.body.classList.contains('dark-mode')){
-btn.innerHTML = 'الوضع الداكن';
-localStorage.setItem('darkMode', 'enabled');
-} else {
-btn.innerHTML = 'الوضع الافتراضي';
-localStorage.setItem('darkMode', 'disabled');
-}
-}
 
-// تشغيل وإيقاف وضع التعديل
 
 // تشغيل وإيقاف وضع التعديل
 function toggleEditMode() {
@@ -700,7 +686,6 @@ function addNewContent() {
             const newH1 = document.createElement('h1');
             newH1.textContent = h1Text;
             header.appendChild(newH1);
-            newH1.addEventListener('touchstart', handleTouchStart, {passive: false});
             
             recordEdit({ type: "add", timestamp: Date.now(), position: { relation: "append", target: "header" }, html: `<h1>${h1Text}</h1>` });
         }
@@ -714,7 +699,6 @@ function addNewContent() {
             const h2 = document.createElement('h2');
             h2.textContent = h2Text;
             newSection.appendChild(h2);
-            h2.addEventListener('touchstart', handleTouchStart, {passive: false});
         }
 
         if (introText !== '') {
@@ -722,7 +706,6 @@ function addNewContent() {
             intro.className = 'section-intro';
             intro.textContent = introText;
             newSection.appendChild(intro);
-            intro.addEventListener('touchstart', handleTouchStart, {passive: false});
         }
 
         if (cardTitle !== '' || cardText !== '') {
@@ -731,20 +714,16 @@ function addNewContent() {
             const card = document.createElement('div');
             card.className = 'card';
 
-            // 🛠️ تعديل: لا يتم إنشاء h3 إذا كان العنوان الفرعي فارغاً
             if (cardTitle !== '') {
                 const cardH3 = document.createElement('h3');
                 cardH3.textContent = cardTitle;
                 card.appendChild(cardH3);
-                cardH3.addEventListener('touchstart', handleTouchStart, {passive: false});
             }
 
-            // 🛠️ تعديل: لا يتم إنشاء p إذا كان نص البطاقة فارغاً
             if (cardText !== '') {
                 const cardP = document.createElement('p');
                 cardP.textContent = cardText;
                 card.appendChild(cardP);
-                cardP.addEventListener('touchstart', handleTouchStart, {passive: false});
             }
 
             cardsGrid.appendChild(card);
@@ -761,13 +740,12 @@ function addNewContent() {
         });
     }
 
-    // ⭐ إعطاء IDs فريدة للعناصر الجديدة فوراً لكي يتعرف عليها نظام الحذف
     giveUniqueIds(); 
-
     closeAddModal();
     saveChanges();
     showToast('✅ تمت الإضافة بنجاح');
 }
+
 
 function saveChanges() {
     // إخفاء العناصر المنبثقة يدوياً قبل الحفظ لضمان عدم تسجيلها في ملف HTML
@@ -791,22 +769,18 @@ function saveChanges() {
 function handleTouchStart(e) {
     if (!editMode) return;
 
-    // إذا كان العنصر الذي لمسته هو نفسه الذي يتم تعديله حالياً، اترك المتصفح يقوم بعمله
-    if (e.target.hasAttribute('contenteditable')) {
+    // تجاهل النقر إذا كان على القوائم أو الأزرار أو النوافذ المنبثقة
+    if (e.target.closest('.edit-popup, .confirm-popup, .menu-btn, .side-menu, .modal-overlay, .modal-content') || e.target.hasAttribute('contenteditable')) {
         return; 
     }
 
     const element = e.target.closest('h1, h2, h3, p, .section-intro, .card p');
     if (!element) return;
 
-    // إزالة السطر التالي أو جعله مشروطاً
-    // e.preventDefault(); 
-
     if (longPressTimer) {
         clearTimeout(longPressTimer);
     }
 
-    // تفعيل التحديد فقط عند الضغط المطول أو النقر لاختيار العنصر
     currentEditElement = element;
     originalText = currentEditElement.innerText;
 
@@ -1085,12 +1059,10 @@ toast.classList.remove('show');
 }, 1500);
 }
 
-// إضافة مستمعي الأحداث للعناصر
-document.querySelectorAll('h1, h2, h3, p, .section-intro, .card p').forEach(element => {
-element.addEventListener('touchstart', handleTouchStart, {passive: false});
-element.addEventListener('touchend', handleTouchEnd);
-element.addEventListener('touchcancel', handleTouchCancel);
-});
+// إضافة مستمعي الأحداث لجميع العناصر (القديمة والجديدة)
+document.addEventListener('touchstart', handleTouchStart, {passive: false});
+document.addEventListener('touchend', handleTouchEnd);
+document.addEventListener('touchcancel', handleTouchCancel);
 
 document.addEventListener('contextmenu', (e) => {
 if (editMode) e.preventDefault();
